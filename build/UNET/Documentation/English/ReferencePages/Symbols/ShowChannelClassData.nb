@@ -1,0 +1,351 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12460,        342]
+NotebookOptionsPosition[      9270,        274]
+NotebookOutlinePosition[     11225,        324]
+CellTagsIndexPosition[     11182,        321]
+WindowTitle->ShowChannelClassData
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["U N E T PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET\"\>":>Documentation`HelpLookup[
+       "paclet:UNET/guide/UNET"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET/ref/ShowChannelClassData\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["UNET/ref/ShowChannelClassData"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/UNET/ref/\
+ShowChannelClassData.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$18550], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "UNET/ref/ShowChannelClassData", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["ShowChannelClassData", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ShowChannelClassData", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", " ", 
+        StyleBox["label", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]makes a grid of the data and label in 2D. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ShowChannelClassData", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", " ", 
+        StyleBox["label", "TI"], ",", " ", 
+        StyleBox["result", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]makes a grid of the data, label and result in 2D."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
+   "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["ImageSize",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/ImageSize"], "500", Cell["\<\
+ImageSize is an option that specifies the overall size of an image to display \
+for an object. \
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["ClassScale",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/ClassScale"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["ClassScale"]],"paclet:UNET/ref/ClassScale"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an options for ",
+     Cell[BoxData["ShowChannelClassData"], "InlineFormula"],
+     ". Allows to scale the calss collors just as in ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["MakeClassImage"]],"paclet:UNET/ref/MakeClassImage"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     "."
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["NumberRowItems",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/NumberRowItems"], "3", Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["NumberRowItems"]],"paclet:UNET/ref/NumberRowItems"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an options for ",
+     Cell[BoxData["ShowChannelClassData"], "InlineFormula"],
+     ". Specifies how many images are on each row."
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["MakeDifferenceImage",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/MakeDifferenceImage"], 
+    ButtonBox["False",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/False"], Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["MakeDifferenceImage"]],
+        "paclet:UNET/ref/MakeDifferenceImage"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an options for ",
+     Cell[BoxData["ShowChannelClassData"], "InlineFormula"],
+     ". ",
+     "If",
+     " a result is provided this allos to show the diffrence between the \
+label and result.\n1 = false positive, 2 = false negative, 3 = true \
+positive."
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["StepSize",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/StepSize"], "1", Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["StepSize"]],"paclet:UNET/ref/StepSize"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an options for ",
+     Cell[BoxData["ShowChannelClassData"], "InlineFormula"],
+     ". It defines how many images are displayed by stepping through the data \
+with stepsize."
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["AspectRatio",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/AspectRatio"], "1", Cell["\<\
+AspectRatio is an option for Graphics and related functions that specifies \
+the ratio of height to width for a plot. \
+\>", "TableText"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["UNET"]],"paclet:UNET/guide/UNET"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->1]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ShowChannelClassData",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "UNET", ButtonData -> "paclet:UNET/guide/UNET", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2018, 6, 2, 15, 29, 43.8500745}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
+    "keywords" -> {}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
+    "status" -> "None", "summary" -> 
+    "ShowChannelClassData[data, label] makes a grid of the data and label in \
+2D. ShowChannelClassData[data, label, result] makes a grid of the data, label \
+and result in 2D.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "ShowChannelClassData", "titlemodifier" -> "", "windowtitle" -> 
+    "ShowChannelClassData", "type" -> "Symbol", "uri" -> 
+    "UNET/ref/ShowChannelClassData"}},
+CellContext->"Global`",
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[592, 21, 3044, 74, 70, "AnchorBarGrid",ExpressionUUID->"3625e8e9-398e-4576-ae92-ea845ae259bd",
+ CellID->1],
+Cell[3639, 97, 177, 6, 70, "ObjectNameGrid",ExpressionUUID->"5af18181-e5a0-47bf-9f25-1f060b810aa2"],
+Cell[3819, 105, 798, 22, 70, "Usage",ExpressionUUID->"a4ebe090-253a-4516-b2c0-3e8242b5bfc0"],
+Cell[CellGroupData[{
+Cell[4642, 131, 621, 19, 70, "NotesSection",ExpressionUUID->"6a3e5bd2-32a6-4d92-96a2-a82df47c9a41",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[5266, 152, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"83f01be4-86bd-4e42-b320-244f6f533d57"],
+Cell[5300, 154, 53, 0, 70, "Notes",ExpressionUUID->"16d1b7a3-4bd3-4e3f-b170-5e69a3cea4f1"],
+Cell[5356, 156, 3460, 90, 70, "3ColumnTableMod",ExpressionUUID->"c92e0802-628a-4ae9-8c47-0280a9157c4d"],
+Cell[8819, 248, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"49992091-43c7-44cc-838b-3af256f8c34c"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[8887, 253, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"f9eb242d-71ad-42a4-a8c0-08c6c9408af4",
+ CellID->38303248],
+Cell[9046, 262, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"5025093c-ad31-4399-8f9f-aeebd5f05a2f"],
+Cell[9080, 264, 148, 5, 70, "MoreAbout",ExpressionUUID->"33275664-3ebb-40cf-9344-d171698b6ae5",
+ CellID->1]
+}, Open  ]],
+Cell[9243, 272, 23, 0, 70, "FooterCell",ExpressionUUID->"7cf6a803-9eaf-4c48-b0d0-8c3dbe2410ad"]
+}
+]
+*)
+
+(* End of internal cache information *)

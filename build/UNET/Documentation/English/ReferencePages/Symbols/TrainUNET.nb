@@ -1,0 +1,433 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15583,        424]
+NotebookOptionsPosition[     12281,        355]
+NotebookOutlinePosition[     14341,        406]
+CellTagsIndexPosition[     14298,        403]
+WindowTitle->TrainUNET
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["U N E T PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET\"\>":>Documentation`HelpLookup[
+       "paclet:UNET/guide/UNET"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET/ref/TrainUNET\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["UNET/ref/TrainUNET"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/UNET/ref/TrainUNET.\
+html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
+            False]]; SelectionMove[
+         DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$21255], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], "UNET/ref/TrainUNET",
+              ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["TrainUNET", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"TrainUNET", "[", 
+       RowBox[{
+        StyleBox["trainData", "TI"], ",", " ", 
+        StyleBox["validationData", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Trains a ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["UNET"]],"paclet:UNET/ref/UNET"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " for the given data. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"TrainUNET", "[", 
+       RowBox[{
+        StyleBox["trainData", "TI"], ",", " ", 
+        StyleBox["validationData", "TI"], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          StyleBox["testData", "TI"], ",", " ", 
+          StyleBox["testLabels", "TI"]}], "}"}]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Trains a ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["UNET"]],"paclet:UNET/ref/UNET"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " for the given data and also gives similarity results for the testData. \
+The inputs trainData, validationData, testData and testLabels can be \
+generated using ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["SplitTrainData"]],"paclet:UNET/ref/SplitTrainData"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
+   "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["NetParameters",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/NetParameters"], "32", Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["NetParameters"]],"paclet:UNET/ref/NetParameters"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an option for ",
+     Cell[BoxData["TrainUNET"], "InlineFormula"],
+     ". It Specifies the number of trainable parameters of the first layer of \
+the ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["UNET"]],"paclet:UNET/ref/UNET"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"]
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["BatchSize",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/BatchSize"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+BatchSize is an option for NetTrain and related functions that specifies the \
+size of a batch of examples to process together.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["LearningRateMultipliers",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/LearningRateMultipliers"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+LearningRateMultipliers is an option for NetTrain that specifies learning \
+rate multipliers to apply to specific layers within a NetChain, NetGraph, etc.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["LossFunction",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/LossFunction"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+LossFunction is an option for NetTrain that specifies how to compare actual \
+and requested outputs from a neural net.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["MaxTrainingRounds",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/MaxTrainingRounds"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+MaxTrainingRounds is an option for NetTrain and related functions that \
+specifies the maximum number of rounds of training to do.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["Method",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Method"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+Method is an option for various algorithm-intensive functions that specifies \
+what internal methods they should use.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["RandomSeeding",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/RandomSeeding"], 
+    ButtonBox["Inherited",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Inherited"], Cell["\<\
+RandomSeeding is an option that specifies what seeding of pseudorandom \
+generators should be done inside the operation of a function.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["TargetDevice",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/TargetDevice"], "CPU", Cell["\<\
+TargetDevice is an option for certain functions that specifies whether CPU or \
+GPU computation should be attempted.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["TimeGoal",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/TimeGoal"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+TimeGoal is an option for various functions that specifies how long to spend \
+doing a particular operation.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["TrainingProgressCheckpointing",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/TrainingProgressCheckpointing"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+TrainingProgressCheckpointing is an option for NetTrain that specifies how to \
+save copies of the net during training.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["TrainingProgressFunction",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/TrainingProgressFunction"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+TrainingProgressFunction is an option for NetTrain that specifies a function \
+to run periodically during training.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["TrainingProgressReporting",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/TrainingProgressReporting"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+TrainingProgressReporting is an option for NetTrain and related functions \
+that specifies how to report the progress of training.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["ValidationSet",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/ValidationSet"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+ValidationSet is an option for Predict, Classify, NetTrain, and related \
+functions that specifies the validation set to be used during the training \
+phase.\
+\>", "TableText"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {
+    None, None, None, None, None, None, None, None, None, None, None, None, {
+     None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{
+     True, True, True, True, True, True, True, True, True, True, True, True, 
+      True, True}}}}],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["UNET"]],"paclet:UNET/guide/UNET"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->1]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"TrainUNET",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "UNET", ButtonData -> "paclet:UNET/guide/UNET", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2018, 6, 2, 15, 29, 51.7748512}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
+    "keywords" -> {}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
+    "status" -> "None", "summary" -> 
+    "TrainUNET[trainData, validationData] Trains a UNET for the given data. \
+TrainUNET[trainData, validationData, {testData, testLabels}] Trains a UNET \
+for the given data and also gives similarity results for the testData. The \
+inputs trainData, validationData, testData and testLabels can be generated \
+using SplitTrainData.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "TrainUNET", "titlemodifier" -> "", "windowtitle" -> "TrainUNET", "type" -> 
+    "Symbol", "uri" -> "UNET/ref/TrainUNET"}},
+CellContext->"Global`",
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[581, 21, 2999, 74, 70, "AnchorBarGrid",ExpressionUUID->"0d49f993-5e8d-4fd5-b52a-577606da594e",
+ CellID->1],
+Cell[3583, 97, 166, 6, 70, "ObjectNameGrid",ExpressionUUID->"2b7c961a-4df1-476c-a05f-51bc6c88d445"],
+Cell[3752, 105, 1578, 45, 70, "Usage",ExpressionUUID->"31895039-00ef-4753-99e4-02e31e8a181d"],
+Cell[CellGroupData[{
+Cell[5355, 154, 621, 19, 70, "NotesSection",ExpressionUUID->"482401ae-d0dd-49fb-ba33-622c3a893d6b",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[5979, 175, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"b6c1061e-c5f0-42dc-8ff8-06f5827986fa"],
+Cell[6013, 177, 53, 0, 70, "Notes",ExpressionUUID->"737601bb-b2fb-41bb-8749-27c6a1f0d63d"],
+Cell[6069, 179, 5758, 148, 70, "3ColumnTableMod",ExpressionUUID->"8ce74fea-e1b8-4994-ba7c-016c9e5db023"],
+Cell[11830, 329, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"c0edb9b4-afba-4e58-996e-c75472373477"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11898, 334, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"2b5c1d1d-eada-4002-b43c-09c487d8e134",
+ CellID->38303248],
+Cell[12057, 343, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"83fed06c-e2af-449e-a338-33b07e507136"],
+Cell[12091, 345, 148, 5, 70, "MoreAbout",ExpressionUUID->"953d1d84-7656-4cf3-b770-4c67f09d48a3",
+ CellID->1]
+}, Open  ]],
+Cell[12254, 353, 23, 0, 70, "FooterCell",ExpressionUUID->"4fd5e4e2-7732-4900-b053-9a4810b1d7a7"]
+}
+]
+*)
+
+(* End of internal cache information *)
