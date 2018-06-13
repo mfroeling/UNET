@@ -39,10 +39,24 @@ There are also examples how to visualize the layer of your trained network and h
 The network supports multi channel inputs and multi class segmentation.
 
 * UNET generates a UNET convolutional network.
-* TrainUNET trains the network.
-* SplitTrainData splits the data and labels into training, validation and test data.
+	* 2D UNET
+![UNET 2D](https://github.com/mfroeling/UNET/blob/master/images/UNET2D.PNG)
+	* 3D UNET
+![UNET 3D](https://github.com/mfroeling/UNET/blob/master/images/UNET3D.PNG)
+	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer and a CrossEntropyLossLayer.
+![SoftDiceLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)
 
-Training the data is done using two loss layers: a SoftDiceLossLayer and a CrossEntropyLossLayer.
+* SplitTrainData splits the data and labels into training, validation and test data.
+![split data](https://github.com/mfroeling/UNET/blob/master/images/Split.PNG)
+
+* TrainUNET trains the network.
+![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/Train.PNG)
+
+* Visualize the network and results
+	* Hidden layers
+![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
+	* Results
+![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
 
 ## License
 https://opensource.org/licenses/MIT
