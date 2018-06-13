@@ -38,6 +38,6 @@ The network supports multi channel inputs and multi class segmentation.
 Training the data is done using two loss layers: a SoftDiceLossLayer and a CrossEntropyLossLayer.
 
 ## License
-https://opensource.org/licenses/BSD-3-Clause
+https://opensource.org/licenses/MIT
 
 Some code was based on https://github.com/alihashmiii/UNet-Segmentation-Wolfram
