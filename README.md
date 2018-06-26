@@ -1,5 +1,7 @@
 # UNET
 [![DOI](https://zenodo.org/badge/137186334.svg)](https://zenodo.org/badge/latestdoi/137186334)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![HitCount](http://hits.dwyl.io/mfroeling/UNET.svg)](http://hits.dwyl.io/mfroeling/UNET)
 
 A package to generate and train a UNET deep convolutional network for 2D and 3D image segmentation
 
