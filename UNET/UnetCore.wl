@@ -218,6 +218,7 @@ UNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=Switch[Length[dimIn],2,UNET2D
 
 
 UNET2D[NChan_:1,Nclass_:1,dep_:64,dimIn_:{128,128}, res_:"ResNet"] := NetGraph[<|
+		"start" -> convBN2[dep, 1],
 		"enc_1"->conv2[dep, res],
 		"enc_2"->{PoolingLayer[{2, 2}, 2], conv2[2 dep, res]},
 		"enc_3"->{PoolingLayer[{2, 2}, 2], conv2[4 dep, res]},
@@ -230,56 +231,38 @@ UNET2D[NChan_:1,Nclass_:1,dep_:64,dimIn_:{128,128}, res_:"ResNet"] := NetGraph[<
 		"map"->ConvolutionLayer[Nclass,{1,1}],
 		"prob"->If[Nclass>1,{TransposeLayer[{1<->3,1<->2}],SoftmaxLayer[]},{LogisticSigmoid,FlattenLayer[1]}]
 	|>,{
-		NetPort["Input"]->"enc_1"->"enc_2"->"enc_3"->"enc_4"->"enc_5",
-		{"enc_4","enc_5"}->"dec_1",
-		{"enc_3","dec_1"}->"dec_2",
-		{"enc_2","dec_2"}->"dec_3",
-		{"enc_1","dec_3"}->"dec_4",
+		NetPort["Input"]->"start"->"enc_1"->"enc_2"->"enc_3"->"enc_4"->"enc_5",
+		{"enc_4","enc_5"}->"dec_1", {"enc_3","dec_1"}->"dec_2",
+		{"enc_2","dec_2"}->"dec_3",	{"enc_1","dec_3"}->"dec_4",
 		"dec_4"->"map"->"prob"
 	},"Input"->Prepend[dimIn,NChan]
 ]
 
 
-conv2[n_,res_]:= Switch[res,
-	"ResNet",
-	NetGraph[<|
-	    "BN1" -> BatchNormalizationLayer[],
-	    "EL1" -> ElementwiseLayer["ELU"],
-	    "con1" -> ConvolutionLayer[n/2, 1, "PaddingSize" -> {0, 0}],
-	    "BN2" -> BatchNormalizationLayer[],
-	    "EL2" -> ElementwiseLayer["ELU"],
-	    "con2" -> ConvolutionLayer[n/2, 3, "PaddingSize" -> {1, 1}],
-	    "BN3" -> BatchNormalizationLayer[],
-	    "EL3" -> ElementwiseLayer["ELU"],
-	    "con3" -> {ConvolutionLayer[n, 1, "PaddingSize" -> {0, 0}], DropoutLayer[0.1]},
-	    "conS" -> {BatchNormalizationLayer[], ConvolutionLayer[n, 1, "PaddingSize" -> {0, 0}]},
-	    "tot" -> TotalLayer[]
-	    |>,{
-	    	NetPort["Input"] -> "BN1" -> "EL1" -> "con1" -> "BN2" -> "EL2" -> "con2" -> "BN3" -> "EL3" -> "con3",
-	    	NetPort["Input"] -> "conS",
-	    	{"conS", "con3"} -> "tot" -> NetPort["Output"]
-    }],
-    _,
-	NetChain[{
-		BatchNormalizationLayer[],
-		ElementwiseLayer["ELU"],
-		ConvolutionLayer[n,3,"PaddingSize"->{1,1}],
-		BatchNormalizationLayer[],
-		ElementwiseLayer["ELU"],
-		ConvolutionLayer[n,3,"PaddingSize"->{1,1}], 
-		DropoutLayer[0.1]
-	}]
+convBN2[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
+  ch = {ConvolutionLayer[dep, {k, k}, "PaddingSize" -> {p, p}], BatchNormalizationLayer[]};
+  ch = If[r, Append[ch, ElementwiseLayer["ELU"]], ch];
+  NetChain[ch]]
+
+
+conv2[n_, res_] := Switch[res,
+   "ResNet",
+   NetGraph[<|
+	     "con1" -> convBN2[n/2, 1], "con2" -> convBN2[n/2, 3], "con3" -> convBN2[n, 1, False],
+	     "skip" -> convBN2[n, 1, False], "tot" -> TotalLayer[], "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[0.2]}
+     |>, {
+    	NetPort["Input"] -> "con1" -> "con2" -> "con3", NetPort["Input"] -> "skip", 
+    	{"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]
+     }],
+   _,
+   NetChain[{convBN2[n, 3], convBN2[n, 3], DropoutLayer[0.2]}]
 ];
 
 
-dec2[n_, res_]:=NetGraph[<|
-		"deconv"->NetChain[{ResizeLayer[{Scaled[2],Scaled[2]}]}],
-		"cat"->CatenateLayer[],
-		"conv"->conv2[n, res]
-	|>,{
-		NetPort["Input1"]->"cat",
-		NetPort["Input2"]->"deconv"->"cat"->"conv"
-}];
+dec2[n_, res_] := NetGraph[
+   <|"deconv" -> ResizeLayer[{Scaled[2], Scaled[2]}], "cat" -> CatenateLayer[], "conv" -> conv2[n, res]|>,
+   {NetPort["Input1"] -> "cat", NetPort["Input2"] -> "deconv" -> "cat" -> "conv"}
+   ];
 
 
 (* ::Subsubsection::Closed:: *)
@@ -287,71 +270,52 @@ dec2[n_, res_]:=NetGraph[<|
 
 
 UNET3D[NChan_: 1, Nclass_: 1, dep_: 32, dimIn_: {32, 128, 128}, res_:"ResNet"] := NetGraph[<|
-   "enc_1" -> conv3[dep, res],
-   "enc_2" -> {PoolingLayer[{2, 2, 2}, 2], conv3[2 dep, res]},
-   "enc_3" -> {PoolingLayer[{2, 2, 2}, 2], conv3[4 dep, res]},
-   "enc_4" -> {PoolingLayer[{2, 2, 2}, 2], conv3[8 dep, res]},
-   "enc_5" -> {PoolingLayer[{2, 2, 2}, 2], conv3[16 dep, res]},
-   "dec_1" -> dec3[8 dep, dimIn/16, res],
-   "dec_2" -> dec3[4 dep, dimIn/8, res],
-   "dec_3" -> dec3[2 dep, dimIn/4, res],
-   "dec_4" -> dec3[dep, dimIn/2, res],
-   "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
-   "prob" -> 
-    If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], 
-      SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
-   |>,
-  {
-   NetPort["Input"] -> 
-    "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-   {"enc_4", "enc_5"} -> "dec_1",
-   {"enc_3", "dec_1"} -> "dec_2",
-   {"enc_2", "dec_2"} -> "dec_3",
-   {"enc_1", "dec_3"} -> "dec_4",
-   "dec_4" -> "map" -> "prob"
-   }, "Input" -> Prepend[dimIn, NChan]]
+  "start" -> convBN3[dep, 1],
+  "enc_1" -> conv3[dep, res],
+  "enc_2" -> {PoolingLayer[{2, 2, 2}, 2], conv3[2 dep, res]},
+  "enc_3" -> {PoolingLayer[{2, 2, 2}, 2], conv3[4 dep, res]},
+  "enc_4" -> {PoolingLayer[{2, 2, 2}, 2], conv3[8 dep, res]},
+  "enc_5" -> {PoolingLayer[{2, 2, 2}, 2], conv3[16 dep, res]},
+  "dec_1" -> dec3[8 dep, dimIn/16, res],
+  "dec_2" -> dec3[4 dep, dimIn/8, res],
+  "dec_3" -> dec3[2 dep, dimIn/4, res],
+  "dec_4" -> dec3[dep, dimIn/2, res],
+  "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
+  "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
+  |>, {
+  NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+  {"enc_4", "enc_5"} -> "dec_1",
+  {"enc_3", "dec_1"} -> "dec_2",
+  {"enc_2", "dec_2"} -> "dec_3",
+  {"enc_1", "dec_3"} -> "dec_4",
+  "dec_4" -> "map" -> "prob"
+  }, "Input" -> Prepend[dimIn, NChan]]
 
+
+convBN3[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
+  ch = {ConvolutionLayer[dep, {k, k, k}, "PaddingSize" -> {p, p, p}], BatchNormalizationLayer[]};
+  ch = If[r, Append[ch, ElementwiseLayer["ELU"]], ch];
+  NetChain[ch]
+  ]
 
 conv3[n_, res_] := Switch[res,
-   "ResNet",
-	NetGraph[<|
-	  "BN1" -> BatchNormalizationLayer[],
-	  "EL1" -> ElementwiseLayer["ELU"],
-	  "con1" -> ConvolutionLayer[n/2, {1, 1, 1}, "PaddingSize" -> {0, 0, 0}],
-	  "BN2" -> BatchNormalizationLayer[],
-	  "EL2" -> ElementwiseLayer["ELU"],
-	  "con2" -> ConvolutionLayer[n/2, {3, 3, 3}, "PaddingSize" -> {1, 1, 1}],
-	  "BN3" -> BatchNormalizationLayer[],
-	  "EL3" -> ElementwiseLayer["ELU"],
-	  "con3" -> {ConvolutionLayer[n, {1, 1, 1}, "PaddingSize" -> {0, 0, 0}], DropoutLayer[0.1]},
-	  "conS" -> {BatchNormalizationLayer[], ConvolutionLayer[n, {1, 1, 1}, "PaddingSize" -> {0, 0, 0}]},
-	  "tot" -> TotalLayer[]
-	  |>,
-	 {NetPort["Input"] -> "BN1" -> "EL1" -> "con1" -> "BN2" -> "EL2" -> "con2" -> "BN3" -> "EL3" -> "con3",
-	  NetPort["Input"] -> "conS",
-	  {"conS", "con3"} -> "tot" -> NetPort["Output"]
-	  }],
-   _, 
-	NetChain[{
-	  BatchNormalizationLayer[],
-	  ElementwiseLayer["ELU"],
-	  ConvolutionLayer[n, {3, 3, 3}, "PaddingSize" -> {1, 1, 1}],
-	  BatchNormalizationLayer[],
-	  ElementwiseLayer["ELU"],
-	  ConvolutionLayer[n, {3, 3, 3}, "PaddingSize" -> {1, 1, 1}],
-	  DropoutLayer[0.1]
-	  }]
+  "ResNet",
+  NetGraph[<|
+    	"con1" -> convBN3[n/2, 1], "con2" -> convBN3[n/2, 3], "con3" -> convBN3[n, 1, False],
+    	"skip" -> convBN3[n, 1, False], "tot" -> TotalLayer[], "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[0.2]}
+    |>, {
+    	NetPort["Input"] -> "con1" -> "con2" -> "con3", NetPort["Input"] -> "skip", 
+   		{"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]
+    }],
+  _,
+  NetChain[{convBN3[n, 3], convBN3[n, 3], DropoutLayer[0.2]}]
+  ];
+
+
+dec3[n_, dimIn_, res_] := NetGraph[
+   <|"deconv" -> ResizeLayer3D[n, dimIn], "cat" -> CatenateLayer[], "conv" -> conv3[n, res]|>,
+   {NetPort["Input1"] -> "cat", NetPort["Input2"] -> "deconv" -> "cat" -> "conv"}
    ];
-
-
-dec3[n_, dimIn_, res_] := NetGraph[<|
-    "deconv" -> ResizeLayer3D[n, dimIn],
-    "cat" -> CatenateLayer[],
-    "conv" -> conv3[n, res]|>,
-   {
-    NetPort["Input1"] -> "cat",
-    NetPort["Input2"] -> "deconv" -> "cat" -> "conv"
-    }];
 
 
 ResizeLayer3D[n_, {dimInx_, dimIny_, dimInz_}] := Block[{sc = 2},
