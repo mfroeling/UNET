@@ -501,7 +501,10 @@ SplitTrainData[data_,label_,OptionsPattern[]]:=Block[{
 	testLabel=label[[s3]];
 	
 	(*define the output*)
-	{train,valid,testData,testLabel}
+	If[rand,
+		{train,valid,testData,testLabel,{s1,s2,s3}},
+		{train,valid,testData,testLabel}
+	]
 ]
 
 
