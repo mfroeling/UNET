@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7089,        199]
-NotebookOptionsPosition[      4603,        142]
-NotebookOutlinePosition[      6454,        190]
-CellTagsIndexPosition[      6411,        187]
+NotebookDataLength[      6980,        196]
+NotebookOptionsPosition[      4494,        139]
+NotebookOutlinePosition[      6346,        187]
+CellTagsIndexPosition[      6303,        184]
 WindowTitle->RotateFlip
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17972], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$20457], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/RotateFlip", ".html"]], None}]}]},
@@ -104,13 +104,10 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"RotateFlip", "[", 
-       StyleBox["data", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]transforms one dataset into 8 by generating a mirrored \
-version and rotation both 4x90 degree."
-    }]]}
+   {"", Cell["\<\
+RotateFlip[data]\[LineSeparator]transforms one dataset into 8 by generating a \
+mirrored version and rotation both 4x90 degree.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -155,7 +152,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 42.2147147}", 
+   "built" -> "{2018, 9, 18, 13, 16, 35.6792039}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -189,18 +186,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[582, 21, 3003, 74, 70, "AnchorBarGrid",ExpressionUUID->"25874109-8327-4525-9e00-0bcb2661fe4f",
+Cell[582, 21, 3003, 74, 70, "AnchorBarGrid",ExpressionUUID->"3a991dfa-9bce-4c08-bbe2-fe175cfb6033",
  CellID->1],
-Cell[3588, 97, 167, 6, 70, "ObjectNameGrid",ExpressionUUID->"1e49ce87-db91-4425-94d5-614dd005bc48"],
-Cell[3758, 105, 437, 12, 70, "Usage",ExpressionUUID->"d0ed5134-cc5e-4ae9-8be0-14f4dea7af99"],
+Cell[3588, 97, 167, 6, 70, "ObjectNameGrid",ExpressionUUID->"80257c76-0335-4750-8650-07a4ee339671"],
+Cell[3758, 105, 328, 9, 70, "Usage",ExpressionUUID->"9a85cdf9-fe55-428d-9db0-b0e8539d3a27"],
 Cell[CellGroupData[{
-Cell[4220, 121, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"47552847-d4b5-403e-822c-c5e8057ea89e",
+Cell[4111, 118, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"642d2624-72f5-4a6b-b0d3-303fd6c1b52f",
  CellID->38303248],
-Cell[4379, 130, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"e91aebb2-95d5-49e3-9d53-455b4aec81fc"],
-Cell[4413, 132, 148, 5, 70, "MoreAbout",ExpressionUUID->"f0b9bdfa-a80b-4cc2-b98c-fc137bd0a390",
+Cell[4270, 127, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"0b22bb0d-edb7-44b4-b2fc-924d4263eea1"],
+Cell[4304, 129, 148, 5, 70, "MoreAbout",ExpressionUUID->"2fc138eb-6ad3-4c99-9873-2d10dab3c8c5",
  CellID->1]
 }, Open  ]],
-Cell[4576, 140, 23, 0, 70, "FooterCell",ExpressionUUID->"79f47d3e-69a0-4534-99af-fa1b914a6aef"]
+Cell[4467, 137, 23, 0, 70, "FooterCell",ExpressionUUID->"33e3457d-4436-4bf4-843a-3eea75337001"]
 }
 ]
 *)

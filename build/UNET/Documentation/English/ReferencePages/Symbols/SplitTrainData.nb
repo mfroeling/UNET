@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11585,        322]
-NotebookOptionsPosition[      8275,        253]
-NotebookOutlinePosition[     10350,        304]
-CellTagsIndexPosition[     10307,        301]
+NotebookDataLength[     12193,        399]
+NotebookOptionsPosition[      8881,        330]
+NotebookOutlinePosition[     10957,        381]
+CellTagsIndexPosition[     10914,        378]
 WindowTitle->SplitTrainData
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ SplitTrainData.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$20059], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$22543], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/SplitTrainData", ".html"]], None}]}]},
@@ -105,11 +105,7 @@ Cell[TextData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"SplitTrainData", "[", 
-       RowBox[{
-        StyleBox["data", "TI"], ",", " ", 
-        StyleBox["label", "TI"]}], "]"}]], "InlineFormula"],
+     "SplitTrainData[data, label]",
      "\[LineSeparator]splits the data and label in trainData, validationData, \
 testData and testLabels that can be used in ",
      Cell[BoxData[
@@ -117,9 +113,90 @@ testData and testLabels that can be used in ",
          TextData["TrainUNET"]],"paclet:UNET/ref/TrainUNET"},
        "RefLink",
        BaseStyle->{"InlineFormula"}]], "InlineFormula"],
-     ". The data and label should be in the form {N, Nchan, x, y} or {N, \
-Nchan, z, x, y}. The label sould be Integers with 1 for the background class \
-and should go from 1 to Nclass."
+     ".",
+     " ",
+     "The",
+     " ",
+     "data",
+     " ",
+     "and",
+     " ",
+     "label",
+     " ",
+     "should",
+     " ",
+     "be",
+     " ",
+     "in",
+     " ",
+     "the",
+     " ",
+     "form",
+     " ",
+     "{N",
+     ",",
+     " ",
+     "Nchan",
+     ",",
+     " ",
+     "x",
+     ",",
+     " ",
+     "y}",
+     " ",
+     "or",
+     " ",
+     "{N",
+     ",",
+     " ",
+     "Nchan",
+     ",",
+     " ",
+     "z",
+     ",",
+     " ",
+     "x",
+     ",",
+     " ",
+     "y}",
+     ".",
+     " ",
+     "The",
+     " ",
+     "label",
+     " ",
+     "sould",
+     " ",
+     "be",
+     " ",
+     "Integers",
+     " ",
+     "with",
+     " ",
+     "1",
+     " ",
+     "for",
+     " ",
+     "the",
+     " ",
+     "background",
+     " ",
+     "class",
+     " ",
+     "and",
+     " ",
+     "should",
+     " ",
+     "go",
+     " ",
+     "from",
+     " ",
+     "1",
+     " ",
+     "to",
+     " ",
+     "Nclass",
+     "."
     }]]}
   }]], "Usage",
  GridBoxOptions->{
@@ -156,15 +233,15 @@ Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], 
-    ButtonBox["RadomizeSplit",
+    ButtonBox["RandomizeSplit",
      BaseStyle->"Link",
-     ButtonData->"paclet:UNET/ref/RadomizeSplit"], 
+     ButtonData->"paclet:UNET/ref/RandomizeSplit"], 
     ButtonBox["True",
      BaseStyle->"Link",
      ButtonData->"paclet:ref/True"], Cell[TextData[{
      Cell[BoxData[
       TemplateBox[{Cell[
-         TextData["RadomizeSplit"]],"paclet:UNET/ref/RadomizeSplit"},
+         TextData["RandomizeSplit"]],"paclet:UNET/ref/RandomizeSplit"},
        "RefLink",
        BaseStyle->{"InlineFormula"}]], "InlineFormula"],
      " is an option for ",
@@ -266,7 +343,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 48.6711053}", 
+   "built" -> "{2018, 9, 18, 13, 16, 42.9957213}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -303,27 +380,27 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"28aac41c-536a-4eac-b991-4c4af7fb6515",
+Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"811b2cf9-f330-4d5e-b8f4-271285d7693b",
  CellID->1],
-Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"b9aae2a8-ffb1-450e-a0a4-74debf8e90bd"],
-Cell[3783, 105, 880, 22, 70, "Usage",ExpressionUUID->"6a164f39-ae12-4987-99de-1d29086fb77d"],
+Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"f45808aa-9b75-419c-885a-d18601b8e8fe"],
+Cell[3783, 105, 1482, 99, 70, "Usage",ExpressionUUID->"a7a5d8d0-afab-4a5e-838c-f20a64e01280"],
 Cell[CellGroupData[{
-Cell[4688, 131, 621, 19, 70, "NotesSection",ExpressionUUID->"43b1548f-8226-473f-b2cc-3710eb6f08b9",
+Cell[5290, 208, 621, 19, 70, "NotesSection",ExpressionUUID->"57179d60-f5bb-4b59-aa48-e34a91ff1ec9",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[5312, 152, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"815e6f87-fa5e-4f74-a88a-daa80a794c6f"],
-Cell[5346, 154, 53, 0, 70, "Notes",ExpressionUUID->"456a4a00-d9c0-42a2-b55e-f59466495912"],
-Cell[5402, 156, 2419, 69, 70, "3ColumnTableMod",ExpressionUUID->"7a4d9462-7a68-4454-ab95-90e3e3790d99"],
-Cell[7824, 227, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"e8505dba-5199-4d8f-87cd-3035b00b3625"]
+Cell[5914, 229, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"a3c03c70-5226-427a-bec3-359b5f271b61"],
+Cell[5948, 231, 53, 0, 70, "Notes",ExpressionUUID->"28a3a7ef-c60d-4784-bdba-e85ea16bb68b"],
+Cell[6004, 233, 2423, 69, 70, "3ColumnTableMod",ExpressionUUID->"d835e3cf-6f59-4c12-b818-a76dee9fbb26"],
+Cell[8430, 304, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"836821a5-f5f4-4a07-8a1f-3bbd68a9d940"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[7892, 232, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"9674fd9e-f16a-4f6b-be84-4a746f40f65f",
+Cell[8498, 309, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"9bedd2f1-8795-49e4-b50c-9ffbdcc183f2",
  CellID->38303248],
-Cell[8051, 241, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"6ae689fb-aed0-4c83-b48a-5cb758048fdc"],
-Cell[8085, 243, 148, 5, 70, "MoreAbout",ExpressionUUID->"3b4963f5-f365-4d5c-a3fa-4bfc18689126",
+Cell[8657, 318, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"ca4af956-942d-4f8c-98ef-96c489001d3d"],
+Cell[8691, 320, 148, 5, 70, "MoreAbout",ExpressionUUID->"a971fedd-29b4-4c5f-b3ec-bf635c6bcf54",
  CellID->1]
 }, Open  ]],
-Cell[8248, 251, 23, 0, 70, "FooterCell",ExpressionUUID->"2cd85e34-7fd9-45f0-b436-e9b9483b4706"]
+Cell[8854, 328, 23, 0, 70, "FooterCell",ExpressionUUID->"58492c9f-5208-40b0-bdef-95ee247b8220"]
 }
 ]
 *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7572,        212]
-NotebookOptionsPosition[      5002,        154]
-NotebookOutlinePosition[      6937,        203]
-CellTagsIndexPosition[      6894,        200]
+NotebookDataLength[      7206,        201]
+NotebookOptionsPosition[      4635,        143]
+NotebookOutlinePosition[      6571,        192]
+CellTagsIndexPosition[      6528,        189]
 WindowTitle->DiceSimilarity
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ DiceSimilarity.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$13619], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14669], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/DiceSimilarity", ".html"]], None}]}]},
@@ -104,25 +104,14 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"DiceSimilarity", "[", 
-       RowBox[{
-        StyleBox["x", "TI"], ",", " ", 
-        StyleBox["y", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the Dice Similarity between 1 and 0 vectors x and \
-y. "
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"DiceSimilarity", "[", 
-       RowBox[{
-        StyleBox["x", "TI"], ",", " ", 
-        StyleBox["y", "TI"], ",", " ", 
-        StyleBox["class", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the Dice Similarity Integer vectors x and y for \
-Integer Class."
-    }]]}
+   {"", Cell["\<\
+DiceSimilarity[x, y]\[LineSeparator]gives the Dice Similarity between 1 and 0 \
+vectors x and y. \
+\>"]},
+   {"", Cell["\<\
+DiceSimilarity[x, y, class]\[LineSeparator]gives the Dice Similarity Integer \
+vectors x and y for Integer Class.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -167,7 +156,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 28.1125562}", 
+   "built" -> "{2018, 9, 18, 13, 16, 13.5490522}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -202,18 +191,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"a841e6b5-fdf8-41a0-9927-c28b6ee12349",
+Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"c37e5d2d-f9b3-4661-bdec-f103d342f5c9",
  CellID->1],
-Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"f6a4d06e-647b-4312-876e-e6eb7754e81f"],
-Cell[3783, 105, 811, 24, 70, "Usage",ExpressionUUID->"8d7cd905-749c-4a6a-96e8-f22f6ce8e6c1"],
+Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"dade3bd0-9e69-4ba4-b516-75e04a6c0ced"],
+Cell[3783, 105, 444, 13, 70, "Usage",ExpressionUUID->"07b8a5c6-a721-40ee-8be2-1360b89e4bfc"],
 Cell[CellGroupData[{
-Cell[4619, 133, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"d4504c4a-7c98-445f-bb7b-e52779af850b",
+Cell[4252, 122, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"cef0e9e0-f445-4999-aa04-cecb6b3144ae",
  CellID->38303248],
-Cell[4778, 142, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"aadd06f2-1dbc-4c72-a36c-7e05c0999c8b"],
-Cell[4812, 144, 148, 5, 70, "MoreAbout",ExpressionUUID->"c997c4a0-d8b0-4127-a24f-d7b8ff14b1c0",
+Cell[4411, 131, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"076f0d45-9256-4603-a89c-5334c5733773"],
+Cell[4445, 133, 148, 5, 70, "MoreAbout",ExpressionUUID->"2f65878d-0aa1-411f-affa-b341a5a680d4",
  CellID->1]
 }, Open  ]],
-Cell[4975, 152, 23, 0, 70, "FooterCell",ExpressionUUID->"e1eca94c-6837-4aba-adc6-a34213221d18"]
+Cell[4608, 141, 23, 0, 70, "FooterCell",ExpressionUUID->"becdceb0-6cee-44d5-9d2b-819741a4e575"]
 }
 ]
 *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7150,        201]
-NotebookOptionsPosition[      4663,        144]
-NotebookOutlinePosition[      6515,        192]
-CellTagsIndexPosition[      6472,        189]
+NotebookDataLength[      6986,        196]
+NotebookOptionsPosition[      4499,        139]
+NotebookOutlinePosition[      6352,        187]
+CellTagsIndexPosition[      6309,        184]
 WindowTitle->ClassDecoder
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$9750], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$10800], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/ClassDecoder", ".html"]], None}]}]},
@@ -104,15 +104,10 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"ClassDecoder", "[", 
-       RowBox[{
-        StyleBox["probability", "TI"], ",", " ", 
-        StyleBox["nclass", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]decodes a probability vector of 1 and 0 into Integers \
-of 1 to Nclass."
-    }]]}
+   {"", Cell["\<\
+ClassDecoder[probability, nclass]\[LineSeparator]decodes a probability vector \
+of 1 and 0 into Integers of 1 to Nclass.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -157,7 +152,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 15.5850858}", 
+   "built" -> "{2018, 9, 18, 13, 15, 58.9726463}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -191,18 +186,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[584, 21, 3010, 74, 70, "AnchorBarGrid",ExpressionUUID->"f749cc6c-f75b-4413-a0ae-449fa2407448",
+Cell[584, 21, 3011, 74, 70, "AnchorBarGrid",ExpressionUUID->"f12b75d8-2639-4687-942c-f982908bec58",
  CellID->1],
-Cell[3597, 97, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"868eff58-fd42-466e-8aa2-8196910001dd"],
-Cell[3769, 105, 486, 14, 70, "Usage",ExpressionUUID->"c00033f3-9c6a-4029-8d07-b1ed1dabf879"],
+Cell[3598, 97, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"46cc868b-f407-4ca7-9d6f-703aca193a7c"],
+Cell[3770, 105, 321, 9, 70, "Usage",ExpressionUUID->"8d09e8e7-064b-4904-9c22-ddadf04d720f"],
 Cell[CellGroupData[{
-Cell[4280, 123, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"d8f848fc-6398-4814-b58b-6214c225a2ec",
+Cell[4116, 118, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"b506d578-6c83-4ae9-b653-8dab26b15e9d",
  CellID->38303248],
-Cell[4439, 132, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"c8b71df2-8471-49c8-9b0a-7c48c9fc4575"],
-Cell[4473, 134, 148, 5, 70, "MoreAbout",ExpressionUUID->"56326ee8-20de-4780-88f4-7a5547377463",
+Cell[4275, 127, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"6e56524a-442b-4994-a13a-f8a84cd71a27"],
+Cell[4309, 129, 148, 5, 70, "MoreAbout",ExpressionUUID->"9460398c-29b5-485b-afcb-ce6a6b4d4ad5",
  CellID->1]
 }, Open  ]],
-Cell[4636, 142, 23, 0, 70, "FooterCell",ExpressionUUID->"c6bc22a0-a350-4196-871e-d310e344fdd1"]
+Cell[4472, 137, 23, 0, 70, "FooterCell",ExpressionUUID->"1d192386-4d93-4ea6-bb07-6a4228ee8a71"]
 }
 ]
 *)

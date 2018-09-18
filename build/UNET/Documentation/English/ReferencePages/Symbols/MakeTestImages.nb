@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7430,        205]
-NotebookOptionsPosition[      4802,        146]
-NotebookOutlinePosition[      6795,        196]
-CellTagsIndexPosition[      6752,        193]
+NotebookDataLength[      7269,        200]
+NotebookOptionsPosition[      4641,        141]
+NotebookOutlinePosition[      6634,        191]
+CellTagsIndexPosition[      6591,        188]
 WindowTitle->MakeTestImages
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ MakeTestImages.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$16054], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$18060], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/MakeTestImages", ".html"]], None}]}]},
@@ -104,17 +104,12 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeTestImages", "[", 
-       RowBox[{
-        StyleBox["n", "TI"], ",", 
-        StyleBox["case", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]generates n 2D test images for segmentation testing. \
-There are four cases. case1: One channel one class. case2: One channel two \
-classes. case3: One channel four classes. case4: Three channels four \
-classes."
-    }]]}
+   {"", Cell["\<\
+MakeTestImages[n,case]\[LineSeparator]generates n 2D test images for \
+segmentation testing. There are four cases. case1: One channel one class. \
+case2: One channel two classes. case3: One channel four classes. case4: Three \
+channels four classes.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -159,13 +154,13 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 35.9692982}", 
+   "built" -> "{2018, 9, 18, 13, 16, 26.6491569}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetSupport`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
     "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
     "status" -> "None", "summary" -> 
-    "MakeTestImages[n, case] generates n 2D test images for segmentation \
+    "MakeTestImages[n,case] generates n 2D test images for segmentation \
 testing. There are four cases. case1: One channel one class. case2: One \
 channel two classes. case3: One channel four classes. case4: Three channels \
 four classes.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
@@ -195,18 +190,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"052f3498-5733-4372-8cbc-fbfdf30c2be0",
+Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"49645b57-a1db-4e44-9790-0974ba5d7cd2",
  CellID->1],
-Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"0664772f-1a38-4729-a214-4d91069c9bc5"],
-Cell[3783, 105, 611, 16, 70, "Usage",ExpressionUUID->"57a396ae-e387-4e69-8ccb-20b4b5d5b42c"],
+Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"465ab648-ac0e-444b-91e3-5c029a41f96b"],
+Cell[3783, 105, 450, 11, 70, "Usage",ExpressionUUID->"bfe70f39-b4f6-4389-be97-335a21875722"],
 Cell[CellGroupData[{
-Cell[4419, 125, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"7bb3b4ed-5bb5-4ef9-8760-bb1563d5cb1a",
+Cell[4258, 120, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"1555fe72-b945-4d30-8c90-63e588990bfd",
  CellID->38303248],
-Cell[4578, 134, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"ba9e17fb-f799-46c3-9ffc-c279a3063652"],
-Cell[4612, 136, 148, 5, 70, "MoreAbout",ExpressionUUID->"7e466027-70fd-4997-b16f-57c3213dc887",
+Cell[4417, 129, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"78a2ac80-c44b-42b8-bedb-001f39cb0975"],
+Cell[4451, 131, 148, 5, 70, "MoreAbout",ExpressionUUID->"ef8344bc-0b92-47be-b3ed-16d3504c95a8",
  CellID->1]
 }, Open  ]],
-Cell[4775, 144, 23, 0, 70, "FooterCell",ExpressionUUID->"394fc5f5-212b-454f-8d0e-0843e9eab72f"]
+Cell[4614, 139, 23, 0, 70, "FooterCell",ExpressionUUID->"9b25137b-9a58-4eb2-b4fe-ef30e5a3eea6"]
 }
 ]
 *)

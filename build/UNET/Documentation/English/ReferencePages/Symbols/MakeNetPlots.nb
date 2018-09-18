@@ -10,11 +10,11 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5776,        161]
-NotebookOptionsPosition[      3656,        110]
-NotebookOutlinePosition[      5513,        159]
-CellTagsIndexPosition[      5470,        156]
-WindowTitle->AddLossLayer
+NotebookDataLength[      5411,        147]
+NotebookOptionsPosition[      3342,         97]
+NotebookOutlinePosition[      5150,        145]
+CellTagsIndexPosition[      5107,        142]
+WindowTitle->MakeNetPlots
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -32,12 +32,12 @@ Cell[BoxData[GridBox[{
         TextCell[
          Row[{"URL", 
            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
-       StripOnInput->False], {"\<\"UNET/ref/AddLossLayer\"\>":>
+       StripOnInput->False], {"\<\"UNET/ref/MakeNetPlots\"\>":>
       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
       Module[{DocumentationSearch`Private`nb$}, 
        DocumentationSearch`Private`nb$ = NotebookPut[
           Notebook[{
-            Cell["UNET/ref/AddLossLayer"]}, Visible -> False]]; 
+            Cell["UNET/ref/MakeNetPlots"]}, Visible -> False]]; 
        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
@@ -49,7 +49,7 @@ Cell[BoxData[GridBox[{
              BoxData[
               MakeBoxes[
                Hyperlink[
-               "http://reference.wolfram.com/language/UNET/ref/AddLossLayer.\
+               "http://reference.wolfram.com/language/UNET/ref/MakeNetPlots.\
 html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
            False]]; SelectionMove[
         DocumentationSearch`Private`nb$, All, Notebook]; 
@@ -60,10 +60,10 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8879], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17582], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
-            "UNET/ref/AddLossLayer", ".html"]], None}]}]},
+            "UNET/ref/MakeNetPlots", ".html"]], None}]}]},
       Appearance->None,
       MenuAppearance->Automatic,
       MenuStyle->"URLMenu"]],
@@ -76,7 +76,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
  CellID->1],
 
 Cell[TextData[{
- Cell["AddLossLayer", "ObjectName"],
+ Cell["MakeNetPlots", "ObjectName"],
  Cell[BoxData[
   TemplateBox[{8},
    "Spacer1"]]],
@@ -84,22 +84,9 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     "AddLossLayer[net]",
-     "\[LineSeparator]adds two loss layers to a NetGraph, a ",
-     Cell[BoxData[
-      TemplateBox[{Cell[
-         TextData["SoftDiceLossLayer"]],"paclet:UNET/ref/SoftDiceLossLayer"},
-       "RefLink",
-       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
-     " ",
-     "and",
-     " ",
-     "a",
-     " ",
-     "CrossEntropyLossLayer",
-     "."
-    }]]}
+   {"", Cell[
+    "MakeNetPlots[trainedNet]\[LineSeparator]MakeNetPlots[trainedNet, \
+size]"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -112,7 +99,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"AddLossLayer",
+WindowTitle->"MakeNetPlots",
 TaggingRules->{
  "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
   GridBox[{{
@@ -123,17 +110,16 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 15, 51.6407579}", 
+   "built" -> "{2018, 9, 18, 13, 16, 24.9769908}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
     "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
     "status" -> "None", "summary" -> 
-    "AddLossLayer[net] adds two loss layers to a NetGraph, a \
-SoftDiceLossLayer and a CrossEntropyLossLayer.", "synonyms" -> {}, 
-    "tabletags" -> {}, "title" -> "AddLossLayer", "titlemodifier" -> "", 
-    "windowtitle" -> "AddLossLayer", "type" -> "Symbol", "uri" -> 
-    "UNET/ref/AddLossLayer"}},
+    "MakeNetPlots[trainedNet] MakeNetPlots[trainedNet, size]", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "MakeNetPlots", 
+    "titlemodifier" -> "", "windowtitle" -> "MakeNetPlots", "type" -> 
+    "Symbol", "uri" -> "UNET/ref/MakeNetPlots"}},
 CellContext->"Global`",
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->Notebook[{
@@ -158,11 +144,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[584, 21, 2282, 54, 70, "AnchorBarGrid",ExpressionUUID->"42038756-0f1b-436d-a8b0-8dbc37b6bba1",
+Cell[584, 21, 2283, 54, 70, "AnchorBarGrid",ExpressionUUID->"7161e4ec-d787-499f-aff6-54382d241224",
  CellID->1],
-Cell[2869, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"f6a81ef1-83cb-4afb-9164-f37f923de656"],
-Cell[3041, 85, 585, 21, 70, "Usage",ExpressionUUID->"695a0db9-9ada-427f-957d-b30a7d648cc8"],
-Cell[3629, 108, 23, 0, 70, "FooterCell",ExpressionUUID->"29f3aac9-d691-48d6-96c7-c5aa68b4e81b"]
+Cell[2870, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"6540f35a-1900-45ad-a71d-055a57418e77"],
+Cell[3042, 85, 270, 8, 70, "Usage",ExpressionUUID->"abecbb73-ad61-47c1-bd7e-c3425ef7d0f1"],
+Cell[3315, 95, 23, 0, 70, "FooterCell",ExpressionUUID->"2fef6082-0497-407f-a401-d823fcedd164"]
 }
 ]
 *)

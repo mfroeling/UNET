@@ -43,6 +43,9 @@ AddLossLayer::usage =
 SoftDiceLossLayer::usage = 
 "SoftDiceLossLayer[dim] represents a net layer that computes the SoftDice loss by comparing input class probability vectors with the target class vector."
 
+BrierLossLayer::usage = 
+"BrierLossLayer[dim] represents a net layer that computes the Brier loss by comparing input class probability vectors with the target class vector."
+
 TrainUNET::usage = 
 "TrainUNET[trainData, validationData] Trains a UNET for the given data.
 TrainUNET[trainData, validationData, {testData, testLabels}] Trains a UNET for the given data and also gives similarity results for the testData.
@@ -81,6 +84,10 @@ ShowChannelClassData::usage =
 "ShowChannelClassData[data, label] makes a grid of the data and label in 2D.
 ShowChannelClassData[data, label, result] makes a grid of the data, label and result in 2D."
 
+MakeNetPlots::usage = 
+"MakeNetPlots[trainedNet]
+MakeNetPlots[trainedNet, size]"
+
 
 (* ::Subsection::Closed:: *)
 (*Options*)
@@ -91,6 +98,9 @@ NetParameters::usage =
 
 BlockType::usage = 
 "BlockType is an option for TrainUNET and UNET. It specifies which block are used to build the network. Values can be \"UNET\" or \"ResNet\"."
+
+DropOutRate::usage = 
+"DropOutRate is an option for TrainUNET and UNET. It specifies how musch dropout is used after each block. It is a value between 0 and 1, default is .2."
 
 RandomizeSplit::usage = 
 "RandomizeSplit is an option for SplitTrainData. If True the data is randomized"
@@ -115,6 +125,9 @@ MakeDifferenceImage::usage =
 StepSize::usage = 
 "StepSize is an options for ShowChannelClassData. It defines how many images are displayed by stepping through the data with stepsize."
 
+NetLossLayers::usage = 
+"NetLossLayers is an option for TrainUNET. It defines which loss layers to use default is ALL. Values are 1 - SoftDice, 2 - CrossEntropy, 3 - Brier. Can also be a combination, i.e. {1,2}."
+
 
 (* ::Subsection::Closed:: *)
 (*Error messages*)
@@ -129,6 +142,9 @@ TrainUNET::dim =
 
 
 Begin["`Private`"]
+
+
+verb = False;
 
 
 (* ::Subsection:: *)
@@ -179,23 +195,86 @@ DiceSimilarity2 = Compile[{{predi, _Integer, 1}, {gti, _Integer, 1}, {class, _In
 SyntaxInformation[SoftDiceLossLayer] = {"ArgumentsPattern" -> {_}};
 
 SoftDiceLossLayer[dim_]:=NetGraph[<|
-		"times"->ThreadingLayer[Times],
-		"flattot1"->{ElementwiseLayer[2*#&],FlatTotLayer[dim-1]},
-		"flattot2"->FlatTotLayer[dim-1],
-		"flattot3"->FlatTotLayer[dim-1],
-		"total1"->TotalLayer[],
-		"devide"->{ThreadingLayer[Divide],AggregationLayer[Mean,1],ElementwiseLayer[1-#&]}
-	|>,
-	{
-		{NetPort["Input"],NetPort["Target"]}->"times"->"flattot1",
-		NetPort["Input"]->"flattot2",
-		NetPort["Target"]->"flattot3",
-		{"flattot2","flattot3"}->"total1",
-		{"flattot1","total1"}->"devide"->NetPort["Loss"]
-	},"Loss"->"Real"
-]
+  "times" -> ThreadingLayer[Times],
+  "flattot1" -> FlatTotLayer[dim - 1],
+  "flattot2" -> FlatTotLayer[dim - 1],
+  "flattot3" -> FlatTotLayer[dim - 1],
+  "total" -> TotalLayer[],
+  "devide" -> {ThreadingLayer[Divide], AggregationLayer[Mean, 1],ElementwiseLayer[1 - 2 # &]},
+  "weight" -> ElementwiseLayer[1/(# + 1) &],
+  "times1" -> ThreadingLayer[Times],
+  "times2" -> ThreadingLayer[Times]
+  |>, {
+  {NetPort["Input"], NetPort["Target"]} -> "times" -> "flattot1",
+  NetPort["Input"] -> "flattot2",
+  NetPort["Target"] -> "flattot3",
+  {"flattot2", "flattot3"} -> "total",
+  "flattot3" -> "weight",
+  {"flattot1", "weight"} -> "times1",
+  {"total", "weight"} -> "times2",
+  {"times1", "times2"} -> "devide" -> NetPort["Loss"]
+  }, "Loss" -> "Real"]
+
 
 FlatTotLayer[lev_]:=NetChain[{FlattenLayer[lev],AggregationLayer[Total,1]}];
+
+
+(* ::Subsubsection::Closed:: *)
+(*SoftDiceLossLayer*)
+
+
+SyntaxInformation[BrierLossLayer] = {"ArgumentsPattern" -> {_}};
+
+(*
+BrierLossLayer[dim_] := NetGraph[<|
+   "sub" -> ThreadingLayer[Subtract],
+   "SqMn" -> {ElementwiseLayer[#^2 &], FlattenLayer[dim-1], TransposeLayer[], AggregationLayer[Mean],AggregationLayer[Total, 1]}
+   |>, {
+   {NetPort["Input"], NetPort["Target"]} -> "sub" -> "SqMn"-> NetPort["Loss"]
+   }, "Loss" -> "Real"]
+   *)
+   
+BrierLossLayer[dim_] := NetGraph[<|
+   "sub" -> ThreadingLayer[Subtract],
+   "SqMn" -> {ElementwiseLayer[#^2 &], FlattenLayer[dim - 1], TransposeLayer[], AggregationLayer[Mean]},
+   "tot1" -> AggregationLayer[Total, 1],
+   "weigth" -> {FlatTotLayer[dim - 1], ElementwiseLayer[1/(# + 1) &]},
+   "times" -> ThreadingLayer[Times],
+   "tot1" -> AggregationLayer[Total, 1],
+   "tot2" -> AggregationLayer[Total, 1],
+   "devide" -> ThreadingLayer[Divide]
+   |>, {
+   {NetPort["Input"], NetPort["Target"]} -> "sub" -> "SqMn",
+   NetPort["Target"] -> "weigth",
+   {"weigth", "SqMn"} -> "times" -> "tot1",
+   "weigth" -> "tot2",
+   {"tot1", "tot2"} -> "devide" -> NetPort["Loss"]
+   }, "Loss" -> "Real"]
+
+(* ::Subsection::Closed:: *)
+(*SoftDiceLossLayer*)
+
+
+MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2},
+  n = Round[trained["TotalBatches"]/trained["TotalRounds"]];
+  pl1 = ListLogPlot[{trained["ValidationLossList"][[All, 2]], 
+     trained["BatchLossList"][[;; ;; n]]}, Joined -> True, 
+    PlotLegends -> {"Validation", "Training"}, Frame -> True, 
+    GridLines -> Automatic, FrameLabel -> {"Epochs", "Loss"}, 
+    LabelStyle -> Directive[Black, Bold, 12], 
+    FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick, 
+    ImageSize -> size];
+  pl2 = ListLogPlot[
+    100 {trained["ValidationErrorRateList"][[All, 2]], 
+      trained["BatchErrorRateList"][[;; ;; n]]}, Joined -> True, 
+    PlotLegends -> {"Validation", "Training"}, Frame -> True, 
+    GridLines -> Automatic, 
+    FrameLabel -> {"Epochs", "Error Rate [%]"}, 
+    LabelStyle -> Directive[Black, Bold, 12], 
+    FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick, 
+    ImageSize -> size];
+  {pl1, pl2}
+  ]
 
 
 (* ::Subsection:: *)
@@ -206,37 +285,58 @@ FlatTotLayer[lev_]:=NetChain[{FlattenLayer[lev],AggregationLayer[Total,1]}];
 (*UNET*)
 
 
-Options[UNET] = {BlockType->"ResNet"}
+Options[UNET] = {BlockType->"ResNet", DropOutRate->0.2}
 
 SyntaxInformation[UNET] = {"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}};
 
-UNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=Switch[Length[dimIn],2,UNET2D,3,UNET3D][Nchan,Nclass,Floor[dep,2],dimIn,OptionValue[BlockType]]
+UNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=Switch[Length[dimIn],2,UNET2D,3,UNET3D][Nchan,Nclass,Floor[dep,2],dimIn,OptionValue[BlockType],OptionValue[DropOutRate]]
+
+
+(* ::Subsubsection::Closed:: *)
+(*General*)
+
+layName[rep_] := "layer_" <> ToString[rep]
+
+connect[dep_] := Flatten@Table[Switch[rep,
+     1, {NetPort["Input"] -> layName[rep]}, dep + 1, Flatten[{NetPort["Input"], Table[layName[rr], {rr, 1, rep - 1}]}] -> "trans",
+     _, Flatten[{NetPort["Input"], Table[layName[rr], {rr, 1, rep - 1}]}] -> layName[rep]
+     ], {rep, 1, dep + 1}];
 
 
 (* ::Subsubsection::Closed:: *)
 (*Unet2D*)
 
 
-UNET2D[NChan_:1,Nclass_:1,dep_:64,dimIn_:{128,128}, res_:"ResNet"] := NetGraph[<|
-		"start" -> convBN2[dep, 1],
-		"enc_1"->conv2[dep, res],
-		"enc_2"->{PoolingLayer[{2, 2}, 2], conv2[2 dep, res]},
-		"enc_3"->{PoolingLayer[{2, 2}, 2], conv2[4 dep, res]},
-		"enc_4"->{PoolingLayer[{2, 2}, 2], conv2[8 dep, res]},
-		"enc_5"->{PoolingLayer[{2, 2}, 2], conv2[16 dep, res]},
-		"dec_1"->dec2[8 dep, res],
-		"dec_2"->dec2[4 dep, res],
-		"dec_3"->dec2[2 dep, res],
-		"dec_4"->dec2[dep, res],
-		"map"->ConvolutionLayer[Nclass,{1,1}],
-		"prob"->If[Nclass>1,{TransposeLayer[{1<->3,1<->2}],SoftmaxLayer[]},{LogisticSigmoid,FlattenLayer[1]}]
-	|>,{
-		NetPort["Input"]->"start"->"enc_1"->"enc_2"->"enc_3"->"enc_4"->"enc_5",
-		{"enc_4","enc_5"}->"dec_1", {"enc_3","dec_1"}->"dec_2",
-		{"enc_2","dec_2"}->"dec_3",	{"enc_1","dec_3"}->"dec_4",
-		"dec_4"->"map"->"prob"
-	},"Input"->Prepend[dimIn,NChan]
-]
+UNET2D[NChan_:1,Nclass_:1,depI_:64,dimIn_:{128,128}, res_:"ResNet", drop_:0.2] := Block[{dep, depi},
+ {dep, depi} = Switch[res,
+ 	"DenseNet", {Table[{depI[[1]], depI[[2]] i}, {i, {1, 2, 3, 4, 3}}], 4 depI[[1]]},
+ 	_, {Table[depI i, {i, {{1, 1}, {1, 2}, {2, 4}, {4, 8}, {8, 16}}}], depI}
+   ];
+ 
+ If[verb, Print["Layer parameters:" , {dep, depi}]];
+ 
+ NetGraph[<|
+   "start" -> convBN2[depi, 1],
+   "enc_1" -> conv2[dep[[1]], dimIn, res, drop],
+   "enc_2" -> {PoolingLayer[{2, 2}, 2], conv2[dep[[2]], dimIn/2, res, drop]},
+   "enc_3" -> {PoolingLayer[{2, 2}, 2], conv2[dep[[3]], dimIn/4, res, drop]},
+   "enc_4" -> {PoolingLayer[{2, 2}, 2], conv2[dep[[4]], dimIn/8, res, drop]},
+   "enc_5" -> {PoolingLayer[{2, 2}, 2], conv2[dep[[5]], dimIn/16, res, drop]},
+   "dec_1" -> dec2[dep[[5]], dimIn/8, res, drop],
+   "dec_2" -> dec2[dep[[4]], dimIn/4, res, drop],
+   "dec_3" -> dec2[dep[[3]], dimIn/2, res, drop],
+   "dec_4" -> dec2[dep[[2]], dimIn, res, drop],
+   "map" -> ConvolutionLayer[Nclass, {1, 1}],
+   "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
+   |>, {
+   NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+   {"enc_4", "enc_5"} -> "dec_1",
+   {"enc_3", "dec_1"} -> "dec_2",
+   {"enc_2", "dec_2"} -> "dec_3",
+   {"enc_1", "dec_3"} -> "dec_4",
+   "dec_4" -> "map" -> "prob"
+   }, "Input" -> Prepend[dimIn, NChan]]
+ ]
 
 
 convBN2[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
@@ -245,23 +345,65 @@ convBN2[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
   NetChain[ch]]
 
 
-conv2[n_, res_] := Switch[res,
-   "ResNet",
-   NetGraph[<|
-	     "con1" -> convBN2[n/2, 1], "con2" -> convBN2[n/2, 3], "con3" -> convBN2[n, 1, False],
-	     "skip" -> convBN2[n, 1, False], "tot" -> TotalLayer[], "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[0.2]}
+conv2[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
+   Switch[res,
+    "ResNet",
+    {ni, no} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, n]]];
+    NetGraph[<|
+      "con1" -> convBN2[no/2, 1], "con2" -> convBN2[no/2, 3], 
+      "con3" -> convBN2[no, 1, False],
+      "skip" -> convBN2[no, 1, False], "tot" -> TotalLayer[],
+      "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[drop]}
+      |>, {
+      NetPort["Input"] -> "con1" -> "con2" -> "con3",
+      NetPort["Input"] -> "skip",
+      {"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]},
+     "Input" -> Prepend[dimIn, ni]
+     ],
+    
+    "DenseNet",
+    {k, dep} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, 4 k]]];
+    NetGraph[Association[Join[
+       {"trans" -> {CatenateLayer["Inputs" -> Prepend[ConstantArray[Prepend[dimIn, k], dep], Prepend[dimIn, 4 k]]], convBN2[4 k, 1], DropoutLayer[drop]}},
+       convLayers2[k, dep, dimIn]
+       ]],
+     connect[dep],
+     "Input" -> Prepend[dimIn, 4 k]
+     ],
+    
+    _,
+    {ni, no} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, n]]];
+    NetChain[{convBN2[no, 3], convBN2[no, 3], DropoutLayer[drop]},"Input" -> Prepend[dimIn, ni]]
+    ]
+   ];
+
+
+convLayers2[k_, dep_, dimIn_] := Table[layName[rep] -> Switch[rep,
+     1, convBN2[k, 3],
+     _, {CatenateLayer["Inputs" -> Prepend[ConstantArray[Prepend[dimIn, k], rep - 1], Prepend[dimIn, 4 k]]], convBN2[4 k, 1], convBN2[k, 3]}
+     ], {rep, 1, dep}];
+
+
+dec2[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
+   (*determine in and output channels*)
+   (*n is (ni,no) or (k,dep) for conv2, n1 is n input2 , 
+   n2 is n input2*)
+   {n, n1, n2} = Switch[res, "DenseNet", {ni, 4 ni[[1]], 4 ni[[1]]}, _, {{Total[ni], ni[[1]]}, ni[[1]], ni[[2]]}];
+   If[verb, Print["dec - dimensions and in/out par", {Prepend[dimIn, n1], n1, n2}]];
+   (*the deconv graph*)
+   NetGraph[
+    <|
+     "deconv" -> ResizeLayer[{Scaled[2], Scaled[2]}],
+     "cat" -> CatenateLayer["Inputs" -> {Prepend[dimIn, n1], Prepend[dimIn, n2]}],
+     "conv" -> Switch[res, "DenseNet", {convBN2[n2, 1], conv2[n, dimIn, res, drop]}, _, conv2[n, dimIn, res, drop]]
      |>, {
-    	NetPort["Input"] -> "con1" -> "con2" -> "con3", NetPort["Input"] -> "skip", 
-    	{"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]
-     }],
-   _,
-   NetChain[{convBN2[n, 3], convBN2[n, 3], DropoutLayer[0.2]}]
-];
-
-
-dec2[n_, res_] := NetGraph[
-   <|"deconv" -> ResizeLayer[{Scaled[2], Scaled[2]}], "cat" -> CatenateLayer[], "conv" -> conv2[n, res]|>,
-   {NetPort["Input1"] -> "cat", NetPort["Input2"] -> "deconv" -> "cat" -> "conv"}
+     NetPort["Input2"] -> "deconv",
+     {NetPort["Input1"], "deconv"} -> "cat" -> "conv"},
+    "Input1" -> Prepend[dimIn, n1], "Input2" -> Prepend[dimIn/2, n2]
+    ]
    ];
 
 
@@ -269,27 +411,35 @@ dec2[n_, res_] := NetGraph[
 (*UNET3D*)
 
 
-UNET3D[NChan_: 1, Nclass_: 1, dep_: 32, dimIn_: {32, 128, 128}, res_:"ResNet"] := NetGraph[<|
-  "start" -> convBN3[dep, 1],
-  "enc_1" -> conv3[dep, res],
-  "enc_2" -> {PoolingLayer[{2, 2, 2}, 2], conv3[2 dep, res]},
-  "enc_3" -> {PoolingLayer[{2, 2, 2}, 2], conv3[4 dep, res]},
-  "enc_4" -> {PoolingLayer[{2, 2, 2}, 2], conv3[8 dep, res]},
-  "enc_5" -> {PoolingLayer[{2, 2, 2}, 2], conv3[16 dep, res]},
-  "dec_1" -> dec3[8 dep, dimIn/16, res],
-  "dec_2" -> dec3[4 dep, dimIn/8, res],
-  "dec_3" -> dec3[2 dep, dimIn/4, res],
-  "dec_4" -> dec3[dep, dimIn/2, res],
-  "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
-  "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
-  |>, {
-  NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-  {"enc_4", "enc_5"} -> "dec_1",
-  {"enc_3", "dec_1"} -> "dec_2",
-  {"enc_2", "dec_2"} -> "dec_3",
-  {"enc_1", "dec_3"} -> "dec_4",
-  "dec_4" -> "map" -> "prob"
-  }, "Input" -> Prepend[dimIn, NChan]]
+UNET3D[NChan_: 1, Nclass_: 1, depI_: 32, dimIn_: {32, 128, 128}, res_:"ResNet", drop_:0.2] := Block[{dep, depi},
+ {dep, depi} = Switch[res,
+   "DenseNet", {Table[{depI[[1]], depI[[2]] i}, {i, {1, 2, 3, 4, 3}}], 4 depI[[1]]},
+   _, {Table[depI i, {i, {{1, 1}, {1, 2}, {2, 4}, {4, 8}, {8, 16}}}], depI}
+   ];
+ 
+ If[verb, Print["Layer parameters:" , {dep, depi}]]; 
+ NetGraph[<|
+ 	"start" -> convBN3[depi, 1],
+   "enc_1" -> conv3[dep[[1]], dimIn, res, drop],
+   "enc_2" -> {PoolingLayer[{2, 2, 2}, 2], conv3[dep[[2]], dimIn/2, res, drop]},
+   "enc_3" -> {PoolingLayer[{2, 2, 2}, 2], conv3[dep[[3]], dimIn/4, res, drop]},
+   "enc_4" -> {PoolingLayer[{2, 2, 2}, 2], conv3[dep[[4]], dimIn/8, res, drop]},
+   "enc_5" -> {PoolingLayer[{2, 2, 2}, 2], conv3[dep[[5]], dimIn/16, res, drop]},
+   "dec_1" -> dec3[dep[[5]], dimIn/8, res, drop],
+   "dec_2" -> dec3[dep[[4]], dimIn/4, res, drop],
+   "dec_3" -> dec3[dep[[3]], dimIn/2, res, drop],
+   "dec_4" -> dec3[dep[[2]], dimIn, res, drop],
+   "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
+   "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
+   |>, {
+   NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+   {"enc_4", "enc_5"} -> "dec_1",
+   {"enc_3", "dec_1"} -> "dec_2",
+   {"enc_2", "dec_2"} -> "dec_3",
+   {"enc_1", "dec_3"} -> "dec_4",
+   "dec_4" -> "map" -> "prob"
+   }, "Input" -> Prepend[dimIn, NChan]]
+ ]
 
 
 convBN3[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
@@ -298,35 +448,75 @@ convBN3[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
   NetChain[ch]
   ]
 
-conv3[n_, res_] := Switch[res,
-  "ResNet",
-  NetGraph[<|
-    	"con1" -> convBN3[n/2, 1], "con2" -> convBN3[n/2, 3], "con3" -> convBN3[n, 1, False],
-    	"skip" -> convBN3[n, 1, False], "tot" -> TotalLayer[], "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[0.2]}
-    |>, {
-    	NetPort["Input"] -> "con1" -> "con2" -> "con3", NetPort["Input"] -> "skip", 
-   		{"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]
-    }],
-  _,
-  NetChain[{convBN3[n, 3], convBN3[n, 3], DropoutLayer[0.2]}]
-  ];
+
+conv3[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
+   Switch[res,
+    "ResNet",
+    {ni, no} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, n]]];
+    NetGraph[<|
+      "con1" -> convBN3[no/2, 1], "con2" -> convBN3[no/2, 3], 
+      "con3" -> convBN3[no, 1, False],
+      "skip" -> convBN3[no, 1, False], "tot" -> TotalLayer[],
+      "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[drop]}
+      |>, {
+      NetPort["Input"] -> "con1" -> "con2" -> "con3",
+      NetPort["Input"] -> "skip",
+      {"skip", "con3"} -> "tot" -> "elu" -> NetPort["Output"]},
+     "Input" -> Prepend[dimIn, ni]
+     ],
+    
+    "DenseNet",
+    {k, dep} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, 4 k]]];
+    NetGraph[Association[Join[
+       {"trans" -> {CatenateLayer["Inputs" -> Prepend[ConstantArray[Prepend[dimIn, k], dep], Prepend[dimIn, 4 k]]], convBN3[4 k, 1], DropoutLayer[drop]}},
+       convLayers3[k, dep, dimIn]]
+      ],
+     connect[dep],
+     "Input" -> Prepend[dimIn, 4 k]
+     ],
+    
+    _,
+    {ni, no} = n;
+    If[verb, Print["conv - dimensions", Prepend[dimIn, n]]];
+    NetChain[{convBN3[no, 3], convBN3[no, 3], DropoutLayer[drop]}, "Input" -> Prepend[dimIn, ni]]
+    ]
+   ];
 
 
-dec3[n_, dimIn_, res_] := NetGraph[
-   <|"deconv" -> ResizeLayer3D[n, dimIn], "cat" -> CatenateLayer[], "conv" -> conv3[n, res]|>,
-   {NetPort["Input1"] -> "cat", NetPort["Input2"] -> "deconv" -> "cat" -> "conv"}
+convLayers3[k_, dep_, dimIn_] := Table[layName[rep] -> Switch[rep,
+     1, convBN3[k, 3],
+     _, {CatenateLayer["Inputs" -> Prepend[ConstantArray[Prepend[dimIn, k], rep - 1], Prepend[dimIn, 4 k]]], convBN3[4 k, 1], convBN3[k, 3]}
+     ], {rep, 1, dep}];
+
+
+dec3[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
+   (*determine in and output channels*)
+   (*n is (ni,no) or (k,dep) for conv2, n1 is n input2 , n2 is n input2*)
+   {n, n1, n2} = Switch[res, "DenseNet", {ni, 4 ni[[1]], 4 ni[[1]]}, _, {{Total[ni], ni[[1]]}, ni[[1]], ni[[2]]}];
+   If[verb, Print["dec - dimensions and in/out par", {Prepend[dimIn, n1], n1, n2}]];
+   NetGraph[<|
+     "deconv" -> ResizeLayer3D[n2, dimIn/2],
+     "cat" -> CatenateLayer["Inputs" -> {Prepend[dimIn, n1], Prepend[dimIn, n2]}],
+     "conv" -> Switch[res, "DenseNet", {convBN3[n2, 1], conv3[n, dimIn, res, drop]}, _, conv3[n, dimIn, res, drop]]
+     |>, {
+     NetPort["Input2"] -> "deconv",
+     {NetPort["Input1"], "deconv"} -> "cat" -> "conv"},
+    "Input1" -> Prepend[dimIn, n1], "Input2" -> Prepend[dimIn/2, n2]
+    ]
    ];
 
 
 ResizeLayer3D[n_, {dimInx_, dimIny_, dimInz_}] := Block[{sc = 2},
   NetChain[{
-    FlattenLayer[1, "Input" -> {n sc, dimInx, dimIny, dimInz}],
+    FlattenLayer[1, "Input" -> {n, dimInx, dimIny, dimInz}],
     ResizeLayer[{Scaled[sc], Scaled[sc]}],
-    ReshapeLayer[{n sc, dimInx, sc dimIny, sc dimInz}],
+    ReshapeLayer[{n, dimInx, sc dimIny, sc dimInz}],
     TransposeLayer[2 <-> 3],
     FlattenLayer[1],
     ResizeLayer[{Scaled[sc], Scaled[1]}],
-    ReshapeLayer[{n sc, sc dimIny, sc dimInx, sc dimInz}],
+    ReshapeLayer[{n, sc dimIny, sc dimInx, sc dimInz}],
     TransposeLayer[2 <-> 3]
     }]
   ]
@@ -340,14 +530,14 @@ ResizeLayer3D[n_, {dimInx_, dimIny_, dimInz_}] := Block[{sc = 2},
 (*Train UNET*)
 
 
-Options[TrainUNET]=Join[{NetParameters->32, BlockType ->"ResNet"},Options[NetTrain]];
+Options[TrainUNET]=Join[{NetParameters->32, BlockType ->"ResNet", NetLossLayers->All, DropOutRate->0.2},Options[NetTrain]];
 
 SyntaxInformation[TrainUNET] = {"ArgumentsPattern" -> {_, _, _., OptionsPattern[]}};
 
 TrainUNET[train_, valid_, opt:OptionsPattern[]]:=TrainUNET[train, valid, {None, None}, opt]
 
 TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[{
-	Nchan,Nclass,net,device,trained,netTrained,result,plots,iou, block,
+	Nchan,Nclass,net,device,trained,netTrained,result,plots,iou, block, loss, drop,
 	netDim,datDim,netPar,trainopt,lossNet,lossFunction},
 	
 	(*get the data dime*)
@@ -365,6 +555,9 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 	device = OptionValue[TargetDevice];
 	trainopt = Sequence@FilterRules[{opt},Options[NetTrain]];
 	block = OptionValue[BlockType];
+	drop = OptionValue[DropOutRate];
+	
+	loss = {"Loss1","Loss2","Loss3"}[[OptionValue[NetLossLayers]]];
 	
 	(*chekc if data dimensions are valid for net*)
 	If[(!AllTrue[MemberQ[Range[20]2^4,#]&/@datDim,TrueQ])&&(MemberQ[{2,3},netDim]),
@@ -372,9 +565,9 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 		Return[Message[TrainUNET::dim, datDim]]
 		,
 		(*initialize and train net*)
-		net=UNET[Nchan,Nclass,netPar,datDim, BlockType -> block];
+		net=UNET[Nchan,Nclass,netPar,datDim, BlockType -> block, DropOutRate -> drop];
 		(*Attatch the loss funtion if needed*)
-		{lossNet,lossFunction}=If[Nclass>1,{AddLossLayer[net,netDim],{"Loss1","Loss2"}},{net,Automatic}];
+		{lossNet,lossFunction}=If[Nclass>1,{AddLossLayer[net,netDim],loss},{net,Automatic}];
 		(*train the net*)
 		trained = NetTrain[lossNet,train,All,TargetDevice->device,ValidationSet->valid,LossFunction->lossFunction,trainopt];
 		
@@ -382,7 +575,7 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 		{netTrained, plots} = If[Nclass>1,
 			{
 				NetExtract[trained["TrainedNet"],"net"],
-				Row[{trained["LossEvolutionPlot"],trained["ErrorRateEvolutionPlot"]}]
+				Row[MakeNetPlots[trained]]
 				},
 			{
 				trained["TrainedNet"],
@@ -416,12 +609,14 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 
 AddLossLayer[net_,dim_]:=NetGraph[<|
 		"net"->net,
-		"loss1"->SoftDiceLossLayer[dim],
-		"loss2"->CrossEntropyLossLayer["Probabilities"]
+		"SoftDice"->SoftDiceLossLayer[dim],
+		"CrossEntr"->CrossEntropyLossLayer["Probabilities"],
+		"Brier"->BrierLossLayer[dim]
 	|>,{
 		NetPort["Input"]->"net"->NetPort["Output"],
-		{"net",NetPort["Target"]}->"loss1"->NetPort["Loss1"],
-		{"net",NetPort["Target"]}->"loss2"->NetPort["Loss2"]
+		{"net",NetPort["Target"]}->"SoftDice"->NetPort["Loss1"],
+		{"net",NetPort["Target"]}->"CrossEntr"->NetPort["Loss2"],
+		{"net",NetPort["Target"]}->"Brier"->NetPort["Loss3"]
 }]
 
 

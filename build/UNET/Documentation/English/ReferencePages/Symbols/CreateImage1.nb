@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7022,        198]
-NotebookOptionsPosition[      4556,        141]
-NotebookOutlinePosition[      6387,        189]
-CellTagsIndexPosition[      6344,        186]
+NotebookDataLength[      6940,        196]
+NotebookOptionsPosition[      4475,        139]
+NotebookOutlinePosition[      6306,        187]
+CellTagsIndexPosition[      6263,        184]
 WindowTitle->CreateImage1
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$11196], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$12246], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/CreateImage1", ".html"]], None}]}]},
@@ -104,12 +104,10 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"CreateImage1", "[", "]"}]], "InlineFormula"],
-     "\[LineSeparator]creates a test images with label with one channel and \
-one class."
-    }]]}
+   {"", Cell["\<\
+CreateImage1[]\[LineSeparator]creates a test images with label with one \
+channel and one class.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -154,7 +152,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 20.2097283}", 
+   "built" -> "{2018, 9, 18, 13, 16, 4.4283759}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetSupport`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -188,18 +186,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[584, 21, 3011, 74, 70, "AnchorBarGrid",ExpressionUUID->"04264c27-ec2a-4270-8fc5-8012f9ec1ba2",
+Cell[584, 21, 3011, 74, 70, "AnchorBarGrid",ExpressionUUID->"18becb32-252f-4612-9df9-c77cc119f7a7",
  CellID->1],
-Cell[3598, 97, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"cf4883b3-2f38-4101-9bad-dfe1ecc5018b"],
-Cell[3770, 105, 378, 11, 70, "Usage",ExpressionUUID->"8ee1153f-79a6-47b1-b41c-cd7e2dd0b625"],
+Cell[3598, 97, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"10237ced-ec0a-4fb5-8b9e-c638ce5ad55e"],
+Cell[3770, 105, 297, 9, 70, "Usage",ExpressionUUID->"54226b0d-551a-4a1d-98a6-1f39078db5ba"],
 Cell[CellGroupData[{
-Cell[4173, 120, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"ea435c5b-bdb7-4ddf-b50a-87e2c4f667cd",
+Cell[4092, 118, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"4bb4bd35-f01b-4eb3-b3ee-6a6646c446d5",
  CellID->38303248],
-Cell[4332, 129, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"6fde7687-e4f0-4351-843e-df614463e37f"],
-Cell[4366, 131, 148, 5, 70, "MoreAbout",ExpressionUUID->"cd6d2865-2bd7-46b2-962b-b724ed38c36b",
+Cell[4251, 127, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"50ae9178-a6fb-44d6-8aa3-f7277bbdf5e8"],
+Cell[4285, 129, 148, 5, 70, "MoreAbout",ExpressionUUID->"86e102e0-8604-4ec0-8645-91d50bfd169b",
  CellID->1]
 }, Open  ]],
-Cell[4529, 139, 23, 0, 70, "FooterCell",ExpressionUUID->"4daadcf5-54fb-4208-9b47-d24c3897fa00"]
+Cell[4448, 137, 23, 0, 70, "FooterCell",ExpressionUUID->"c1eabaa0-b198-4362-920a-2f8cffce78ec"]
 }
 ]
 *)

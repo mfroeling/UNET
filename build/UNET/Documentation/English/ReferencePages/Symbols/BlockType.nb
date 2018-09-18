@@ -10,11 +10,11 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5706,        154]
-NotebookOptionsPosition[      3613,        104]
-NotebookOutlinePosition[      5443,        152]
-CellTagsIndexPosition[      5400,        149]
-WindowTitle->RadomizeSplit
+NotebookDataLength[      5970,        162]
+NotebookOptionsPosition[      3824,        111]
+NotebookOutlinePosition[      5707,        160]
+CellTagsIndexPosition[      5664,        157]
+WindowTitle->BlockType
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -32,12 +32,12 @@ Cell[BoxData[GridBox[{
         TextCell[
          Row[{"URL", 
            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
-       StripOnInput->False], {"\<\"UNET/ref/RadomizeSplit\"\>":>
+       StripOnInput->False], {"\<\"UNET/ref/BlockType\"\>":>
       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
       Module[{DocumentationSearch`Private`nb$}, 
        DocumentationSearch`Private`nb$ = NotebookPut[
           Notebook[{
-            Cell["UNET/ref/RadomizeSplit"]}, Visible -> False]]; 
+            Cell["UNET/ref/BlockType"]}, Visible -> False]]; 
        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
@@ -49,7 +49,7 @@ Cell[BoxData[GridBox[{
              BoxData[
               MakeBoxes[
                Hyperlink[
-               "http://reference.wolfram.com/language/UNET/ref/RadomizeSplit.\
+               "http://reference.wolfram.com/language/UNET/ref/BlockType.\
 html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
            False]]; SelectionMove[
         DocumentationSearch`Private`nb$, All, Notebook]; 
@@ -60,10 +60,10 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17493], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$9842], 
              "http://reference.wolfram.com/system-modeler/", 
-             "http://reference.wolfram.com/language/"], 
-            "UNET/ref/RadomizeSplit", ".html"]], None}]}]},
+             "http://reference.wolfram.com/language/"], "UNET/ref/BlockType", 
+            ".html"]], None}]}]},
       Appearance->None,
       MenuAppearance->Automatic,
       MenuStyle->"URLMenu"]],
@@ -76,7 +76,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
  CellID->1],
 
 Cell[TextData[{
- Cell["RadomizeSplit", "ObjectName"],
+ Cell["BlockType", "ObjectName"],
  Cell[BoxData[
   TemplateBox[{8},
    "Spacer1"]]],
@@ -85,14 +85,21 @@ Cell[TextData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData["RadomizeSplit"], "InlineFormula"],
+     Cell[BoxData["BlockType"], "InlineFormula"],
      "\[LineSeparator]is an option for ",
      Cell[BoxData[
       TemplateBox[{Cell[
-         TextData["SplitTrainData"]],"paclet:UNET/ref/SplitTrainData"},
+         TextData["TrainUNET"]],"paclet:UNET/ref/TrainUNET"},
        "RefLink",
        BaseStyle->{"InlineFormula"}]], "InlineFormula"],
-     ". If True the data is randomized"
+     " and ",
+     Cell[BoxData[
+      TemplateBox[{Cell[
+         TextData["UNET"]],"paclet:UNET/ref/UNET"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     ". It specifies which block are used to build the network. Values can be \
+\"UNET\" or \"ResNet\"."
     }]]}
   }]], "Usage",
  GridBoxOptions->{
@@ -106,7 +113,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"RadomizeSplit",
+WindowTitle->"BlockType",
 TaggingRules->{
  "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
   GridBox[{{
@@ -117,16 +124,17 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 40.6576049}", 
+   "built" -> "{2018, 9, 18, 13, 15, 55.3685821}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
     "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
     "status" -> "None", "summary" -> 
-    "RadomizeSplit is an option for SplitTrainData. If True the data is \
-randomized", "synonyms" -> {}, "tabletags" -> {}, "title" -> "RadomizeSplit", 
-    "titlemodifier" -> "", "windowtitle" -> "RadomizeSplit", "type" -> 
-    "Symbol", "uri" -> "UNET/ref/RadomizeSplit"}},
+    "BlockType is an option for TrainUNET and UNET. It specifies which block \
+are used to build the network. Values can be \"UNET\" or \"ResNet\".", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "BlockType", 
+    "titlemodifier" -> "", "windowtitle" -> "BlockType", "type" -> "Symbol", 
+    "uri" -> "UNET/ref/BlockType"}},
 CellContext->"Global`",
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->Notebook[{
@@ -151,11 +159,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[585, 21, 2287, 54, 70, "AnchorBarGrid",ExpressionUUID->"6708521f-be91-48bd-b5b3-da18f5123e70",
+Cell[581, 21, 2270, 54, 70, "AnchorBarGrid",ExpressionUUID->"1a943d4c-c880-4f75-9e93-c18b7589c0d5",
  CellID->1],
-Cell[2875, 77, 170, 6, 70, "ObjectNameGrid",ExpressionUUID->"d81635ef-3840-4b3a-b6db-35e8512e84d2"],
-Cell[3048, 85, 535, 15, 70, "Usage",ExpressionUUID->"1218a402-00f1-4402-96e8-a76d08894580"],
-Cell[3586, 102, 23, 0, 70, "FooterCell",ExpressionUUID->"8d924807-4ca7-4bc5-8cf3-420d35eec761"]
+Cell[2854, 77, 166, 6, 70, "ObjectNameGrid",ExpressionUUID->"bef511e9-cfb2-4139-a718-db7e6d6dbc3a"],
+Cell[3023, 85, 771, 22, 70, "Usage",ExpressionUUID->"4c1d338c-1b68-4ff1-a5ad-647a4e35f2a4"],
+Cell[3797, 109, 23, 0, 70, "FooterCell",ExpressionUUID->"86dd9e43-29df-4951-bcec-e5f8f29dcc8d"]
 }
 ]
 *)

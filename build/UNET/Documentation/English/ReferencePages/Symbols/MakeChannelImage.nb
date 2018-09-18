@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7510,        209]
-NotebookOptionsPosition[      4923,        150]
-NotebookOutlinePosition[      6875,        200]
-CellTagsIndexPosition[      6832,        197]
+NotebookDataLength[      7239,        202]
+NotebookOptionsPosition[      4651,        143]
+NotebookOutlinePosition[      6604,        193]
+CellTagsIndexPosition[      6561,        190]
 WindowTitle->MakeChannelImage
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ MakeChannelImage.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14110], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$15640], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/MakeChannelImage", ".html"]], None}]}]},
@@ -104,21 +104,14 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeChannelImage", "[", 
-       StyleBox["image", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]creates a row of the channels. The Input should be a \
-list of 2D arrays. "
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeChannelImage", "[", 
-       RowBox[{
-        StyleBox["image", "TI"], ",", " ", 
-        StyleBox["ratio", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]creates a row of the channels with aspectratio ratio."
-    }]]}
+   {"", Cell["\<\
+MakeChannelImage[image]\[LineSeparator]creates a row of the channels. The \
+Input should be a list of 2D arrays. \
+\>"]},
+   {"", Cell["\<\
+MakeChannelImage[image, ratio]\[LineSeparator]creates a row of the channels \
+with aspectratio ratio.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -163,7 +156,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 29.7435183}", 
+   "built" -> "{2018, 9, 18, 13, 16, 17.5871425}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -199,18 +192,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[588, 21, 3028, 74, 70, "AnchorBarGrid",ExpressionUUID->"1ed23b5c-81d0-4492-9c0b-ccb848e0a9ee",
+Cell[588, 21, 3028, 74, 70, "AnchorBarGrid",ExpressionUUID->"cb9345d4-ab7b-45d6-a275-6124a66e28d9",
  CellID->1],
-Cell[3619, 97, 173, 6, 70, "ObjectNameGrid",ExpressionUUID->"0af1b0b8-5fe8-47eb-af1e-4fd5c7131902"],
-Cell[3795, 105, 720, 20, 70, "Usage",ExpressionUUID->"2127dfcf-4fb1-4662-8089-fd1eb2c0b194"],
+Cell[3619, 97, 173, 6, 70, "ObjectNameGrid",ExpressionUUID->"c95da811-e6b0-461d-be93-c7cd927fd322"],
+Cell[3795, 105, 448, 13, 70, "Usage",ExpressionUUID->"b9a1d6cf-b02f-4e9c-a1c0-f4026106e8cb"],
 Cell[CellGroupData[{
-Cell[4540, 129, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"745c13a3-ca41-4afb-8761-a79ee709669a",
+Cell[4268, 122, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"0d336479-273b-42ec-b0cf-8b1286f97040",
  CellID->38303248],
-Cell[4699, 138, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"018ced34-bec2-4aaf-a256-25d97b25fff6"],
-Cell[4733, 140, 148, 5, 70, "MoreAbout",ExpressionUUID->"b7bc59bd-f783-45d0-9ce4-26345f841434",
+Cell[4427, 131, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"01357411-007d-4ae8-be44-e2678cb2956e"],
+Cell[4461, 133, 148, 5, 70, "MoreAbout",ExpressionUUID->"833194ed-2749-4446-91e4-ef756aaa23e7",
  CellID->1]
 }, Open  ]],
-Cell[4896, 148, 23, 0, 70, "FooterCell",ExpressionUUID->"5a6b2864-3de9-49c8-a891-ebf54c692b35"]
+Cell[4624, 141, 23, 0, 70, "FooterCell",ExpressionUUID->"27ebfa89-83d9-4474-80d5-2166a403f3df"]
 }
 ]
 *)

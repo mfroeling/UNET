@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16980,        481]
-NotebookOptionsPosition[     12402,        390]
-NotebookOutlinePosition[     14118,        431]
-CellTagsIndexPosition[     14075,        428]
+NotebookDataLength[     16634,        471]
+NotebookOptionsPosition[     12189,        382]
+NotebookOutlinePosition[     13906,        423]
+CellTagsIndexPosition[     13863,        420]
 WindowTitle->UNET
 WindowFrame->Normal*)
 
@@ -112,7 +112,7 @@ Cell[BoxData[GridBox[{
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$7530], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$7632], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], "UNET/guide/UNET", 
              ".html"]], None}]}]},
@@ -340,14 +340,6 @@ Cell[TextData[{
 }], "GuideText",
  CellID->243224559],
 
-Cell[BoxData[Cell[BoxData[
-  TemplateBox[{Cell[
-     TextData[""]],"paclet:ref/"},
-   "RefLink",
-   BaseStyle->"InlineFunctionSans"]], 
-  "InlineFunctionSans"]], "InlineGuideFunctionListing",
- CellID->97972071],
-
 Cell[TextData[{
  Cell[BoxData[
   TemplateBox[{Cell[
@@ -402,7 +394,7 @@ TaggingRules->{
          BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
     Left], "ExampleCounter" -> 1, "NeedPlatMsgIn" -> None, "RootCaptions" -> 
   "", "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 10.5051774}", 
+   "built" -> "{2018, 9, 18, 13, 15, 49.5842086}", 
     "history" -> {"0.1", "", "", ""}, "context" -> "UNET`", 
     "keywords" -> {"UNET"}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -412,7 +404,7 @@ TaggingRules->{
 that generate an train a UNET neural network. Furthermore it contains various \
 functions to visualize the training and result data as well as methods to \
 visualize the hidden network layers and optimization. ", "synonyms" -> {}, 
-    "tabletags" -> DocumentationBuild`Make`Private`tabletaggingrules$7417, 
+    "tabletags" -> DocumentationBuild`Make`Private`tabletaggingrules$7527, 
     "title" -> "UNET", "titlemodifier" -> "", "windowtitle" -> "UNET", "type" -> 
     "Guide", "uri" -> "UNET/guide/UNET"}},
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
@@ -430,7 +422,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[576, 21, 4701, 107, 70, "AnchorBarGrid",ExpressionUUID->"c094b5d3-d055-4f58-8078-fe315fe35e14",
+Cell[576, 21, 4701, 107, 70, "AnchorBarGrid",ExpressionUUID->"ef0e9f6a-dcf8-486a-8015-8326c437bee5",
  CellID->1],
 Cell[CellGroupData[{
 Cell[5302, 132, 46, 1, 70, "GuideTitle",ExpressionUUID->"99f5c618-a76e-4410-8297-55f4a7d2099b",
@@ -439,8 +431,8 @@ Cell[5351, 135, 338, 7, 70, "GuideAbstract",ExpressionUUID->"ff145e71-076d-4cbf-
  CellID->2001916300]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5726, 147, 137, 6, 70, "GuideReferenceSection",ExpressionUUID->"b597cb63-4711-45cb-88a6-6094753de74c"],
-Cell[5866, 155, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"87cdadb5-1f52-4ffa-9493-9116d5d9d27c"],
+Cell[5726, 147, 137, 6, 70, "GuideReferenceSection",ExpressionUUID->"ebdff2c9-867b-433c-aab5-7f9afa867107"],
+Cell[5866, 155, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"5bb43cb0-b1b5-4118-9db9-7a0302887089"],
 Cell[CellGroupData[{
 Cell[5922, 159, 70, 1, 70, "GuideFunctionsSubsection",ExpressionUUID->"c1c73885-48d2-4c69-84de-bac319421ced",
  CellID->131621375],
@@ -476,13 +468,11 @@ Cell[10605, 327, 73, 1, 70, "GuideFunctionsSubsection",ExpressionUUID->"2e19ee9c
  CellID->36245634],
 Cell[10681, 330, 327, 10, 70, "GuideText",ExpressionUUID->"5ecbc4c5-0ebe-4c93-8778-9d92c9a42d57",
  CellID->243224559],
-Cell[11011, 342, 210, 6, 70, "InlineGuideFunctionListing",ExpressionUUID->"251b8e75-4534-45fc-8cfa-54eaed6ff293",
- CellID->97972071],
-Cell[11224, 350, 1124, 34, 70, "InlineGuideFunctionListing",ExpressionUUID->"08cc9893-5889-4fbe-9f02-22e48dd73a22",
+Cell[11011, 342, 1124, 34, 70, "InlineGuideFunctionListing",ExpressionUUID->"08cc9893-5889-4fbe-9f02-22e48dd73a22",
  CellID->75037046]
 }, Open  ]]
 }, Open  ]],
-Cell[12375, 388, 23, 0, 70, "FooterCell",ExpressionUUID->"433a954e-fbde-49c5-aba7-af4665e97210"]
+Cell[12162, 380, 23, 0, 70, "FooterCell",ExpressionUUID->"b6178d80-5c81-493c-8859-62ac34c5fcc8"]
 }
 ]
 *)

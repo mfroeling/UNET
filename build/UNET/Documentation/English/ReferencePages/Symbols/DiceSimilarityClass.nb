@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7346,        203]
-NotebookOptionsPosition[      4785,        145]
-NotebookOutlinePosition[      6711,        194]
-CellTagsIndexPosition[      6668,        191]
+NotebookDataLength[      7147,        198]
+NotebookOptionsPosition[      4585,        140]
+NotebookOutlinePosition[      6512,        189]
+CellTagsIndexPosition[      6469,        186]
 WindowTitle->DiceSimilarityClass
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ DiceSimilarityClass.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$13128], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14178], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/DiceSimilarityClass", ".html"]], None}]}]},
@@ -104,16 +104,11 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"DiceSimilarityClass", "[", 
-       RowBox[{
-        StyleBox["prediction", "TI"], ",", " ", 
-        StyleBox["groundTruth", "TI"], ",", " ", 
-        StyleBox["nclasses", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the Dice Similarity between of each of Nclasses \
-between prediction and groundTruth."
-    }]]}
+   {"", Cell["\<\
+DiceSimilarityClass[prediction, groundTruth, nclasses]\[LineSeparator]gives \
+the Dice Similarity between of each of Nclasses between prediction and \
+groundTruth.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -158,7 +153,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 26.4817363}", 
+   "built" -> "{2018, 9, 18, 13, 16, 11.7178458}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -193,18 +188,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[591, 21, 3040, 74, 70, "AnchorBarGrid",ExpressionUUID->"1c385db3-e699-4134-bdb3-95bfb35ee24f",
+Cell[591, 21, 3040, 74, 70, "AnchorBarGrid",ExpressionUUID->"c2a5a023-9630-4700-b58a-6174935b05b6",
  CellID->1],
-Cell[3634, 97, 176, 6, 70, "ObjectNameGrid",ExpressionUUID->"e154f191-12b8-4329-9ffe-c81e02deaff7"],
-Cell[3813, 105, 564, 15, 70, "Usage",ExpressionUUID->"a30741d4-ed02-4c94-a02e-939d4f7de9a0"],
+Cell[3634, 97, 176, 6, 70, "ObjectNameGrid",ExpressionUUID->"974bdb64-fd01-4730-a2ce-6ebd68d50edf"],
+Cell[3813, 105, 364, 10, 70, "Usage",ExpressionUUID->"d7c1b284-b538-466f-be51-8830154ab59a"],
 Cell[CellGroupData[{
-Cell[4402, 124, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"eedced6f-e25d-4d9a-9186-84d50c099843",
+Cell[4202, 119, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"48096fb7-29aa-4af5-b97f-393f4e908bc6",
  CellID->38303248],
-Cell[4561, 133, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"c582917d-e974-4f87-9ab9-93e55eae0bb9"],
-Cell[4595, 135, 148, 5, 70, "MoreAbout",ExpressionUUID->"75f9e9fb-f511-4cc0-9b0d-b4afbd725e72",
+Cell[4361, 128, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"4ed3dfd2-fe5a-4ad5-ae3f-08906db5aa05"],
+Cell[4395, 130, 148, 5, 70, "MoreAbout",ExpressionUUID->"ab3e7249-fae1-4bc8-950a-6082e8af8b5a",
  CellID->1]
 }, Open  ]],
-Cell[4758, 143, 23, 0, 70, "FooterCell",ExpressionUUID->"80b1bb48-573b-43a9-bf08-cc9d11448334"]
+Cell[4558, 138, 23, 0, 70, "FooterCell",ExpressionUUID->"d4d76511-becd-45c3-8a7e-15c772dab20f"]
 }
 ]
 *)

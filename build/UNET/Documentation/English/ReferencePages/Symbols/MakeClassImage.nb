@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8650,        237]
-NotebookOptionsPosition[      5809,        175]
-NotebookOutlinePosition[      8014,        228]
-CellTagsIndexPosition[      7971,        225]
+NotebookDataLength[      7835,        213]
+NotebookOptionsPosition[      4994,        151]
+NotebookOutlinePosition[      7200,        204]
+CellTagsIndexPosition[      7157,        201]
 WindowTitle->MakeClassImage
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ MakeClassImage.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14617], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$16147], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/MakeClassImage", ".html"]], None}]}]},
@@ -104,46 +104,22 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeClassImage", "[", 
-       StyleBox["label", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]makes a images of the labels automatically scaled \
-betweern the min and max label. "
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeClassImage", "[", 
-       RowBox[{
-        StyleBox["label", "TI"], ",", " ", 
-        StyleBox["ratio", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]makes a images of the labels with aspectratio ratio. "
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeClassImage", "[", 
-       RowBox[{
-        StyleBox["label", "TI"], ",", " ", 
-        RowBox[{"{", 
-         RowBox[{
-          StyleBox["min", "TI"], ",", " ", 
-          StyleBox["max", "TI"]}], "}"}]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]makes a images of the labels automatically scaled \
-betweern the min and max. "
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeClassImage", "[", 
-       RowBox[{
-        StyleBox["label", "TI"], ",", " ", 
-        RowBox[{"{", 
-         RowBox[{
-          StyleBox["min", "TI"], ",", " ", 
-          StyleBox["max", "TI"]}], "}"}], ",", " ", 
-        StyleBox["ratio", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]makes a images of the labels automatically scaled \
-betweern the min and max with aspectratio ratio."
-    }]]}
+   {"", Cell["\<\
+MakeClassImage[label]\[LineSeparator]makes a images of the labels \
+automatically scaled betweern the min and max label. \
+\>"]},
+   {"", Cell["\<\
+MakeClassImage[label, ratio]\[LineSeparator]makes a images of the labels with \
+aspectratio ratio. \
+\>"]},
+   {"", Cell["\<\
+MakeClassImage[label, {min, max}]\[LineSeparator]makes a images of the labels \
+automatically scaled betweern the min and max. \
+\>"]},
+   {"", Cell["\<\
+MakeClassImage[label, {min, max}, ratio]\[LineSeparator]makes a images of the \
+labels automatically scaled betweern the min and max with aspectratio ratio.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -188,7 +164,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 31.3877706}", 
+   "built" -> "{2018, 9, 18, 13, 16, 19.5857205}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -227,18 +203,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"70b882d7-ac4c-46ed-9502-d174b710f3ff",
+Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"e3dc09f8-6fac-40a4-8190-22c5b71e3efc",
  CellID->1],
-Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"971587a8-264f-49fd-99ba-4e335c8acda5"],
-Cell[3783, 105, 1618, 45, 70, "Usage",ExpressionUUID->"f3fc4691-e49b-4138-b255-16d3b4ad526a"],
+Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"b9649017-c15a-4f71-ae78-a2ff2ef7cb83"],
+Cell[3783, 105, 803, 21, 70, "Usage",ExpressionUUID->"38828343-f6f1-4189-b34a-b064579bf3ce"],
 Cell[CellGroupData[{
-Cell[5426, 154, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"53a77f1d-4221-4eff-9cc7-2576d4170f80",
+Cell[4611, 130, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"c6c98e90-2d3b-44fc-a697-8c285820bf83",
  CellID->38303248],
-Cell[5585, 163, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"ae9a672f-10a8-44da-bf8e-147d8a05926c"],
-Cell[5619, 165, 148, 5, 70, "MoreAbout",ExpressionUUID->"1d6e9859-0e53-4f6d-a9c3-2e8b86d4d645",
+Cell[4770, 139, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"c64df917-a457-4731-8306-808c797a22b9"],
+Cell[4804, 141, 148, 5, 70, "MoreAbout",ExpressionUUID->"3c1a53a9-ca6d-48b7-addc-39de4fb57357",
  CellID->1]
 }, Open  ]],
-Cell[5782, 173, 23, 0, 70, "FooterCell",ExpressionUUID->"65d627ff-42cc-440f-a507-888bfa586ef1"]
+Cell[4967, 149, 23, 0, 70, "FooterCell",ExpressionUUID->"c637c9a2-acda-46d0-906e-65f5710ec4da"]
 }
 ]
 *)

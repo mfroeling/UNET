@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7331,        207]
-NotebookOptionsPosition[      4842,        149]
-NotebookOutlinePosition[      6696,        198]
-CellTagsIndexPosition[      6653,        195]
+NotebookDataLength[      7191,        203]
+NotebookOptionsPosition[      4701,        145]
+NotebookOutlinePosition[      6556,        194]
+CellTagsIndexPosition[      6513,        191]
 WindowTitle->VisualizeUNET2D
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ VisualizeUNET2D.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$22262], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$24836], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/VisualizeUNET2D", ".html"]], None}]}]},
@@ -105,11 +105,7 @@ Cell[TextData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"VisualizeUNET2D", "[", 
-       RowBox[{
-        StyleBox["testData", "TI"], ",", " ", 
-        StyleBox["trainedNet", "TI"]}], "]"}]], "InlineFormula"],
+     "VisualizeUNET2D[testData, trainedNet]",
      "\[LineSeparator]visualises the hidden layers of a trained 2D ",
      Cell[BoxData[
       TemplateBox[{Cell[
@@ -162,7 +158,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 54.8166042}", 
+   "built" -> "{2018, 9, 18, 13, 16, 50.7613450}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -197,18 +193,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[587, 21, 3024, 74, 70, "AnchorBarGrid",ExpressionUUID->"be75d277-4816-4e7c-9d2c-f239661c0dc1",
+Cell[587, 21, 3024, 74, 70, "AnchorBarGrid",ExpressionUUID->"a64148bf-dcc6-4262-8da1-992d56ba4adc",
  CellID->1],
-Cell[3614, 97, 172, 6, 70, "ObjectNameGrid",ExpressionUUID->"13d03e8a-df0e-40f7-8797-27464ed81c2a"],
-Cell[3789, 105, 645, 19, 70, "Usage",ExpressionUUID->"0a7ae388-e709-45b0-8730-0e069a78d174"],
+Cell[3614, 97, 172, 6, 70, "ObjectNameGrid",ExpressionUUID->"26c8b0d6-4ffe-48d9-a1ac-9d9cedf35bd0"],
+Cell[3789, 105, 504, 15, 70, "Usage",ExpressionUUID->"47413c1a-401e-4f19-960f-663653ee39f0"],
 Cell[CellGroupData[{
-Cell[4459, 128, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"b1d39684-be45-4f8c-82a5-232fe2c2ded5",
+Cell[4318, 124, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"2185fe67-d24b-4b83-84f6-19baefc8bfc6",
  CellID->38303248],
-Cell[4618, 137, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"28d50931-e4b9-44ea-aff0-8a7b266a5baa"],
-Cell[4652, 139, 148, 5, 70, "MoreAbout",ExpressionUUID->"8d72f749-391a-4ad4-96e1-27bd895c0101",
+Cell[4477, 133, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"041c926d-2f55-4477-95f3-c92bf462657c"],
+Cell[4511, 135, 148, 5, 70, "MoreAbout",ExpressionUUID->"45f9dbb1-6a9a-4485-a643-c5d5bf985804",
  CellID->1]
 }, Open  ]],
-Cell[4815, 147, 23, 0, 70, "FooterCell",ExpressionUUID->"b6afdba0-5150-4f13-b289-174667e7c052"]
+Cell[4674, 143, 23, 0, 70, "FooterCell",ExpressionUUID->"2e716362-5512-4665-aad9-b71b5bc720c1"]
 }
 ]
 *)

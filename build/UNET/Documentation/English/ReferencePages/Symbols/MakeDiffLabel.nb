@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5712,        154]
-NotebookOptionsPosition[      3576,        103]
-NotebookOutlinePosition[      5449,        152]
-CellTagsIndexPosition[      5406,        149]
+NotebookDataLength[      5546,        149]
+NotebookOptionsPosition[      3411,         98]
+NotebookOutlinePosition[      5285,        147]
+CellTagsIndexPosition[      5242,        144]
 WindowTitle->MakeDiffLabel
 WindowFrame->Normal*)
 
@@ -60,7 +60,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$15576], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17106], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "UNET/ref/MakeDiffLabel", ".html"]], None}]}]},
@@ -84,15 +84,10 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"MakeDiffLabel", "[", 
-       RowBox[{
-        StyleBox["label", "TI"], ",", " ", 
-        StyleBox["result", "TI"]}], "]"}]], "InlineFormula"],
-     "\[LineSeparator]makes a label datasets with 1 = false positive, 2 = \
-false negative, 3 = true positive."
-    }]]}
+   {"", Cell["\<\
+MakeDiffLabel[label, result]\[LineSeparator]makes a label datasets with 1 = \
+false positive, 2 = false negative, 3 = true positive.\
+\>"]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -116,7 +111,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 6, 2, 15, 29, 34.4812028}", 
+   "built" -> "{2018, 9, 18, 13, 16, 23.2142896}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -151,11 +146,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[585, 21, 2287, 54, 70, "AnchorBarGrid",ExpressionUUID->"d4b3a556-1bf5-4d1f-bd9a-13672df93c62",
+Cell[585, 21, 2287, 54, 70, "AnchorBarGrid",ExpressionUUID->"aa300ffc-a538-4d35-8781-7012f88940e0",
  CellID->1],
-Cell[2875, 77, 170, 6, 70, "ObjectNameGrid",ExpressionUUID->"3fecb680-18fe-4fbe-99fa-54c79fc326f2"],
-Cell[3048, 85, 498, 14, 70, "Usage",ExpressionUUID->"9fd075b6-634a-474c-a073-a7e52439dd10"],
-Cell[3549, 101, 23, 0, 70, "FooterCell",ExpressionUUID->"705237d0-ef02-45f4-9cd8-cb721d17569e"]
+Cell[2875, 77, 170, 6, 70, "ObjectNameGrid",ExpressionUUID->"37e31e38-2f90-4268-af1b-b57c3f63a97d"],
+Cell[3048, 85, 333, 9, 70, "Usage",ExpressionUUID->"09a0045a-c30f-42e7-8838-87ca178028c8"],
+Cell[3384, 96, 23, 0, 70, "FooterCell",ExpressionUUID->"484bcd52-262e-4d42-84fd-10499f823cab"]
 }
 ]
 *)
