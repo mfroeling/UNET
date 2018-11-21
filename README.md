@@ -12,7 +12,7 @@ A package to generate and train a UNET deep convolutional network for 2D and 3D 
 
 ## Information
 
-DTITools is developed for [Mathematica](https://www.wolfram.com/mathematica/).
+UNET is developed for [Mathematica](https://www.wolfram.com/mathematica/).
 It contains the following toolboxes:
 
 - UnetCore
