@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      6980,        196]
+NotebookDataLength[      6981,        196]
 NotebookOptionsPosition[      4494,        139]
-NotebookOutlinePosition[      6346,        187]
-CellTagsIndexPosition[      6303,        184]
+NotebookOutlinePosition[      6347,        187]
+CellTagsIndexPosition[      6304,        184]
 WindowTitle->RotateFlip
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$20457], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$20895], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/RotateFlip", ".html"]], None}]}]},
@@ -152,7 +152,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 35.6792039}", 
+   "built" -> "{2018, 11, 26, 16, 54, 42.3749415}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -186,18 +186,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[582, 21, 3003, 74, 70, "AnchorBarGrid",ExpressionUUID->"3a991dfa-9bce-4c08-bbe2-fe175cfb6033",
+Cell[582, 21, 3003, 74, 70, "AnchorBarGrid",ExpressionUUID->"b66d9d1d-b7b2-4949-9213-f24abcf66b3f",
  CellID->1],
-Cell[3588, 97, 167, 6, 70, "ObjectNameGrid",ExpressionUUID->"80257c76-0335-4750-8650-07a4ee339671"],
-Cell[3758, 105, 328, 9, 70, "Usage",ExpressionUUID->"9a85cdf9-fe55-428d-9db0-b0e8539d3a27"],
+Cell[3588, 97, 167, 6, 70, "ObjectNameGrid",ExpressionUUID->"2abe42b0-2c19-43a5-9bc7-c4825a6e42cb"],
+Cell[3758, 105, 328, 9, 70, "Usage",ExpressionUUID->"bc856ed8-51ff-4728-9feb-1a9493450279"],
 Cell[CellGroupData[{
-Cell[4111, 118, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"642d2624-72f5-4a6b-b0d3-303fd6c1b52f",
+Cell[4111, 118, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"76b847aa-fb1a-43ee-ae3b-c9cfdad00b51",
  CellID->38303248],
-Cell[4270, 127, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"0b22bb0d-edb7-44b4-b2fc-924d4263eea1"],
-Cell[4304, 129, 148, 5, 70, "MoreAbout",ExpressionUUID->"2fc138eb-6ad3-4c99-9873-2d10dab3c8c5",
+Cell[4270, 127, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"75461e1f-6e36-4a6d-abbd-87088f4f2fde"],
+Cell[4304, 129, 148, 5, 70, "MoreAbout",ExpressionUUID->"7e7e085f-6415-42bf-8225-316c1d29643c",
  CellID->1]
 }, Open  ]],
-Cell[4467, 137, 23, 0, 70, "FooterCell",ExpressionUUID->"33e3457d-4436-4bf4-843a-3eea75337001"]
+Cell[4467, 137, 23, 0, 70, "FooterCell",ExpressionUUID->"4badf590-04db-4423-8533-89efc44373d2"]
 }
 ]
 *)

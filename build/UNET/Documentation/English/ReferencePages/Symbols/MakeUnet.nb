@@ -10,11 +10,11 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5773,        155]
-NotebookOptionsPosition[      3654,        105]
-NotebookOutlinePosition[      5510,        153]
-CellTagsIndexPosition[      5467,        150]
-WindowTitle->NumberRowItems
+NotebookDataLength[      6300,        175]
+NotebookOptionsPosition[      3836,        119]
+NotebookOutlinePosition[      5558,        165]
+CellTagsIndexPosition[      5515,        162]
+WindowTitle->MakeUnet
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -32,12 +32,12 @@ Cell[BoxData[GridBox[{
         TextCell[
          Row[{"URL", 
            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
-       StripOnInput->False], {"\<\"UNET/ref/NumberRowItems\"\>":>
+       StripOnInput->False], {"\<\"UNET/ref/MakeUnet\"\>":>
       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
       Module[{DocumentationSearch`Private`nb$}, 
        DocumentationSearch`Private`nb$ = NotebookPut[
           Notebook[{
-            Cell["UNET/ref/NumberRowItems"]}, Visible -> False]]; 
+            Cell["UNET/ref/MakeUnet"]}, Visible -> False]]; 
        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
@@ -49,8 +49,8 @@ Cell[BoxData[GridBox[{
              BoxData[
               MakeBoxes[
                Hyperlink[
-               "http://reference.wolfram.com/language/UNET/ref/NumberRowItems.\
-html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
+               "http://reference.wolfram.com/language/UNET/ref/MakeUnet.html"]\
+, StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
            False]]; SelectionMove[
         DocumentationSearch`Private`nb$, All, Notebook]; 
        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
@@ -60,10 +60,10 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$19938], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$18509], 
              "http://reference.wolfram.com/system-modeler/", 
-             "http://reference.wolfram.com/language/"], 
-            "UNET/ref/NumberRowItems", ".html"]], None}]}]},
+             "http://reference.wolfram.com/language/"], "UNET/ref/MakeUnet", 
+            ".html"]], None}]}]},
       Appearance->None,
       MenuAppearance->Automatic,
       MenuStyle->"URLMenu"]],
@@ -76,30 +76,44 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
  CellID->1],
 
 Cell[TextData[{
- Cell["NumberRowItems", "ObjectName"],
+ Cell["MakeUnet", "ObjectName"],
  Cell[BoxData[
   TemplateBox[{8},
    "Spacer1"]]],
  Cell[BoxData[""], "ObjectNameTranslation"]
 }], "ObjectNameGrid"],
 
-Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData["NumberRowItems"], "InlineFormula"],
-     "\[LineSeparator]is an options for ",
-     Cell[BoxData[
-      TemplateBox[{Cell[
-         TextData["ShowChannelClassData"]],
-        "paclet:UNET/ref/ShowChannelClassData"},
-       "RefLink",
-       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
-     ". Specifies how many images are on each row."
-    }]]}
-  }]], "Usage",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}}}],
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["$CellContext`MakeUnet", "usage"],
+
+Cell["Usage", "Input"],
+
+Cell[BoxData["Open"], "Input"]
+}, Closed]],
 
 Cell[" ", "FooterCell"]
 },
@@ -107,7 +121,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NumberRowItems",
+WindowTitle->"MakeUnet",
 TaggingRules->{
  "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
   GridBox[{{
@@ -118,16 +132,14 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 11, 26, 16, 54, 38.6669999}", 
-    "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
-    "keywords" -> {}, "specialkeywords" -> {}, 
-    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
-    "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
-    "status" -> "None", "summary" -> 
-    "NumberRowItems is an options for ShowChannelClassData. Specifies how \
-many images are on each row.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
-    "NumberRowItems", "titlemodifier" -> "", "windowtitle" -> 
-    "NumberRowItems", "type" -> "Symbol", "uri" -> "UNET/ref/NumberRowItems"}},
+   "built" -> "{2018, 11, 26, 16, 54, 32.8474882}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "Global`", "keywords" -> {},
+     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> 
+    True, "label" -> "U N E T Package Symbol", "language" -> "en", "paclet" -> 
+    "UNET Package", "status" -> "None", "summary" -> " ", "synonyms" -> {}, 
+    "tabletags" -> {}, "title" -> "MakeUnet", "titlemodifier" -> "", 
+    "windowtitle" -> "MakeUnet", "type" -> "Symbol", "uri" -> 
+    "UNET/ref/MakeUnet"}},
 CellContext->"Global`",
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->Notebook[{
@@ -152,11 +164,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 2291, 54, 70, "AnchorBarGrid",ExpressionUUID->"abece0d7-2918-48f4-b2bd-f7a817cf0ec6",
+Cell[580, 21, 2267, 54, 70, "AnchorBarGrid",ExpressionUUID->"915f749d-4fc8-4fc2-8032-425c308ab3ab",
  CellID->1],
-Cell[2880, 77, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"8342115b-f47a-4c6e-ab52-53959fcafce2"],
-Cell[3054, 85, 570, 16, 70, "Usage",ExpressionUUID->"8a35fb5d-8c0b-4a78-acec-5b8e43f59a81"],
-Cell[3627, 103, 23, 0, 70, "FooterCell",ExpressionUUID->"42929d8f-1660-4f3b-a306-886071ef8576"]
+Cell[2850, 77, 165, 6, 70, "ObjectNameGrid",ExpressionUUID->"b2f6cbbd-aaac-4984-ac8d-cf1dbac265be"],
+Cell[CellGroupData[{
+Cell[3040, 87, 621, 19, 70, "NotesSection",ExpressionUUID->"b18d7d14-718e-4ae8-b100-9a4ef14332bb",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[3664, 108, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"b164cd81-8a32-46f1-8bd3-f11c904ecf94"],
+Cell[3698, 110, 38, 0, 70, "usage",ExpressionUUID->"a4ba5f01-93d6-4a3e-aa00-da66ca40cda5"],
+Cell[3739, 112, 22, 0, 70, "Input",ExpressionUUID->"a776b51a-e780-4423-b3b8-09b22ccfed69"],
+Cell[3764, 114, 30, 0, 70, "Input",ExpressionUUID->"92a63b9f-cbef-4961-9ee5-45936491a15f"]
+}, Closed]],
+Cell[3809, 117, 23, 0, 70, "FooterCell",ExpressionUUID->"e8ac9896-0492-4765-b45b-c99b574bba6d"]
 }
 ]
 *)

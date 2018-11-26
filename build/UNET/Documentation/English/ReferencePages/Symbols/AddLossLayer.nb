@@ -60,7 +60,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8879], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8870], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "UNET/ref/AddLossLayer", ".html"]], None}]}]},
@@ -123,7 +123,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 15, 51.6407579}", 
+   "built" -> "{2018, 11, 26, 16, 54, 3.6314795}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -158,11 +158,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[584, 21, 2282, 54, 70, "AnchorBarGrid",ExpressionUUID->"42038756-0f1b-436d-a8b0-8dbc37b6bba1",
+Cell[584, 21, 2282, 54, 70, "AnchorBarGrid",ExpressionUUID->"e8824422-aa89-4857-8b34-449e85f20919",
  CellID->1],
-Cell[2869, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"f6a81ef1-83cb-4afb-9164-f37f923de656"],
-Cell[3041, 85, 585, 21, 70, "Usage",ExpressionUUID->"695a0db9-9ada-427f-957d-b30a7d648cc8"],
-Cell[3629, 108, 23, 0, 70, "FooterCell",ExpressionUUID->"29f3aac9-d691-48d6-96c7-c5aa68b4e81b"]
+Cell[2869, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"f9ee6df4-79dd-4927-974e-352c537f61b2"],
+Cell[3041, 85, 585, 21, 70, "Usage",ExpressionUUID->"c998768e-46ad-429c-bd85-0a772eed30f0"],
+Cell[3629, 108, 23, 0, 70, "FooterCell",ExpressionUUID->"a4f480f1-e576-4ca2-a155-cbf71e06a90f"]
 }
 ]
 *)

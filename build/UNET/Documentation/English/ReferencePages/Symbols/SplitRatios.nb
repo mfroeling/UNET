@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5737,        154]
+NotebookDataLength[      5738,        154]
 NotebookOptionsPosition[      3626,        104]
-NotebookOutlinePosition[      5474,        152]
-CellTagsIndexPosition[      5431,        149]
+NotebookOutlinePosition[      5475,        152]
+CellTagsIndexPosition[      5432,        149]
 WindowTitle->SplitRatios
 WindowFrame->Normal*)
 
@@ -60,7 +60,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$22016], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$22454], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "UNET/ref/SplitRatios", ".html"]], None}]}]},
@@ -117,7 +117,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 41.1116932}", 
+   "built" -> "{2018, 11, 26, 16, 54, 47.4805493}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -151,11 +151,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[583, 21, 2279, 54, 70, "AnchorBarGrid",ExpressionUUID->"a4804a1c-dd23-4da8-98b5-49dfb8af8c09",
+Cell[583, 21, 2279, 54, 70, "AnchorBarGrid",ExpressionUUID->"43ac80bc-fb4a-4b22-a7ad-d74a17f6d6d4",
  CellID->1],
-Cell[2865, 77, 168, 6, 70, "ObjectNameGrid",ExpressionUUID->"a4c4d531-65b4-4d41-a384-b08a2b9354ac"],
-Cell[3036, 85, 560, 15, 70, "Usage",ExpressionUUID->"d5da2319-2d67-4d98-beec-35735efb46be"],
-Cell[3599, 102, 23, 0, 70, "FooterCell",ExpressionUUID->"25fd4560-f4c5-421e-be25-5bacc62e1693"]
+Cell[2865, 77, 168, 6, 70, "ObjectNameGrid",ExpressionUUID->"cc613799-2c23-47f2-9f80-ae61f4f033d0"],
+Cell[3036, 85, 560, 15, 70, "Usage",ExpressionUUID->"ced9c048-956b-4716-8a15-a7994d8c3d3c"],
+Cell[3599, 102, 23, 0, 70, "FooterCell",ExpressionUUID->"dac1b31a-ffa2-419a-a9e1-b8c6ee26e5a5"]
 }
 ]
 *)

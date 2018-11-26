@@ -34,8 +34,8 @@ DiceSimilarity::usage =
 "DiceSimilarity[x, y] gives the Dice Similarity between 1 and 0 of vectors x and y for class 1.
 DiceSimilarity[x, y, class] gives the Dice Similarity for vectors x and y for Integer Class."
 
-UNET::usage = 
-"UNET[nchan, nclass, dep, dimIn] Generates a UNET with nchan as input and nclass as output. The number of parameter of the first convolution layer can be set with dep.
+MakeUNET::usage = 
+"MakeUNET[nchan, nclass, dep, dimIn] Generates a UNET with nchan as input and nclass as output. The number of parameter of the first convolution layer can be set with dep.
 The data dimensions can be 2D or 3D and each of the dimensions should be 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240 or 256."
 
 AddLossLayer::usage = 
@@ -279,11 +279,11 @@ MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2},
 (*UNET*)
 
 
-Options[UNET] = {BlockType->"ResNet", DropOutRate->0.2}
+Options[MakeUNET] = {BlockType->"ResNet", DropOutRate->0.2}
 
-SyntaxInformation[UNET] = {"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}};
+SyntaxInformation[MakeUNET] = {"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}};
 
-UNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=Switch[Length[dimIn],2,UNET2D,3,UNET3D][Nchan,Nclass,Floor[dep,2],dimIn,OptionValue[BlockType],OptionValue[DropOutRate]]
+MakeUNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=Switch[Length[dimIn],2,UNET2D,3,UNET3D][Nchan,Nclass,Floor[dep,2],dimIn,OptionValue[BlockType],OptionValue[DropOutRate]]
 
 
 (* ::Subsubsection::Closed:: *)
@@ -630,7 +630,7 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 		Return[Message[TrainUNET::dim, datDim]]
 		,
 		(*initialize and train net*)
-		net=UNET[Nchan,Nclass,netPar,datDim, BlockType -> block, DropOutRate -> drop];
+		net=MakeUNET[Nchan,Nclass,netPar,datDim, BlockType -> block, DropOutRate -> drop];
 		(*Attatch the loss funtion if needed*)
 		{lossNet,lossFunction}=If[Nclass>1,{AddLossLayer[net,netDim],loss},{net,Automatic}];
 		(*train the net*)

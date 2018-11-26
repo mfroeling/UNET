@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7147,        198]
-NotebookOptionsPosition[      4585,        140]
-NotebookOutlinePosition[      6512,        189]
-CellTagsIndexPosition[      6469,        186]
+NotebookDataLength[      7328,        201]
+NotebookOptionsPosition[      4674,        141]
+NotebookOutlinePosition[      6693,        192]
+CellTagsIndexPosition[      6650,        189]
 WindowTitle->DiceSimilarityClass
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ DiceSimilarityClass.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14178], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14169], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/DiceSimilarityClass", ".html"]], None}]}]},
@@ -107,7 +107,8 @@ Cell[BoxData[GridBox[{
    {"", Cell["\<\
 DiceSimilarityClass[prediction, groundTruth, nclasses]\[LineSeparator]gives \
 the Dice Similarity between of each of Nclasses between prediction and \
-groundTruth.\
+groundTruth. nClasses can also be a list of class number for which the Dice \
+needs to be calculated.\
 \>"]}
   }]], "Usage",
  GridBoxOptions->{
@@ -153,17 +154,19 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 11.7178458}", 
+   "built" -> "{2018, 11, 26, 16, 54, 19.2160216}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
     "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
     "status" -> "None", "summary" -> 
     "DiceSimilarityClass[prediction, groundTruth, nclasses] gives the Dice \
-Similarity between of each of Nclasses between prediction and groundTruth.", 
-    "synonyms" -> {}, "tabletags" -> {}, "title" -> "DiceSimilarityClass", 
-    "titlemodifier" -> "", "windowtitle" -> "DiceSimilarityClass", "type" -> 
-    "Symbol", "uri" -> "UNET/ref/DiceSimilarityClass"}},
+Similarity between of each of Nclasses between prediction and groundTruth. \
+nClasses can also be a list of class number for which the Dice needs to be \
+calculated.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "DiceSimilarityClass", "titlemodifier" -> "", "windowtitle" -> 
+    "DiceSimilarityClass", "type" -> "Symbol", "uri" -> 
+    "UNET/ref/DiceSimilarityClass"}},
 CellContext->"Global`",
 FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
 StyleDefinitions->Notebook[{
@@ -188,18 +191,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[591, 21, 3040, 74, 70, "AnchorBarGrid",ExpressionUUID->"c2a5a023-9630-4700-b58a-6174935b05b6",
+Cell[591, 21, 3040, 74, 70, "AnchorBarGrid",ExpressionUUID->"928940c7-bf9a-443c-ad72-d77414928873",
  CellID->1],
-Cell[3634, 97, 176, 6, 70, "ObjectNameGrid",ExpressionUUID->"974bdb64-fd01-4730-a2ce-6ebd68d50edf"],
-Cell[3813, 105, 364, 10, 70, "Usage",ExpressionUUID->"d7c1b284-b538-466f-be51-8830154ab59a"],
+Cell[3634, 97, 176, 6, 70, "ObjectNameGrid",ExpressionUUID->"b88c3ae4-dd68-4eb2-9e77-04d7cbc9dfe2"],
+Cell[3813, 105, 453, 11, 70, "Usage",ExpressionUUID->"b2086b92-44c9-421e-87ca-abb62d4814a3"],
 Cell[CellGroupData[{
-Cell[4202, 119, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"48096fb7-29aa-4af5-b97f-393f4e908bc6",
+Cell[4291, 120, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"47359cbc-0dee-4025-8946-c4cc66c267f3",
  CellID->38303248],
-Cell[4361, 128, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"4ed3dfd2-fe5a-4ad5-ae3f-08906db5aa05"],
-Cell[4395, 130, 148, 5, 70, "MoreAbout",ExpressionUUID->"ab3e7249-fae1-4bc8-950a-6082e8af8b5a",
+Cell[4450, 129, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"2b272987-8a35-4558-94f1-de58f8c74660"],
+Cell[4484, 131, 148, 5, 70, "MoreAbout",ExpressionUUID->"05406d66-edcf-4959-a1f8-7dffd22e84c5",
  CellID->1]
 }, Open  ]],
-Cell[4558, 138, 23, 0, 70, "FooterCell",ExpressionUUID->"d4d76511-becd-45c3-8a7e-15c772dab20f"]
+Cell[4647, 139, 23, 0, 70, "FooterCell",ExpressionUUID->"a02c14d0-148d-4079-a698-88ffa7e4f4a4"]
 }
 ]
 *)

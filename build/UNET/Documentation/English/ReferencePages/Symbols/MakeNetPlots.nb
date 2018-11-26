@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5411,        147]
+NotebookDataLength[      5412,        147]
 NotebookOptionsPosition[      3342,         97]
-NotebookOutlinePosition[      5150,        145]
-CellTagsIndexPosition[      5107,        142]
+NotebookOutlinePosition[      5151,        145]
+CellTagsIndexPosition[      5108,        142]
 WindowTitle->MakeNetPlots
 WindowFrame->Normal*)
 
@@ -60,7 +60,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17582], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$17573], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "UNET/ref/MakeNetPlots", ".html"]], None}]}]},
@@ -110,7 +110,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 24.9769908}", 
+   "built" -> "{2018, 11, 26, 16, 54, 29.3460194}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -144,11 +144,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[584, 21, 2283, 54, 70, "AnchorBarGrid",ExpressionUUID->"7161e4ec-d787-499f-aff6-54382d241224",
+Cell[584, 21, 2283, 54, 70, "AnchorBarGrid",ExpressionUUID->"ae509b49-80db-454e-8e51-e61fc8cade48",
  CellID->1],
-Cell[2870, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"6540f35a-1900-45ad-a71d-055a57418e77"],
-Cell[3042, 85, 270, 8, 70, "Usage",ExpressionUUID->"abecbb73-ad61-47c1-bd7e-c3425ef7d0f1"],
-Cell[3315, 95, 23, 0, 70, "FooterCell",ExpressionUUID->"2fef6082-0497-407f-a401-d823fcedd164"]
+Cell[2870, 77, 169, 6, 70, "ObjectNameGrid",ExpressionUUID->"2d5f7580-968f-41ee-95b2-42133d01ecf8"],
+Cell[3042, 85, 270, 8, 70, "Usage",ExpressionUUID->"3921f695-203e-4397-9123-8671ce3ce19e"],
+Cell[3315, 95, 23, 0, 70, "FooterCell",ExpressionUUID->"3366b0f3-ba28-4375-81f4-68e6e7fec868"]
 }
 ]
 *)

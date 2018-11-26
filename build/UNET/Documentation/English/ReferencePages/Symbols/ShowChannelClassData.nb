@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     12098,        333]
-NotebookOptionsPosition[      8907,        265]
-NotebookOutlinePosition[     10863,        315]
-CellTagsIndexPosition[     10820,        312]
+NotebookDataLength[     12462,        342]
+NotebookOptionsPosition[      9270,        274]
+NotebookOutlinePosition[     11227,        324]
+CellTagsIndexPosition[     11184,        321]
 WindowTitle->ShowChannelClassData
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ ShowChannelClassData.html"], StandardForm]], "Input", TextClipboardType ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$21035], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$21473], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], 
              "UNET/ref/ShowChannelClassData", ".html"]], None}]}]},
@@ -104,14 +104,23 @@ Cell[TextData[{
 }], "ObjectNameGrid"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell["\<\
-ShowChannelClassData[data, label]\[LineSeparator]makes a grid of the data and \
-label in 2D. \
-\>"]},
-   {"", Cell["\<\
-ShowChannelClassData[data, label, result]\[LineSeparator]makes a grid of the \
-data, label and result in 2D.\
-\>"]}
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ShowChannelClassData", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", " ", 
+        StyleBox["label", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]makes a grid of the data and label in 2D. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ShowChannelClassData", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", " ", 
+        StyleBox["label", "TI"], ",", " ", 
+        StyleBox["result", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]makes a grid of the data, label and result in 2D."
+    }]]}
   }]], "Usage",
  GridBoxOptions->{
  GridBoxBackground->{
@@ -278,7 +287,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 37.5592194}", 
+   "built" -> "{2018, 11, 26, 16, 54, 44.2268880}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -314,27 +323,27 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[592, 21, 3044, 74, 70, "AnchorBarGrid",ExpressionUUID->"1eb4d242-a1b4-476d-ac6e-d667b9d63006",
+Cell[592, 21, 3044, 74, 70, "AnchorBarGrid",ExpressionUUID->"ae122f57-eebf-4988-8009-77c5d4801eba",
  CellID->1],
-Cell[3639, 97, 177, 6, 70, "ObjectNameGrid",ExpressionUUID->"f4be3bdc-ff4d-4997-8748-ee6a22e677b3"],
-Cell[3819, 105, 435, 13, 70, "Usage",ExpressionUUID->"b76b81b0-3096-4554-9e96-7ed25eaebede"],
+Cell[3639, 97, 177, 6, 70, "ObjectNameGrid",ExpressionUUID->"569f219a-2b6a-4a35-8e68-8835d9596f05"],
+Cell[3819, 105, 798, 22, 70, "Usage",ExpressionUUID->"3702bd20-0ca4-4f01-9324-3421cc05f04c"],
 Cell[CellGroupData[{
-Cell[4279, 122, 621, 19, 70, "NotesSection",ExpressionUUID->"93f391ca-f61b-4b71-8569-b40ba239492a",
+Cell[4642, 131, 621, 19, 70, "NotesSection",ExpressionUUID->"a9ca146d-b1a1-40c6-a359-9756da3b5357",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[4903, 143, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"1b29b274-29f2-43d1-9ea6-531fc7f8ae62"],
-Cell[4937, 145, 53, 0, 70, "Notes",ExpressionUUID->"0966a152-7da5-4c30-b236-49c2c502be5f"],
-Cell[4993, 147, 3460, 90, 70, "3ColumnTableMod",ExpressionUUID->"df0dc5ae-edc3-45b4-8cb4-664daf1672a9"],
-Cell[8456, 239, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"99510bcb-a016-47cb-826a-e055054d6946"]
+Cell[5266, 152, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"c9b99006-8a9c-4fca-9eb5-84af0d1be399"],
+Cell[5300, 154, 53, 0, 70, "Notes",ExpressionUUID->"6b8a33e2-e800-4499-9e36-70d87eb9c47f"],
+Cell[5356, 156, 3460, 90, 70, "3ColumnTableMod",ExpressionUUID->"29395d72-c018-42f7-8e49-524b071a4d8c"],
+Cell[8819, 248, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"eb4f73bf-03f1-4168-8bf3-bcb2e07ca465"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[8524, 244, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"54db0805-6d65-45d3-992d-173952e9846a",
+Cell[8887, 253, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"3462ccb3-9e97-4985-9d5e-13887db229db",
  CellID->38303248],
-Cell[8683, 253, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"2e88b958-acaa-411e-885f-232356677589"],
-Cell[8717, 255, 148, 5, 70, "MoreAbout",ExpressionUUID->"c4689a27-df56-4d89-998b-2335e344faed",
+Cell[9046, 262, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"e25cfcd8-43b3-4819-8001-2d98fcd4073c"],
+Cell[9080, 264, 148, 5, 70, "MoreAbout",ExpressionUUID->"765ab3ce-c72c-40c8-8ee7-75915bdc73f2",
  CellID->1]
 }, Open  ]],
-Cell[8880, 263, 23, 0, 70, "FooterCell",ExpressionUUID->"babc2916-b31b-44b4-b827-0c34b6ecbff3"]
+Cell[9243, 272, 23, 0, 70, "FooterCell",ExpressionUUID->"e86c972d-ba49-476e-8934-8bc5f480e9f7"]
 }
 ]
 *)

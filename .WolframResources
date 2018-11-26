@@ -3,6 +3,6 @@ Resources[
     ExecutionBuildCommand["<<UNET`"],
     Paclet[
         PacletFolder["UNET"],
-        FunctionPaclet[False]
+        FunctionPaclet[True]
     ]
 ]

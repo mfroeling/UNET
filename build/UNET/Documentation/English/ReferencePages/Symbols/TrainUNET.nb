@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     17929,        528]
+NotebookDataLength[     17930,        528]
 NotebookOptionsPosition[     14626,        459]
-NotebookOutlinePosition[     16687,        510]
-CellTagsIndexPosition[     16644,        507]
+NotebookOutlinePosition[     16688,        510]
+CellTagsIndexPosition[     16645,        507]
 WindowTitle->TrainUNET
 WindowFrame->Normal*)
 
@@ -79,7 +79,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
            URL[
             StringJoin[
              If[
-              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$23779], 
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$24217], 
               "http://reference.wolfram.com/system-modeler/", 
               "http://reference.wolfram.com/language/"], "UNET/ref/TrainUNET",
               ".html"]], None}]}]},
@@ -472,7 +472,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2018, 9, 18, 13, 16, 46.7691504}", 
+   "built" -> "{2018, 11, 26, 16, 54, 52.4377612}", 
     "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
     "keywords" -> {}, "specialkeywords" -> {}, 
     "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
@@ -509,27 +509,27 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[581, 21, 2999, 74, 70, "AnchorBarGrid",ExpressionUUID->"f0c06eb9-91fe-49e8-9452-cf05761ecb76",
+Cell[581, 21, 2999, 74, 70, "AnchorBarGrid",ExpressionUUID->"e69a5a60-ea94-461c-912f-5826f98c1c5d",
  CellID->1],
-Cell[3583, 97, 166, 6, 70, "ObjectNameGrid",ExpressionUUID->"ab34e0ce-08c7-41ff-b5a3-fbd6dfddc160"],
-Cell[3752, 105, 1689, 89, 70, "Usage",ExpressionUUID->"24f47af7-3254-4838-a404-b621034f637e"],
+Cell[3583, 97, 166, 6, 70, "ObjectNameGrid",ExpressionUUID->"55d206d2-03bb-4217-99c6-37f3f33420d3"],
+Cell[3752, 105, 1689, 89, 70, "Usage",ExpressionUUID->"d1faf7d6-2157-47c9-a55f-a062785a0ad1"],
 Cell[CellGroupData[{
-Cell[5466, 198, 621, 19, 70, "NotesSection",ExpressionUUID->"a5f50fad-99e4-4a3c-b75d-884e5bab1924",
+Cell[5466, 198, 621, 19, 70, "NotesSection",ExpressionUUID->"504bf332-2e6f-4d00-864e-2426e1822083",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[6090, 219, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"63976805-670f-457a-b115-e1b3c9f5644e"],
-Cell[6124, 221, 53, 0, 70, "Notes",ExpressionUUID->"e543df61-33e0-42b7-93e1-125e817d1184"],
-Cell[6180, 223, 7992, 208, 70, "3ColumnTableMod",ExpressionUUID->"27289427-b731-4f4d-b845-7c8b236e6fba"],
-Cell[14175, 433, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"95718283-d3ec-45dc-8d87-42f0c2ba2dc4"]
+Cell[6090, 219, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"081234f6-abec-487f-b96d-3495b209b391"],
+Cell[6124, 221, 53, 0, 70, "Notes",ExpressionUUID->"3f40f90b-8828-4ad3-ad8c-31764d215928"],
+Cell[6180, 223, 7992, 208, 70, "3ColumnTableMod",ExpressionUUID->"92eba95b-c53e-4ea9-bde1-32eee618b386"],
+Cell[14175, 433, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"6ecb2e53-245f-45df-977a-4e3a199e6030"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[14243, 438, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"c466552c-6016-4623-9ba9-4efc4526524a",
+Cell[14243, 438, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"898edbef-2637-473f-96fb-68d185db20f3",
  CellID->38303248],
-Cell[14402, 447, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"150b22a2-2dce-4ec5-9a0a-c247aafa3041"],
-Cell[14436, 449, 148, 5, 70, "MoreAbout",ExpressionUUID->"6530382a-5095-4b4c-be7c-868e0384c287",
+Cell[14402, 447, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"d0f16c6e-b345-4f9e-8f37-f3f9de31277c"],
+Cell[14436, 449, 148, 5, 70, "MoreAbout",ExpressionUUID->"cbaeac44-f559-4a8d-a289-f33dc0a2b884",
  CellID->1]
 }, Open  ]],
-Cell[14599, 457, 23, 0, 70, "FooterCell",ExpressionUUID->"96e6246f-7609-455a-9032-c64e944e8065"]
+Cell[14599, 457, 23, 0, 70, "FooterCell",ExpressionUUID->"5897dbe4-9993-4afe-b080-196e551204dd"]
 }
 ]
 *)
