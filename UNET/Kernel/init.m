@@ -75,7 +75,7 @@ ProtectFunctions[pack_,subpack_,print_:False]:=Module[{},
 (*List Main package and sub packages*)
 package = "UNET`";
 
-subPackages = {"UnetCore`","UnetSupport`"};
+subPackages = {"Unet`","UnetSupport`"};
 
 
 (*define all the toolbox contexts*)
