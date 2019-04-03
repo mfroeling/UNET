@@ -63,7 +63,7 @@ The network supports multi channel inputs and multi class segmentation.
 
 Example: 3D segmentation of lower legg muscles using MRI data.
 
-![Automated 3D muscle segmentation using UNET / RESNET using DIXON MRI data](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
+![Automated 3D muscle segmentation using UNET / RESNET using DIXON MRI data](https://github.com/mfroeling/UNET/blob/master/images/Muscle Segmentation.jpg)
 
 
 ## License
