@@ -45,8 +45,8 @@ The network supports multi channel inputs and multi class segmentation.
 ![UNET 2D](https://github.com/mfroeling/UNET/blob/master/images/UNET2D.PNG)
 	* 3D UNET
 ![UNET 3D](https://github.com/mfroeling/UNET/blob/master/images/UNET3D.PNG)
-	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer and a CrossEntropyLossLayer.
-![SoftDiceLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)
+	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer.
+![SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)
 
 * SplitTrainData splits the data and labels into training, validation and test data.
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/Split.PNG)
@@ -55,10 +55,16 @@ The network supports multi channel inputs and multi class segmentation.
 ![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/Train.PNG)
 
 * Visualize the network and results
-	* Hidden layers
-![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
+	* Visualize the layers
+![Visualize the layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
 	* Results
 ![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
+
+
+Example: 3D segmentation of lower legg muscles using MRI data.
+
+![Automated 3D muscle segmentation using UNET / RESNET using DIXON MRI data](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
+
 
 ## License
 https://opensource.org/licenses/MIT

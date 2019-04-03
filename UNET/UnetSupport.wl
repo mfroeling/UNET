@@ -15,7 +15,7 @@
 
 BeginPackage["UNET`UnetSupport`"]
 
-$ContextPath =  Union[$ContextPath, System`$UNETContextPath];
+$ContextPath =  Union[$ContextPath, System`$UNETContextPaths];
 
 
 (* ::Section:: *)
@@ -47,9 +47,6 @@ CreateImage4::usage = "CreateImage4[] creates a test images with label with thre
 
 (* ::Subsection:: *)
 (*Error messages*)
-
-
-TrainUNET::dim = "`1` is not a valid data dimension. Allowed dimension values are 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240 or 256."
 
 
 (* ::Section:: *)

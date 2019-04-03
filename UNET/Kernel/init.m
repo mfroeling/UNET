@@ -13,18 +13,6 @@
 (*Functions*)
 
 
-(*check for latest version*)
-UpdateWarning[]:=If[$VersionNumber != 11.3,
-	CreateDialog[Column[{Style["
-	Current Mathematica version is "<>ToString[$VersionNumber]<>"
-	The toolbox is tested developed in 11.3.
-	You need to update! (Or I am behind...)
-	Some functions wont work in older versions.
-	", TextAlignment -> Center], DefaultButton[], ""}, 
-	Alignment -> Center], WindowTitle -> "Update!"];
-];
- 
-
 (*Fucntions to clear, load and protect package functions*)
 ClearFunctions[pack_,subpack_,print_:False]:=Module[{packageName,packageSymbols,packageSymbolsG},
 	If[print,Print["--------------------------------------"]];
@@ -49,11 +37,7 @@ ClearFunctions[pack_,subpack_,print_:False]:=Module[{packageName,packageSymbols,
 
 LoadPackages[pack_,subpack_,print_:False]:=Module[{},
 	If[print,Print["--------------------------------------"]];
-	(
-		If[print,
-			Print["Loading all definitions of "<>#]];
-		Get[pack<>#];
-	)&/@subpack;
+	(If[print,Print["Loading all definitions of "<>#]];Get[pack<>#];)&/@subpack;
 ]
 
 
@@ -75,27 +59,28 @@ ProtectFunctions[pack_,subpack_,print_:False]:=Module[{},
 (*List Main package and sub packages*)
 package = "UNET`";
 
-subPackages = {"Unet`","UnetSupport`"};
+subPackages = {
+	"UnetCore`","UnetSupport`"
+	};
 
 
 (*define all the toolbox contexts*)
-System`$UNETContextPath = (package <> # & /@ subPackages);
+System`$UNETContextPaths = (package <> # & /@ subPackages);
+Print[System`$UNETContextPaths];
 
-$ContextPath = Union[$ContextPath, System`$UNETContextPath]
+$ContextPath = Union[$ContextPath, System`$UNETContextPaths];
 
-System`$UNETContextPath::usage = "$UNETContextPath lists all the packages";
+(*state if verbose is true to monitor initialization*)
+UNET`verbose = False;
 
 
 (* ::Section:: *)
 (*Initialize all packages*)
 
 
-(*state if verbose is true to monitor initialization*)
-UNET`verbose = False;
-
 If[UNET`verbose,
 Print["--------------------------------------"];
-Print[System`$UNETContextPath];
+Print[System`$UNETContextPaths];
 ];
 
 (*clear all definitions from the subPacakges*)

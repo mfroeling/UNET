@@ -12,8 +12,8 @@ Paclet[
     Loading -> "Manual",
     Extensions -> 
         {
-            {"Documentation", Language -> "English", MainPage -> "Guides/UNET"}, 
-            {"Kernel", Root -> "Kernel", Context -> "UNET`"}
+            {"Kernel", Root -> "Kernel", Context -> "UNET`"},
+            {"Documentation", Language -> "English", MainPage -> "Guides/UNET"}
         }
 ]
 

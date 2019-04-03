@@ -15,7 +15,7 @@
 
 BeginPackage["UNET`UnetCore`"]
 
-$ContextPath =  Union[$ContextPath, System`$UNETContextPath];
+$ContextPath =  Union[$ContextPath, System`$UNETContextPaths];
 
 
 (* ::Section:: *)
