@@ -40,29 +40,37 @@ There are also examples how to visualize the layer of your trained network and h
 
 The network supports multi channel inputs and multi class segmentation.
 
-* UNET generates a UNET convolutional network.
-	* 2D UNET
+* UNET generates a UNET convolutional network.  
+	* 2D UNET  
 ![UNET 2D](https://github.com/mfroeling/UNET/blob/master/images/UNET2D.PNG)
-	* 3D UNET
+	* 3D UNET  
 ![UNET 3D](https://github.com/mfroeling/UNET/blob/master/images/UNET3D.PNG)
-	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer.
+	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer.  
 ![SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)
 
-* SplitTrainData splits the data and labels into training, validation and test data.
+* Convuluation blocks: The toobox contains five different convolution blocks that build up the network: [UNET](https://arxiv.org/abs/1505.04597), UResNet, [RestNet](https://arxiv.org/abs/1512.03385), UDenseNet, [DensNet](https://arxiv.org/abs/1608.06993). 
+![split data](https://github.com/mfroeling/UNET/blob/master/images/convblocks.PNG)
+
+* SplitTrainData splits the data and labels into training, validation and test data.  
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/Split.PNG)
 
-* TrainUNET trains the network.
+* TrainUNET trains the network.  
 ![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/Train.PNG)
 
-* Visualize the network and results
-	* Visualize the layers
+## Visualization
+
+* Visualize the network and results    
+	* Visualize the layers  
 ![Visualize the layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
-	* Results
+	* Results  
 ![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
+	* Visualize the training  
+![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/amin0-v2.gif)  
+![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/amin4-v2.gif)
 
+## Example
 
-Example: 3D segmentation of lower legg muscles using MRI data.
-
+*Example: 3D segmentation of lower leg muscles using MRI data.  
 ![Automated 3D muscle segmentation using UNET / RESNET using DIXON MRI data](https://github.com/mfroeling/UNET/blob/master/images/Muscle_Segmentation.jpg)
 
 

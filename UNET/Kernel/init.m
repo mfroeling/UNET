@@ -66,7 +66,6 @@ subPackages = {
 
 (*define all the toolbox contexts*)
 System`$UNETContextPaths = (package <> # & /@ subPackages);
-Print[System`$UNETContextPaths];
 
 $ContextPath = Union[$ContextPath, System`$UNETContextPaths];
 
