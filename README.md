@@ -9,6 +9,8 @@ A package to generate and train a UNET deep convolutional network for 2D and 3D 
 * [Install toolbox](#install-toolbox)
 * [Using the toolbox](#using-the-toolbox)
 * [Functionality](#functionality)
+* [Visualization](#visualization)
+* [Example](#example)
 
 ## Information
 
