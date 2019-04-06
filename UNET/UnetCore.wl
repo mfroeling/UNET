@@ -13,9 +13,7 @@
 (*start Package*)
 
 
-BeginPackage["UNET`UnetCore`"]
-
-$ContextPath =  Union[$ContextPath, System`$UNETContextPaths];
+BeginPackage["UNET`UnetCore`", Join[{"Developer`"}, Complement[UNET`$Contexts, {"UNET`UnetCore`"}]]]
 
 
 (* ::Section:: *)
@@ -143,7 +141,6 @@ TrainUNET::dim =
 
 
 Begin["`Private`"]
-
 
 verb = False;
 
@@ -888,6 +885,8 @@ MakeDiffLabel3D = Compile[{{lab, _Integer, 3}, {res, _Integer, 3}}, Block[{resU,
 
 Options[ShowChannelClassData]={ImageSize->500, ClassScale->Automatic, NumberRowItems->3, MakeDifferenceImage->False, StepSize->1, AspectRatio->1};
 
+SyntaxInformation[ShowChannelClassData] = {"ArgumentsPattern" -> {_, _, _., OptionsPattern[]}};
+
 ShowChannelClassData[data_, label_, opts:OptionsPattern[]] := ShowChannelClassData[data, label, None, opts]
 
 ShowChannelClassData[data_, label_, result_, OptionsPattern[]]:=Block[{minmax,diff,step,lab,dat,res, ratio},
@@ -941,6 +940,7 @@ VisualizeUNET2D[dataI_,net_]:=Manipulate[
 	(*fixed parameters*)
 	{{nodes,{"enc_1","enc_2","enc_3","enc_4","enc_5","dec_1","dec_2","dec_3","dec_4","map","prob"}}, ControlType->None},
 	{data,ControlType->None},
+	{size,ControlType->None},
 	{datIm,ControlType->None},
 	{images,ControlType->None},
 	

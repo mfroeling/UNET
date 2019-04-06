@@ -8,83 +8,61 @@
 (*Written by: Martijn Froeling, PhD*)
 (*m.froeling@gmail.com*)
 
+(* Wolfram Language Init File *)
 
-(* ::Section:: *)
-(*Functions*)
+(*package naem*)
+UNET`$Package = "UNET`";
+UNET`$SubPackages = {
+	(*core packages that contain functions for other toolboxes*)
+	"UnetCore`", "UnetSupport`"
+};
 
+(*define context and verbose*)
+UNET`$Contexts = (UNET`$Package <> # & /@ UNET`$SubPackages);
+UNET`$Verbose = False;
 
-(*Fucntions to clear, load and protect package functions*)
-ClearFunctions[pack_,subpack_,print_:False]:=Module[{packageName,packageSymbols,packageSymbolsG},
-	If[print,Print["--------------------------------------"]];
-	Quiet[
-		If[print,Print["Removing all definitions of "<>#]];
-		packageName = pack <> #;
-		Get[packageName];
-		packageSymbols =Names[packageName <> "*"];
-		packageSymbolsG="Global`"<>#&/@packageSymbols;
-		
-		(*remove all global and private definitions*)
-		Unprotect @@ packageSymbols;
-		ClearAll @@ packageSymbols;
-		Remove @@ packageSymbols;
-		Unprotect @@ packageSymbolsG;
-		ClearAll @@ packageSymbolsG;
-		Remove @@ packageSymbolsG;
-		
-		]& /@ subpack;
+(*print the contexts*)
+If[UNET`$Verbose,
+	Print["--------------------------------------"];
+	Print["All defined packages to be loaded are: "];
+	Print[UNET`$Contexts];
 ];
 
+(*load all the packages without error reporting such we can find the names*)
+If[UNET`$Verbose, Print["--------------------------------------"]];
+Quiet[Get/@UNET`$Contexts];
 
-LoadPackages[pack_,subpack_,print_:False]:=Module[{},
-	If[print,Print["--------------------------------------"]];
-	(If[print,Print["Loading all definitions of "<>#]];Get[pack<>#];)&/@subpack;
-]
+(*Destroy all functions defined in the subpackages*)
+(
+	If[UNET`$Verbose, 
+		Print["Removing all definitions of "<>#];
+		Print["- Package functions: \n", Names[# <> "*"]];
+		Print["- Package functions in global:\n", Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]]];
+	];
+	
+	Unprotect @@ Names[# <> "*"];
+	ClearAll @@ Names[# <> "*"];
+	
+	Unprotect @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
+	ClearAll @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
+	Remove @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
+) &/@ UNET`$Contexts
 
+(*reload all the sub packages with error reporting*)
+If[UNET`$Verbose,Print["--------------------------------------"]];
+(
+	If[UNET`$Verbose, Print["Loading all definitions of "<>#]];
+	Get[#];
+)&/@UNET`$Contexts;	
 
-ProtectFunctions[pack_,subpack_,print_:False]:=Module[{},
-	If[print,Print["--------------------------------------"]];
-	(
-		If[print,Print["protecting all definitions of "<>#]];
-		SetAttributes[#,{Protected, ReadProtected}]&/@ Names[pack <> # <> "*"];
-		If[print,Print[Names[pack <> # <> "*"]]];
-		If[print,Print["--------------------------------------"]];
-	)& /@ subpack;
-]
-
-
-(* ::Section:: *)
-(*Settings*)
-
-
-(*List Main package and sub packages*)
-package = "UNET`";
-
-subPackages = {
-	"UnetCore`","UnetSupport`"
-	};
-
-
-(*define all the toolbox contexts*)
-System`$UNETContextPaths = (package <> # & /@ subPackages);
-
-$ContextPath = Union[$ContextPath, System`$UNETContextPaths];
-
-(*state if verbose is true to monitor initialization*)
-UNET`verbose = False;
-
-
-(* ::Section:: *)
-(*Initialize all packages*)
-
-
-If[UNET`verbose,
-Print["--------------------------------------"];
-Print[System`$UNETContextPaths];
-];
-
-(*clear all definitions from the subPacakges*)
-ClearFunctions[package, subPackages, UNET`verbose];
-(*load all packages*)
-LoadPackages[package, subPackages, UNET`verbose];
-(*Protect functions*)
-ProtectFunctions[package, subPackages, UNET`verbose];
+(*protect all functions*)
+If[UNET`$Verbose,Print["--------------------------------------"]];
+(
+	If[UNET`$Verbose,
+		Print["protecting all definitions of "<>#];
+		Print[Names[# <> "*"]];
+		Print["--------------------------------------"]
+	];
+	
+	SetAttributes[#,{Protected, ReadProtected}]&/@ Names[# <> "*"];
+)& /@ UNET`$Contexts;

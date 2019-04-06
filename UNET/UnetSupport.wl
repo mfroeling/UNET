@@ -13,9 +13,7 @@
 (*start Package*)
 
 
-BeginPackage["UNET`UnetSupport`"]
-
-$ContextPath =  Union[$ContextPath, System`$UNETContextPaths];
+BeginPackage["UNET`UnetSupport`",  Join[{"Developer`"}, Complement[UNET`$Contexts, {"UNET`UnetSupport`"}]]]
 
 
 (* ::Section:: *)
