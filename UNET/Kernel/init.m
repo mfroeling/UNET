@@ -19,7 +19,7 @@ UNET`$SubPackages = {
 
 (*define context and verbose*)
 UNET`$Contexts = (UNET`$Package <> # & /@ UNET`$SubPackages);
-UNET`$Verbose = False;
+UNET`$Verbose = If[UNET`$Verbose===True, True, False];
 
 
 (*print the contexts*)
