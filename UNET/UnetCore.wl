@@ -248,16 +248,22 @@ BrierLossLayer[dim_] := NetGraph[<|
 
 MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2},
   n = Round[trained["TotalBatches"]/trained["TotalRounds"]];
-  pl1 = ListLogPlot[{trained["ValidationLossList"][[All, 2]], 
-     trained["BatchLossList"][[;; ;; n]]}, Joined -> True, 
+  
+  If[$VersionNumber<=11.2,
+  	d1={trained["ValidationLossList"][[All, 2]], trained["BatchLossList"][[;; ;; n]]};
+  	d2={trained["ValidationErrorRateList"][[All, 2]], trained["BatchErrorRateList"][[;; ;; n]]};
+  	,
+  	d1={trained["ValidationLossList"], trained["BatchLossList"][[;; ;; n]]};
+  	d2={trained["RoundMeasurementsLists"]["ErrorRate"], trained["BatchMeasurementsLists"]["ErrorRate"][[;; ;; n]]};
+  ];
+  
+  pl1 = ListLogPlot[d1, Joined -> True, 
     PlotLegends -> {"Validation", "Training"}, Frame -> True, 
     GridLines -> Automatic, FrameLabel -> {"Epochs", "Loss"}, 
     LabelStyle -> Directive[Black, Bold, 12], 
     FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick, 
     ImageSize -> size];
-  pl2 = ListLogPlot[
-    100 {trained["ValidationErrorRateList"][[All, 2]], 
-      trained["BatchErrorRateList"][[;; ;; n]]}, Joined -> True, 
+  pl2 = ListLogPlot[100 d2, Joined -> True, 
     PlotLegends -> {"Validation", "Training"}, Frame -> True, 
     GridLines -> Automatic, 
     FrameLabel -> {"Epochs", "Error Rate [%]"}, 
@@ -321,14 +327,25 @@ UNET2D[NChan_:1,Nclass_:1,depI_:64,dimIn_:{128,128}, res_:"ResNet", drop_:0.2] :
    "dec_4" -> dec2[dep[[2]], dimIn, res, drop],
    "map" -> ConvolutionLayer[Nclass, {1, 1}],
    "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
-   |>, {
-   NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-   {"enc_4", "enc_5"} -> "dec_1",
-   {"enc_3", "dec_1"} -> "dec_2",
-   {"enc_2", "dec_2"} -> "dec_3",
-   {"enc_1", "dec_3"} -> "dec_4",
-   "dec_4" -> "map" -> "prob"
-   }, "Input" -> Prepend[dimIn, NChan]]
+   |>, 
+   	If[$VersionNumber >= 12.2,
+   		{
+   			NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+   				{"enc_5", "enc_4"} -> "dec_1",
+   				{"dec_1", "enc_3"} -> "dec_2",
+   				{"dec_2", "enc_2"} -> "dec_3",
+   				{"dec_3", "enc_1"} -> "dec_4",
+   				"dec_4" -> "map" -> "prob"
+   		},
+   		{
+   			NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+   				{"enc_4", "enc_5"} -> "dec_1",
+   				{"enc_3", "dec_1"} -> "dec_2",
+   				{"enc_2", "dec_2"} -> "dec_3",
+   				{"enc_1", "dec_3"} -> "dec_4",
+   				"dec_4" -> "map" -> "prob"
+   		}
+   	], "Input" -> Prepend[dimIn, NChan]]
  ]
 
 
@@ -456,14 +473,26 @@ UNET3D[NChan_: 1, Nclass_: 1, depI_: 32, dimIn_: {32, 128, 128}, res_:"ResNet", 
    "dec_4" -> dec3[dep[[2]], dimIn, res, drop],
    "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
    "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
-   |>, {
-   NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-   {"enc_4", "enc_5"} -> "dec_1",
-   {"enc_3", "dec_1"} -> "dec_2",
-   {"enc_2", "dec_2"} -> "dec_3",
-   {"enc_1", "dec_3"} -> "dec_4",
-   "dec_4" -> "map" -> "prob"
-   }, "Input" -> Prepend[dimIn, NChan]]
+   |>, 
+   	If[$VersionNumber >=12.2,
+	{
+		NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+		{"enc_5", "enc_4"} -> "dec_1",
+		{"dec_1", "enc_3"} -> "dec_2",
+		{"dec_2", "enc_2"} -> "dec_3",
+		{"dec_3", "enc_1"} -> "dec_4",
+		"dec_4" -> "map" -> "prob"
+	}
+	,
+	{
+		NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
+		{"enc_4", "enc_5"} -> "dec_1",
+		{"enc_3", "dec_1"} -> "dec_2",
+		{"enc_2", "dec_2"} -> "dec_3",
+		{"enc_1", "dec_3"} -> "dec_4",
+		"dec_4" -> "map" -> "prob"
+	}
+   	], "Input" -> Prepend[dimIn, NChan]]
  ]
 
 
@@ -634,32 +663,26 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 		trained = NetTrain[lossNet,train,All,TargetDevice->device,ValidationSet->valid,LossFunction->lossFunction,trainopt];
 		
 		(*extract the trained net*)
-		{netTrained, plots} = If[Nclass>1,
-			{
-				NetExtract[trained["TrainedNet"],"net"],
-				Row[MakeNetPlots[trained]]
-				},
-			{
-				trained["TrainedNet"],
-				trained["LossEvolutionPlot"]
-				}
+		netTrained = If[Nclass>1,
+			NetExtract[trained["TrainedNet"],"net"],
+			trained["TrainedNet"]
 		];
 		
 		Print["Evaluating test data"];
 		
 		If[testData=!=None,
 			(*test data provided*)
-			result = netTrained[testData,TargetDevice->device];
+			result = netTrained[testData, TargetDevice->device];
 			(*decode the data*)
-			result = If[Nclass>1,ClassDecoder[result,Nclass],Round[result]];
+			result = If[Nclass>1, ClassDecoder[result,Nclass], Round[result]];
 			(*get the Dice or test data*)
 			iou = DiceSimilarityClass[result,testLabel,Nclass];
 			Print["DICE per class: ",Thread[Range[Nclass]->Round[iou,0.001]]];
 			(*give Output*)
-			{{lossNet, trained, netTrained}, {plots, result, iou}}
+			{{lossNet, trained, netTrained}, {result, iou}}
 			,
 			(*no test data*)
-			{{lossNet, trained, netTrained}, plots}
+			{lossNet, trained, netTrained}
 		]
 	]
 ]
