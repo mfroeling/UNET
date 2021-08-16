@@ -1,0 +1,410 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12140,        401]
+NotebookOptionsPosition[      8832,        332]
+NotebookOutlinePosition[     10904,        383]
+CellTagsIndexPosition[     10861,        380]
+WindowTitle->SplitTrainData
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["U N E T PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET\"\>":>Documentation`HelpLookup[
+       "paclet:UNET/guide/UNET"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"UNET/ref/SplitTrainData\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["UNET/ref/SplitTrainData"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/UNET/ref/\
+SplitTrainData.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$19129], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "UNET/ref/SplitTrainData", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["SplitTrainData", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     "SplitTrainData[data, label]",
+     "\[LineSeparator]splits the data and label in trainData, validationData, \
+testData and testLabels that can be used in ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["TrainUNET"]], "paclet:UNET/ref/TrainUNET"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     ".",
+     " ",
+     "The",
+     " ",
+     "data",
+     " ",
+     "and",
+     " ",
+     "label",
+     " ",
+     "should",
+     " ",
+     "be",
+     " ",
+     "in",
+     " ",
+     "the",
+     " ",
+     "form",
+     " ",
+     "{N",
+     ",",
+     " ",
+     "Nchan",
+     ",",
+     " ",
+     "x",
+     ",",
+     " ",
+     "y}",
+     " ",
+     "or",
+     " ",
+     "{N",
+     ",",
+     " ",
+     "Nchan",
+     ",",
+     " ",
+     "z",
+     ",",
+     " ",
+     "x",
+     ",",
+     " ",
+     "y}",
+     ".",
+     " ",
+     "The",
+     " ",
+     "label",
+     " ",
+     "sould",
+     " ",
+     "be",
+     " ",
+     "Integers",
+     " ",
+     "with",
+     " ",
+     "1",
+     " ",
+     "for",
+     " ",
+     "the",
+     " ",
+     "background",
+     " ",
+     "class",
+     " ",
+     "and",
+     " ",
+     "should",
+     " ",
+     "go",
+     " ",
+     "from",
+     " ",
+     "1",
+     " ",
+     "to",
+     " ",
+     "Nclass",
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["RandomizeSplit",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/RandomizeSplit"], 
+    ButtonBox["True",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/True"], Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["RandomizeSplit"]], "paclet:UNET/ref/RandomizeSplit"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an option for ",
+     Cell[BoxData["SplitTrainData"], "InlineFormula"],
+     ". ",
+     "If",
+     " ",
+     "True",
+     " the data is randomized"
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["SplitRatios",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/SplitRatios"], 
+    RowBox[{"{", 
+     RowBox[{"0.7", ",", " ", "0.2", ",", " ", "0.1"}], "}"}], Cell[
+    TextData[{
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["SplitRatios"]], "paclet:UNET/ref/SplitRatios"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an optino for ",
+     Cell[BoxData["SplitTrainData"], "InlineFormula"],
+     ". Defines the ratios of the train validation and test data."
+    }], "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["AugmentTrainData",
+     BaseStyle->"Link",
+     ButtonData->"paclet:UNET/ref/AugmentTrainData"], 
+    ButtonBox["False",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/False"], Cell[TextData[{
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["AugmentTrainData"]], "paclet:UNET/ref/AugmentTrainData"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     " is an option for ",
+     Cell[BoxData["SplitTrainData"], "InlineFormula"],
+     ". ",
+     "If",
+     " ",
+     "True",
+     " the train and validation data is augmented using ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["RotateFlip"]], "paclet:UNET/ref/RotateFlip"},
+       "RefLink",
+       BaseStyle->{"InlineFormula"}]], "InlineFormula"],
+     ". \nThis increases the data by a factor 8 by generating a mirrored \
+version and rotation both 4x90 degree."
+    }], "TableText"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {None, None, {None}}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True}}}}],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{6},
+   "Spacer1"]]],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->38303248],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["UNET"]], "paclet:UNET/guide/UNET"},
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->1]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"SplitTrainData",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "UNET", ButtonData -> "paclet:UNET/guide/UNET", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2021, 8, 16, 14, 7, 3.1118004}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "UNET`UnetCore`", 
+    "keywords" -> {}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "U N E T Package Symbol", "language" -> "en", "paclet" -> "UNET Package", 
+    "status" -> "None", "summary" -> 
+    "SplitTrainData[data, label] splits the data and label in trainData, \
+validationData, testData and testLabels that can be used in TrainUNET. The \
+data and label should be in the form {N, Nchan, x, y} or {N, Nchan, z, x, y}. \
+The label sould be Integers with 1 for the background class and should go \
+from 1 to Nclass.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "SplitTrainData", "titlemodifier" -> "", "windowtitle" -> 
+    "SplitTrainData", "type" -> "Symbol", "uri" -> "UNET/ref/SplitTrainData"}},
+CellContext->"Global`",
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "12.3 for Microsoft Windows (64-bit) (July 9, 2021)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[586, 21, 3020, 74, 70, "AnchorBarGrid",ExpressionUUID->"3ed44617-95d2-4004-986d-530d868270f9",
+ CellID->1],
+Cell[3609, 97, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"b9582127-2011-41b4-8689-49d88a6bd27e"],
+Cell[3783, 105, 1440, 98, 70, "Usage",ExpressionUUID->"5f6573e0-ffc0-4628-a0f0-565e24419288"],
+Cell[CellGroupData[{
+Cell[5248, 207, 621, 19, 70, "NotesSection",ExpressionUUID->"ad65c3fc-12dd-4fa6-ba9b-d89981d56253",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[5872, 228, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"84aca5f0-5ae7-4e47-a137-f8964eafc9bb"],
+Cell[5906, 230, 53, 0, 70, "Notes",ExpressionUUID->"e8c3c6b0-a945-4b22-999b-618769ba1a58"],
+Cell[5962, 232, 2411, 71, 70, "3ColumnTableMod",ExpressionUUID->"811e910e-0d04-41ef-98f4-fc74d1f9601b"],
+Cell[8376, 305, 31, 0, 70, "SectionFooterSpacer",ExpressionUUID->"c029bc8f-c07e-45da-9fc5-f39c176d7ca4"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[8444, 310, 156, 7, 70, "MoreAboutSection",ExpressionUUID->"7fda524e-5ce0-417f-ba4f-779641805d20",
+ CellID->38303248],
+Cell[8603, 319, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"9b727d4c-4ecb-4c85-9a0a-70f6a652ee65"],
+Cell[8637, 321, 153, 6, 70, "MoreAbout",ExpressionUUID->"7cc03921-4221-4c66-b98e-a11665f0671f",
+ CellID->1]
+}, Open  ]],
+Cell[8805, 330, 23, 0, 70, "FooterCell",ExpressionUUID->"e9328c66-0c39-4de9-9e91-cc903d0b1e81"]
+}
+]
+*)
+
+(* End of internal cache information *)
