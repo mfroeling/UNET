@@ -190,17 +190,16 @@ CreateImage4i[]:=Block[{an,l1,r1,square,d1,data, l2, r2, sphere, l3, l0, labels}
 
 
 MakeTestImages[n_,case_]:=Block[{ii},
-	DistributeDefinitions[CreateImage1i,CreateImage2i,CreateImage3i,CreateImage4i];
 	ii=0;
-	SetSharedVariable[ii];
+	(*DistributeDefinitions[CreateImage1i,CreateImage2i,CreateImage3i,CreateImage4i];*)
+	(*SetSharedVariable[ii];*)
 	PrintTemporary[Dynamic[ii]];
-	Transpose[ParallelTable[ii++;
-		Switch[case,
-		1,CreateImage1i[],
-		2,CreateImage2i[],
-		3,CreateImage3i[],
-		4,CreateImage4i[]
-	],{i,1,n}]]
+	Transpose[Switch[case,
+		1,Table[ii++;CreateImage1i[],{i,1,n}],
+		2,Table[ii++;CreateImage2i[],{i,1,n}],
+		3,Table[ii++;CreateImage3i[],{i,1,n}],
+		4,Table[ii++;CreateImage4i[],{i,1,n}]
+	]]
 ];
 
 

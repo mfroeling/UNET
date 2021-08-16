@@ -4,11 +4,12 @@
 
 Paclet[
     Name -> "UNET",
-    Version -> "1.0.0",
-    MathematicaVersion -> "11.0+",
+    Version -> "1.1.0",
+    WolframVersion -> "12.3+",
     Description -> "A package to generate and train a UNET deep convolutional network for 2D and 3D image segmentation",
     Creator -> "Martijn Froeling <m.froeling@gmail.com>",
-    Thumbnail -> "thumb.gif",
+    Support -> "https://github.com/mfroeling/UNET",
+    Icon -> "thumb.gif",
     Loading -> "Manual",
     Extensions -> 
         {
