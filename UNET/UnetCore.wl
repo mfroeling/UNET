@@ -328,7 +328,6 @@ UNET2D[NChan_:1,Nclass_:1,depI_:64,dimIn_:{128,128}, res_:"ResNet", drop_:0.2] :
    "map" -> ConvolutionLayer[Nclass, {1, 1}],
    "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
    |>, 
-   	If[$VersionNumber >= 12.2,
    		{
    			NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
    				{"enc_5", "enc_4"} -> "dec_1",
@@ -336,16 +335,7 @@ UNET2D[NChan_:1,Nclass_:1,depI_:64,dimIn_:{128,128}, res_:"ResNet", drop_:0.2] :
    				{"dec_2", "enc_2"} -> "dec_3",
    				{"dec_3", "enc_1"} -> "dec_4",
    				"dec_4" -> "map" -> "prob"
-   		},
-   		{
-   			NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-   				{"enc_4", "enc_5"} -> "dec_1",
-   				{"enc_3", "dec_1"} -> "dec_2",
-   				{"enc_2", "dec_2"} -> "dec_3",
-   				{"enc_1", "dec_3"} -> "dec_4",
-   				"dec_4" -> "map" -> "prob"
-   		}
-   	], "Input" -> Prepend[dimIn, NChan]]
+   		}, "Input" -> Prepend[dimIn, NChan]]
  ]
 
 
@@ -441,9 +431,10 @@ dec2[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
      	"UDenseNet", {convBN2[n2, 1], conv2[n, dimIn, res, drop]}, 
      	_, conv2[n, dimIn, res, drop]]
      |>, {
-     NetPort["Input2"] -> "deconv",
-     {NetPort["Input1"], "deconv"} -> "cat" -> "conv"},
-    "Input1" -> Prepend[dimIn, n1], "Input2" -> Prepend[dimIn/2, n2]
+     	NetPort["Input1"] -> "deconv",
+     	{NetPort["Input2"], "deconv"} -> "cat" -> "conv"
+     	},
+     	"Input2" -> Prepend[dimIn, n1], "Input1" -> Prepend[dimIn/2, n2]
     ]
    ];
 
@@ -473,8 +464,7 @@ UNET3D[NChan_: 1, Nclass_: 1, depI_: 32, dimIn_: {32, 128, 128}, res_:"ResNet", 
    "dec_4" -> dec3[dep[[2]], dimIn, res, drop],
    "map" -> ConvolutionLayer[Nclass, {1, 1, 1}],
    "prob" -> If[Nclass > 1, {TransposeLayer[{1 <-> 4, 1 <-> 3, 1 <-> 2}], SoftmaxLayer[]}, {LogisticSigmoid, FlattenLayer[1]}]
-   |>, 
-   	If[$VersionNumber >=12.2,
+   |>,
 	{
 		NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
 		{"enc_5", "enc_4"} -> "dec_1",
@@ -483,16 +473,7 @@ UNET3D[NChan_: 1, Nclass_: 1, depI_: 32, dimIn_: {32, 128, 128}, res_:"ResNet", 
 		{"dec_3", "enc_1"} -> "dec_4",
 		"dec_4" -> "map" -> "prob"
 	}
-	,
-	{
-		NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
-		{"enc_4", "enc_5"} -> "dec_1",
-		{"enc_3", "dec_1"} -> "dec_2",
-		{"enc_2", "dec_2"} -> "dec_3",
-		{"enc_1", "dec_3"} -> "dec_4",
-		"dec_4" -> "map" -> "prob"
-	}
-   	], "Input" -> Prepend[dimIn, NChan]]
+	, "Input" -> Prepend[dimIn, NChan]]
  ]
 
 
@@ -587,10 +568,11 @@ dec3[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
      	"DenseNet", {convBN3[n2, 1], conv3[n, dimIn, res, drop]}, 
      	"UDenseNet", {convBN3[n2, 1], conv3[n, dimIn, res, drop]}, 
      	_, conv3[n, dimIn, res, drop]]
-     |>, {
-     NetPort["Input2"] -> "deconv",
-     {NetPort["Input1"], "deconv"} -> "cat" -> "conv"},
-    "Input1" -> Prepend[dimIn, n1], "Input2" -> Prepend[dimIn/2, n2]
+     |>, {     	
+     	 NetPort["Input1"] -> "deconv",
+     	 {NetPort["Input2"], "deconv"} -> "cat" -> "conv"
+     	},
+    "Input2" -> Prepend[dimIn, n1], "Input1" -> Prepend[dimIn/2, n2]
     ]
    ];
 
