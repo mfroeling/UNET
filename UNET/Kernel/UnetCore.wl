@@ -28,12 +28,11 @@ DiceSimilarityClass::usage =
 "DiceSimilarityClass[prediction, groundTruth, nclasses] gives the Dice Similarity between of each of Nclasses between prediction and groundTruth. 
 nClasses can also be a list of class number for which the Dice needs to be calculated."
 
-DiceSimilarity::usage = 
-"DiceSimilarity[x, y] gives the Dice Similarity between 1 and 0 of vectors x and y for class 1.
+DiceSimilarity::usage = "DiceSimilarity[x, y] gives the Dice Similarity between 1 and 0 of vectors x and y for class 1.
 DiceSimilarity[x, y, class] gives the Dice Similarity for vectors x and y for Integer Class."
 
 MakeUNET::usage = 
-"MakeUNET[nchan, nclass, dep, dimIn] Generates a UNET with nchan as input and nclass as output. The number of parameter of the first convolution layer can be set with dep.
+"MakeUNET[nchan, nclass, dep, dimIn] Generates a UNET with nchan as input and nclass as output. The number of parameter of the first convolution layer can be set with dep.\n
 The data dimensions can be 2D or 3D and each of the dimensions should be 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240 or 256."
 
 AddLossLayer::usage = 

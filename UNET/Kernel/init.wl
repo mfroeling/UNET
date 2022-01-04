@@ -8,36 +8,44 @@
 (*Written by: Martijn Froeling, PhD*)
 (*m.froeling@gmail.com*)
 
+BeginPackage["UNET`"];
+
+
+$Package::usage = "Name of the package.";
+$SubPackages::usage = "List of the subpackages.";
+$Contexts::usage = "The package contexts.";
+$Verbose::usage = "When set True, verbose loading is used.";
+
 
 (*package naem*)
-UNET`$Package = "UNET`";
-UNET`$SubPackages = {
+$Package = "UNET`";
+$SubPackages = {
 	(*core packages that contain functions for other toolboxes*)
 	"UnetCore`", "UnetSupport`"
 };
 
 
 (*define context and verbose*)
-UNET`$Contexts = (UNET`$Package <> # & /@ UNET`$SubPackages);
-UNET`$Verbose = If[UNET`$Verbose===True, True, False];
+$Contexts = ($Package <> # & /@ $SubPackages);
+$Verbose = If[$Verbose===True, True, False];
 
 
 (*print the contexts*)
-If[UNET`$Verbose,
+If[$Verbose,
 	Print["--------------------------------------"];
 	Print["All defined packages to be loaded are: "];
-	Print[UNET`$Contexts];
+	Print[$Contexts];
 ];
 
 
 (*load all the packages without error reporting such we can find the names*)
-If[UNET`$Verbose, Print["--------------------------------------"]];
-Quiet[Get/@UNET`$Contexts];
+If[$Verbose, Print["--------------------------------------"]];
+Quiet[Get/@$Contexts];
 
 
 (*Destroy all functions defined in the subpackages*)
 (
-	If[UNET`$Verbose, 
+	If[$Verbose, 
 		Print["Removing all definitions of "<>#];
 		Print["- Package functions: \n", Names[# <> "*"]];
 		Print["- Package functions in global:\n", Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]]];
@@ -49,25 +57,31 @@ Quiet[Get/@UNET`$Contexts];
 	Unprotect @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
 	ClearAll @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
 	Remove @@ Intersection[Names["Global`*"], "Global`" <> # & /@ Names[# <> "*"]];
-) &/@ UNET`$Contexts
+) &/@ $Contexts
 
 
 (*reload all the sub packages with error reporting*)
-If[UNET`$Verbose,Print["--------------------------------------"]];
+If[$Verbose,Print["--------------------------------------"]];
 (
 	If[UNET`$Verbose, Print["Loading all definitions of "<>#]];
 	Get[#];
-)&/@UNET`$Contexts;	
+)&/@$Contexts;	
 
 
 (*protect all functions*)
-If[UNET`$Verbose,Print["--------------------------------------"]];
+If[$Verbose,Print["--------------------------------------"]];
 (
-	If[UNET`$Verbose,
+	If[$Verbose,
 		Print["protecting all definitions of "<>#];
 		Print[Names[# <> "*"]];
 		Print["--------------------------------------"]
 	];
 	
 	SetAttributes[#,{Protected, ReadProtected}]&/@ Names[# <> "*"];
-)& /@ UNET`$Contexts;
+)& /@ $Contexts;
+
+Begin["`Private`"]
+
+End[]
+
+EndPackage[]
