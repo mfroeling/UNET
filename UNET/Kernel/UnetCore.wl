@@ -87,7 +87,7 @@ MakeNetPlots::usage =
 MakeNetPlots[trainedNet, size]"
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Options*)
 
 
@@ -360,7 +360,8 @@ conv2[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
     NetGraph[<|
       "con1" -> convBN2[no/2, 3], 
       "con2" -> convBN2[no, 3, False], 
-      "skip" -> convBN2[no, 1, False], "tot" -> TotalLayer[],
+      "skip" -> convBN2[no, 1, False], 
+      "tot" -> TotalLayer[],
       "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[drop]}
       |>, {
       NetPort["Input"] -> "con1" -> "con2",
@@ -398,7 +399,7 @@ conv2[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
    ];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*ConvLayers2*)
 
 
@@ -408,7 +409,7 @@ convLayers2[k_, dep_, dimIn_] := Table[layName[rep] -> Switch[rep,
      ], {rep, 1, dep}];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Dec2*)
 
 
@@ -438,7 +439,7 @@ dec2[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
    ];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*UNet3D*)
 
 
@@ -476,7 +477,7 @@ UNET3D[NChan_: 1, Nclass_: 1, depI_: 32, dimIn_: {32, 128, 128}, res_:"ResNet", 
  ]
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*ConvBN3*)
 
 
@@ -487,7 +488,7 @@ convBN3[dep_, k_, r_: True] := Block[{p = (k - 1)/2, ch},
   ]
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Conv3*)
 
 
@@ -499,7 +500,8 @@ conv3[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
     NetGraph[<|
       "con1" -> convBN3[no/2, 1], 
       "con2" -> convBN3[no, 3], 
-      "skip" -> convBN3[no, 1, False], "tot" -> TotalLayer[],
+      "skip" -> convBN3[no, 1, False], 
+      "tot" -> TotalLayer[],
       "elu" -> {ElementwiseLayer["ELU"], DropoutLayer[drop]}
       |>, {
       NetPort["Input"] -> "con1" -> "con2",
@@ -537,7 +539,7 @@ conv3[n_, dimIn_, res_, drop_] := Block[{k, dep, ni, no},
    ];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*ConvLayers3*)
 
 
@@ -547,7 +549,7 @@ convLayers3[k_, dep_, dimIn_] := Table[layName[rep] -> Switch[rep,
      ], {rep, 1, dep}];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Dec3*)
 
 
@@ -561,7 +563,8 @@ dec3[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
    	];
    If[verb, Print["dec - dimensions and in/out par", {Prepend[dimIn, n1], n1, n2}]];
    NetGraph[<|
-     "deconv" -> ResizeLayer3D[n2, dimIn/2],
+     (*"deconv" -> ResizeLayer3D[n2, dimIn/2],*)
+     "deconv" -> ResizeLayer[{Scaled[2], Scaled[2], Scaled[2]}],
      "cat" -> CatenateLayer["Inputs" -> {Prepend[dimIn, n1], Prepend[dimIn, n2]}],
      "conv" -> Switch[res, 
      	"DenseNet", {convBN3[n2, 1], conv3[n, dimIn, res, drop]}, 
@@ -576,7 +579,7 @@ dec3[ni_, dimIn_, res_, drop_] := Block[{n, n1, n2},
    ];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*ResizeLayer3D*)
 
 
