@@ -54,7 +54,7 @@ The network supports multi channel inputs and multi class segmentation.
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/convblocks.PNG)
 
 * Network complexity for each of the blocks and for 2D and 3D UNET.   
-![UNET complexity](https://github.com/mfroeling/UNET/blob/master/images/networks.PNG)
+![UNET complexity](https://github.com/mfroeling/UNET/blob/master/images/networks.png)
 
 * SplitTrainData splits the data and labels into training, validation and test data.  
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/Split.PNG)
@@ -63,7 +63,7 @@ The network supports multi channel inputs and multi class segmentation.
 ![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/Train.PNG)
 
 * Training is done with random batch selection that allows for on the fly data augmentation.  
-![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/batch.PNG)
+![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/batch.png)
 
 ## Visualization
 
