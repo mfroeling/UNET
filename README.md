@@ -44,14 +44,17 @@ The network supports multi channel inputs and multi class segmentation.
 
 * UNET generates a UNET convolutional network.  
 	* 2D UNET  
-![UNET 2D](https://github.com/mfroeling/UNET/blob/master/images/UNET2D.PNG)
+![UNET 2D](https://github.com/mfroeling/UNET/blob/master/images/UNET2D.PNG)  
 	* 3D UNET  
-![UNET 3D](https://github.com/mfroeling/UNET/blob/master/images/UNET3D.PNG)
+![UNET 3D](https://github.com/mfroeling/UNET/blob/master/images/UNET3D.PNG)  
 	* Loss Layers: Training the data is done using two loss layers: a SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer.  
-![SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)
+![SoftDiceLossLayer, BrierLossLayer and a CrossEntropyLossLayer](https://github.com/mfroeling/UNET/blob/master/images/Loss.PNG)  
 
-* Convuluation blocks: The toobox contains five different convolution blocks that build up the network: [UNET](https://arxiv.org/abs/1505.04597), UResNet, [RestNet](https://arxiv.org/abs/1512.03385), UDenseNet, [DensNet](https://arxiv.org/abs/1608.06993). 
+* Convuluation blocks: The toobox contains five different convolution blocks that build up the network: [UNET](https://arxiv.org/abs/1505.04597), UResNet, [RestNet](https://arxiv.org/abs/1512.03385), UDenseNet, [DensNet](https://arxiv.org/abs/1608.06993).  
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/convblocks.PNG)
+
+* Network complexity for each of the blocks and for 2D and 3D UNET.   
+![UNET complexity](https://github.com/mfroeling/UNET/blob/master/images/networks.PNG)
 
 * SplitTrainData splits the data and labels into training, validation and test data.  
 ![split data](https://github.com/mfroeling/UNET/blob/master/images/Split.PNG)
@@ -59,16 +62,19 @@ The network supports multi channel inputs and multi class segmentation.
 * TrainUNET trains the network.  
 ![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/Train.PNG)
 
+* Training is done with random batch selection that allows for on the fly data augmentation.  
+![Train Unet](https://github.com/mfroeling/UNET/blob/master/images/batch.PNG)
+
 ## Visualization
 
 * Visualize the network and results    
 	* Visualize the layers  
-![Visualize the layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
+![Visualize the net layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize1.PNG)
 	* Results  
-![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
+![Visualize training results](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
 	* Visualize the training  
-![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/amin0-v2.gif)  
-![Visualize hidden layers](https://github.com/mfroeling/UNET/blob/master/images/amin4-v2.gif)
+![animate unet training process](https://github.com/mfroeling/UNET/blob/master/images/amin0-v2.gif)  
+![animate unet training process muscle](https://github.com/mfroeling/UNET/blob/master/images/amin4-v2.gif)
 
 ## Example
 

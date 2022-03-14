@@ -83,10 +83,13 @@ ShowChannelClassData::usage =
 ShowChannelClassData[data, label, result] makes a grid of the data, label and result in 2D."
 
 MakeNetPlots::usage = 
-"MakeNetPlots[trainedNet]
-MakeNetPlots[trainedNet, size]"
+"MakeNetPlots[trainedNet] makes the loss and error plots after training.
+MakeNetPlots[trainedNet, size] same but with specifying image size."
 
-TrainFunction::usage=""
+TrainFunction::usage=
+"TrainFunction[train, b, aug ,n] Generates a random training batch from training data train with batchsize b and number of classes n. 
+It allows for autmenting traing data by specifying aug for which default is {False, False, False}. First input is rotation which is \"90\" or a angel which rotates randomly between -angle and +angle.
+Second input is scaling, for 20 procent up and downscaling input is {0.8, 1.2}. Last input is flipping which can be True or False."
 
 
 (* ::Subsection:: *)
@@ -143,7 +146,7 @@ TrainUNET::dim =
 
 Begin["`Private`"]
 
-verb = True;
+verb = False;
 
 
 (* ::Subsection:: *)
@@ -254,13 +257,13 @@ MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2, d1, d2},
 	d2 = {trained["ValidationMeasurementsLists"]["ErrorRate"], trained["RoundMeasurementsLists"]["ErrorRate"]};
 	
 	pl1 = ListLogPlot[d1, Joined -> True,
-		PlotLegends -> {"Validation", "Training"}, Frame -> True,
+		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
 		GridLines -> Automatic, FrameLabel -> {"Epochs", "Loss"},
 		LabelStyle -> Directive[Black, Bold, 12],
 		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
 		ImageSize -> size];
 	pl2 = ListLogPlot[100 d2, Joined -> True,
-		PlotLegends -> {"Validation", "Training"}, Frame -> True,
+		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
 		GridLines -> Automatic, FrameLabel -> {"Epochs", "Error Rate [%]"},
 		LabelStyle -> Directive[Black, Bold, 12],
 		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
@@ -330,14 +333,55 @@ UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool, 
 (*CBE*)
 
 
-CBE[dep_, k_, r_: True] := Block[{d = Round[dep], ch},
-	ch = {ConvolutionLayer[If[IntegerQ[d],d,First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["ELU"]};
-	ch[[;;If[r, -1, -2]]]
+CBE[dep_, k_, r_: True] := Block[{d = Round[dep]},
+	{ConvolutionLayer[If[IntegerQ[d],d,First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["ELU"]}[[;;If[r, -1, -2]]]
 ]
 
 
-convI[n_, dimIn_, res_, drop_, lab_] := Block[{},
-	If[verb, Print[lab<>" - dimensions: ", Prepend[dimIn, n], " - settings: ", {res, drop}]];
+(* ::Subsubsection::Closed:: *)
+(*enCode*)
+
+
+enCode[n_, dimIn_, res_, drop_, resc_]:= Flatten@{
+	If[resc, Resize["down", dimIn], Nothing],
+	conv[n, dimIn, res, "encode"],
+	DropoutLayer[drop]}
+
+
+(* ::Subsubsection::Closed:: *)
+(*deCode*)
+
+
+deCode[n_, dimIn_, res_, drop_] := NetGraph[<|
+	"upconv" -> Flatten[{Resize["up", dimIn], CBE[n ,1, False]}],
+	"conv" -> Flatten@{CatenateLayer[], conv[n, dimIn, res, "decode"], DropoutLayer[drop]}
+|>, {
+	{NetPort["Input2"] -> "upconv", NetPort["Input1"]} -> "conv"
+}];
+
+
+
+(* ::Subsubsection::Closed:: *)
+(*Resize*)
+
+
+Resize[dir_, dim_] := Block[{d, sc},
+	d=Length[dim];
+	sc = If[Ceiling[dim[[1]]]===1, Prepend[ConstantArray[2, d-1], 1], ConstantArray[2, d]];
+	Switch[dir,
+		"up", ResizeLayer[Scaled/@sc, Resampling -> "Nearest"],
+		"down", PoolingLayer[sc, 2, "Function" -> Max]
+	]
+];
+
+
+
+(* ::Subsubsection::Closed:: *)
+(*conv*)
+
+
+conv[n_, dimIn_, res_, lab_] := Block[{},
+	If[verb, Print[lab<>" - dimensions: ", Prepend[dimIn, n]]];
 	Switch[res,
 		"ResNet",
 		NetGraph[<|
@@ -349,7 +393,7 @@ convI[n_, dimIn_, res_, drop_, lab_] := Block[{},
 		}],
 		
 		"UResNet",(*same as resnet but without skip layer*)
-		NetChain[Flatten[{CBE[n/2, 3], CBE[n, 3]}]],
+		Flatten[{CBE[n/2, 3], CBE[n, 3]}],
 		
 		"DenseNet",
 		NetGraph[Association[Join[{
@@ -360,90 +404,12 @@ convI[n_, dimIn_, res_, drop_, lab_] := Block[{},
 		],
 		
 		"UDenseNet",(*same as dnesenete but without skip layer*)
-		NetChain[Flatten[ConstantArray[CBE[n, 3], n[[2]]]]],
+		Flatten[ConstantArray[CBE[n, 3], n[[2]]]],
 		
 		_,(*default which is UNET*)
-		NetChain[Flatten[{CBE[n, 3], CBE[n, 3]}]]
+		Flatten[{CBE[n, 3], CBE[n, 3]}]
 	]
 ]
-
-
-(* ::Subsubsection::Closed:: *)
-(*Conv*)
-
-
-conv[n_, dimIn_, res_, sc_, drop_, lab_] := Block[{},
-	If[verb, Print[lab<>" - dimensions: ", Prepend[dimIn, n], " - settings: ", {res, sc, drop}]];
-	Switch[res,
-		"ResNet",
-		NetGraph[<|
-			"resize" -> {If[sc, Resize["down", dimIn], Nothing], DropoutLayer[drop]},
-			"con" -> Join[CBE[n/2, 3], CBE[n, 3, False]], 
-			"skip" -> CBE[n, 1, False], 
-			"tot" -> {TotalLayer[], ElementwiseLayer["ELU"]}
-		|>, {
-			NetPort["Input"] -> "resize" -> {"con", "skip"} -> "tot" -> NetPort["Output"]
-		}],
-		
-		"UResNet",(*same as resnet but without skip layer*)
-		NetChain[Flatten[{Resize["down", dimIn], DropoutLayer[drop], CBE[n/2, 3], CBE[n, 3]}][[If[sc,1,2];;]]],
-		
-		"DenseNet",
-		NetGraph[Association[Join[{
-				"resize" -> {If[sc, Resize["down", dimIn], Nothing], DropoutLayer[drop]},
-				"trans" -> Flatten[{CatenateLayer[], CBE[n, 1][[All]]}]
-				}, convLayers[n]
-			]],
-			Flatten@{NetPort["Input"]->"resize", connect["resize", n[[2]]]}
-		],
-		
-		"UDenseNet",(*same as dnesenete but without skip layer*)
-		NetChain[Flatten[{Resize["down", dimIn], DropoutLayer[drop], ConstantArray[CBE[n, 3], n[[2]]]}][[If[sc,1,2];;]]],
-		
-		_,(*default which is UNET*)
-		NetChain[Flatten[{Resize["down", dimIn], DropoutLayer[drop], CBE[n, 3][[All]], CBE[n, 3][[All]]}][[If[sc,1,2];;]]]
-	]
-]
-
-
-(* ::Subsubsection::Closed:: *)
-(*enCode*)
-
-
-enCode[n_, dimIn_, res_, drop_, resc_]:= NetGraph[<|
-	"pool" -> {If[resc, Resize["down", dimIn], Nothing], DropoutLayer[drop]},
-	"conv" -> convI[n, dimIn, res, drop, "encode"]
-|>,{
-	"pool" -> "conv"	
-}]
-
-
-(* ::Subsubsection::Closed:: *)
-(*deCode*)
-
-
-deCode[n_, dimIn_, res_, drop_] := NetGraph[<|
-	"upconv" -> Flatten[{Resize["up", dimIn], CBE[n ,1, False]}],
-	"cat" -> CatenateLayer[],
-	"conv" -> convI[n, dimIn, res, drop, "decode"]
-|>, {
-	NetPort["Input2"] -> "upconv",
-	{NetPort["Input1"], "upconv"} -> "cat" -> "conv"
-}];
-
-
-(* ::Subsubsection::Closed:: *)
-(*Pool and Resize*)
-
-
-Resize[dir_, dim_] := Block[{d, sc},
-	d=Length[dim];
-	sc = If[Ceiling[dim[[1]]]===1, Prepend[ConstantArray[2, d-1], 1], ConstantArray[2, d]];
-	Switch[dir,
-		"up", ResizeLayer[Scaled/@sc, Resampling -> "Nearest"],
-		"down", PoolingLayer[sc, 2, "Function" -> Max]
-	]
-];
 
 
 (* ::Subsubsection::Closed:: *)
@@ -560,6 +526,10 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 ]
 
 
+(* ::Subsubsection::Closed:: *)
+(*Train UNET*)
+
+
 TrainFunction[train_, b_, aug_ ,n_] := AugmentData[RandomBatch[train[[All, 1]], train[[All, 2]], b], aug, n]
 
 
@@ -674,7 +644,7 @@ SplitTrainData[data_,label_,OptionsPattern[]]:=Block[{
 	(*get the ratios*)
 	{s1,s2,s3}=Accumulate@Round[ratio Length[data]];
 	{s1,s2,s3}={order[[1;;s1]],order[[s1+1;;s2]],order[[s2+1;;]]};
-	Print["Nuber of Samples in each set: ",Length/@{s1,s2,s3}];
+	Print["Number of Samples in each set: ",Length/@{s1,s2,s3}];
 	
 	(*Encode Data*)
 	Nclass=Max[label];
@@ -907,6 +877,33 @@ TransData[data_,dir_]:=Block[{ran,dep,fun},
 	fun=Switch[dir,"r",RotateLeft[ran],"l",RotateRight[ran]];
 	Transpose[data,fun]
 ]
+
+
+MeanSurfaceDistance[res_, label_] := 
+ Block[{resS, labS, posR, posL, m, pR, pL, mat, msd, lpR, lpL},
+  (*Split the segmentations*)
+  resS = SplitSegmentations[res][[1]];
+  labS = SplitSegmentations[label][[1]];
+  (*Get the posisitons of the edge voxels*)
+  posR = aa = 
+    Map[Position[m = ArrayPad[#, 1]; m1 = m - Erosion[m, 1], 1] &, 
+     resS, {2}];
+  posL = bb = 
+    Map[Position[m = ArrayPad[#, 1]; m2 = m - Erosion[m, 1], 1] &, 
+     labS, {2}];
+  (*calculate the MSD for each point for ech ROI*)
+  msd = MapThread[(
+      pR = #; pL = #2;
+      lpR = Length[pR]; lpL = Length[pL];
+      If[lpR == 0 || lpL == 0,
+       Missing,
+       msd = ParallelMap[Norm[Nearest[pL, #, 1][[1]] - #] &, pR];
+       Mean[N[msd]]
+       ]
+      ) &, {posR, posL}, 2];
+  
+  Mean[DeleteCases[#, Missing]] & /@ Transpose[msd]
+  ]
 
 
 (* ::Section:: *)
