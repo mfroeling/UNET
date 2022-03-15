@@ -13,7 +13,7 @@
 (*start Package*)
 
 
-BeginPackage["UNET`UnetCore`", Join[{"Developer`"}, Complement[UNET`$Contexts, {"UNET`UnetCore`"}]]]
+BeginPackage["UNET`UnetCore`", Join[{"Developer`"}, Complement[UNET`$ContextsUNET, {"UNET`UnetCore`"}]]]
 
 
 (* ::Section:: *)
@@ -125,7 +125,7 @@ MakeDifferenceImage::usage =
 "MakeDifferenceImage is an options for ShowChannelClassData. If a result is provided this allos to show the diffrence between the label and result.
 1 = false positive, 2 = false negative, 3 = true positive."
 
-StepSize::usage = 
+ClassStepSize::usage = 
 "StepSize is an options for ShowChannelClassData. It defines how many images are displayed by stepping through the data with stepsize."
 
 NetLossLayers::usage = 
@@ -291,19 +291,15 @@ MakeUNET[Nchan_,Nclass_,dep_,dimIn_,OptionsPattern[]]:=UNET[Nchan, Nclass, dep, 
 (*UNet*)
 
 
-UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool, map},
+UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool},
 	
 	(*make the layer feature list*)
-	dep = If[IntegerQ[depI]&&(res==="DenseNet" || res==="UDenseNet"),{depI,1}, depI];
+	dep = If[IntegerQ[depI] && (res==="DenseNet" || res==="UDenseNet"), {depI, 1}, depI];
 	dep = Switch[res,
 		"DenseNet" | "UDenseNet", Table[{dep[[1]], dep[[2]] + i -1}, {i, {1, 2, 4, 6, 8}}],
-		_, Table[dep i, {i, {1, 2, 4, 8, 16}}]];
+		_, Table[dep i, {i, {1, 2, 4, 8, 16}}]
+	];
 	If[verb, Print["Layer parameters: ", dep]];
-	
-	(*define dimention dependant *)
-	map = Prepend[If[Nclass > 1, 
-		{TransposeLayer[{{1 <-> 3, 1 <-> 2},{1 <-> 4, 1 <-> 3, 1 <-> 2}}[[Length[dimIn]-1]]], SoftmaxLayer[]}, 
-		{LogisticSigmoid, FlattenLayer[1]}], ConvolutionLayer[Nclass, 1]];
 	
 	(*make the network*)	
 	NetGraph[<|
@@ -317,14 +313,13 @@ UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool, 
 		"dec_2" -> deCode[dep[[3]], dimIn/4, res, drop],
 		"dec_3" -> deCode[dep[[2]], dimIn/2, res, drop],
 		"dec_4" -> deCode[dep[[1]], dimIn, res, drop],
-		"map" -> map
+		"map" -> classMap[dimIn, Nclass]
 	|>,{
 		NetPort["Input"] -> "start" -> "enc_1" -> "enc_2" -> "enc_3" -> "enc_4" -> "enc_5",
 		{"enc_5", "enc_4"} -> "dec_1",
 		{"dec_1", "enc_3"} -> "dec_2",
 		{"dec_2", "enc_2"} -> "dec_3",
-		{"dec_3", "enc_1"} -> "dec_4",
-		"dec_4" -> "map"
+		{"dec_3", "enc_1"} -> "dec_4" -> "map"
 	}, "Input" -> Prepend[dimIn, NChan]]
 ]
 
@@ -334,7 +329,7 @@ UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool, 
 
 
 CBE[dep_, k_, r_: True] := Block[{d = Round[dep]},
-	{ConvolutionLayer[If[IntegerQ[d],d,First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["ELU"]}[[;;If[r, -1, -2]]]
+	{ConvolutionLayer[If[IntegerQ[d], d, First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["ELU"]}[[;;If[r, -1, -2]]]
 ]
 
 
@@ -342,10 +337,11 @@ CBE[dep_, k_, r_: True] := Block[{d = Round[dep]},
 (*enCode*)
 
 
-enCode[n_, dimIn_, res_, drop_, resc_]:= Flatten@{
-	If[resc, Resize["down", dimIn], Nothing],
+enCode[n_, dimIn_, res_, drop_, scale_]:= Flatten[{
+	If[scale, resize["down", dimIn], Nothing],
 	conv[n, dimIn, res, "encode"],
-	DropoutLayer[drop]}
+	DropoutLayer[drop]
+}]
 
 
 (* ::Subsubsection::Closed:: *)
@@ -353,11 +349,11 @@ enCode[n_, dimIn_, res_, drop_, resc_]:= Flatten@{
 
 
 deCode[n_, dimIn_, res_, drop_] := NetGraph[<|
-	"upconv" -> Flatten[{Resize["up", dimIn], CBE[n ,1, False]}],
-	"conv" -> Flatten@{CatenateLayer[], conv[n, dimIn, res, "decode"], DropoutLayer[drop]}
+	"upconv" -> Flatten[{resize["up", dimIn], CBE[n ,1, False]}],
+	"conv" -> Flatten[{CatenateLayer[], conv[n, dimIn, res, "decode"], DropoutLayer[drop]}]
 |>, {
 	{NetPort["Input2"] -> "upconv", NetPort["Input1"]} -> "conv"
-}];
+}]
 
 
 
@@ -365,9 +361,9 @@ deCode[n_, dimIn_, res_, drop_] := NetGraph[<|
 (*Resize*)
 
 
-Resize[dir_, dim_] := Block[{d, sc},
-	d=Length[dim];
-	sc = If[Ceiling[dim[[1]]]===1, Prepend[ConstantArray[2, d-1], 1], ConstantArray[2, d]];
+resize[dir_, dimIn_] := Block[{d, sc},
+	d = Length[dimIn];
+	sc = If[Ceiling[dimIn[[1]]]===1, Prepend[ConstantArray[2, d-1], 1], ConstantArray[2, d]];
 	Switch[dir,
 		"up", ResizeLayer[Scaled/@sc, Resampling -> "Nearest"],
 		"down", PoolingLayer[sc, 2, "Function" -> Max]
@@ -383,33 +379,23 @@ Resize[dir_, dim_] := Block[{d, sc},
 conv[n_, dimIn_, res_, lab_] := Block[{},
 	If[verb, Print[lab<>" - dimensions: ", Prepend[dimIn, n]]];
 	Switch[res,
-		"ResNet",
-		NetGraph[<|
+		"ResNet", NetGraph[<|
 			"con" -> Join[CBE[n/2, 3], CBE[n, 3, False]], 
 			"skip" -> CBE[n, 1, False], 
 			"tot" -> {TotalLayer[], ElementwiseLayer["ELU"]}
-		|>, {
-			{"con", "skip"} -> "tot"
-		}],
-		
-		"UResNet",(*same as resnet but without skip layer*)
-		Flatten[{CBE[n/2, 3], CBE[n, 3]}],
-		
-		"DenseNet",
-		NetGraph[Association[Join[{
-				"trans" -> Flatten[{CatenateLayer[], CBE[n, 1][[All]]}]
-				}, convLayers[n]
-			]],
-			connect[NetPort["Input"], n[[2]]]
-		],
-		
-		"UDenseNet",(*same as dnesenete but without skip layer*)
-		Flatten[ConstantArray[CBE[n, 3], n[[2]]]],
-		
-		_,(*default which is UNET*)
-		Flatten[{CBE[n, 3], CBE[n, 3]}]
-	]
-]
+		|>, {{"con", "skip"} -> "tot"}]
+		,		
+		"UResNet", Flatten[{CBE[n/2, 3], CBE[n, 3]}]
+		,		
+		"DenseNet",	NetGraph[Association[Join[{
+			"trans" -> Flatten[{CatenateLayer[], CBE[n, 1][[All]]}]
+			}, convLayers[n]]],	
+		connect[NetPort["Input"], n[[2]]]]
+		,		
+		"UDenseNet", Flatten[ConstantArray[CBE[n, 3], n[[2]]]]
+		,
+		_, Flatten[{CBE[n, 3], CBE[n, 3]}]
+]]
 
 
 (* ::Subsubsection::Closed:: *)
@@ -418,8 +404,8 @@ conv[n_, dimIn_, res_, lab_] := Block[{},
 
 connect[inp_, dep_] := Flatten[Table[Switch[rep,
 	1, {inp -> layName[rep]},
-	dep + 1, Flatten[{inp, Table[layName[rr], {rr, 1, rep - 1}]},1] -> "trans",
-	_, Flatten[{inp, Table[layName[rr], {rr, 1, rep - 1}]},1] -> layName[rep]
+	dep + 1, Flatten[{inp, Table[layName[rr], {rr, 1, rep - 1}]}, 1] -> "trans",
+	_, Flatten[{inp, Table[layName[rr], {rr, 1, rep - 1}]}, 1] -> layName[rep]
 ], {rep, 1, dep + 1}],1]
 
 
@@ -435,6 +421,16 @@ convLayers[{k_, dep_}] :=Table[layName[rep] -> Flatten[{CatenateLayer[], CBE[k, 
 
 
 layName[rep_] := "layer_" <> ToString[rep]
+
+
+(* ::Subsubsection::Closed:: *)
+(*classMap*)
+
+
+classMap[dimIn_, Nclass_]:= Prepend[If[Nclass > 1,
+	{TransposeLayer[{{1 <-> 3, 1 <-> 2},{1 <-> 4, 1 <-> 3, 1 <-> 2}}[[Length[dimIn]-1]]], SoftmaxLayer[]},
+	{LogisticSigmoid, FlattenLayer[1]}
+], ConvolutionLayer[Nclass, 1]]
 
 
 (* ::Subsection:: *)
@@ -740,12 +736,10 @@ MakeChannelImage[data_, ratio_]:=Block[{dat},
 
 SyntaxInformation[MakeDiffLabel] = {"ArgumentsPattern" -> {_, _}};
 
-MakeDiffLabel[label_, result_] := If[ArrayDepth[label] == ArrayDepth[result] == 2,
-	MakeDiffLabel2D[label, result],
-	If[ArrayDepth[label] == ArrayDepth[result] == 3,
-		MakeDiffLabel3D[label, result],
-		$Failed
-	]
+MakeDiffLabel[label_, result_] := Which[
+	ArrayDepth[label] == ArrayDepth[result] == 2, MakeDiffLabel2D[label, result],
+	ArrayDepth[label] == ArrayDepth[result] == 3, MakeDiffLabel3D[label, result],
+	True, $Failed
 ]
 
 
@@ -788,7 +782,7 @@ MakeDiffLabel3D = Compile[{{lab, _Integer, 3}, {res, _Integer, 3}}, Block[{resU,
 (*ShowChannelClassData*)
 
 
-Options[ShowChannelClassData]={ImageSize->500, ClassScale->Automatic, NumberRowItems->3, MakeDifferenceImage->False, StepSize->1, AspectRatio->1};
+Options[ShowChannelClassData]={ImageSize->500, ClassScale->Automatic, NumberRowItems->3, MakeDifferenceImage->False, ClassStepSize->1, AspectRatio->1};
 
 SyntaxInformation[ShowChannelClassData] = {"ArgumentsPattern" -> {_, _, _., OptionsPattern[]}};
 
@@ -800,7 +794,7 @@ ShowChannelClassData[data_, label_, result_, OptionsPattern[]]:=Block[{minmax,di
 	ratio = OptionValue[AspectRatio];
 	
 	(*part the data*)
-	step=OptionValue[StepSize];
+	step=OptionValue[ClassStepSize];
 	lab=label[[;;;;step]];
 	dat=data[[;;;;step]];
 	

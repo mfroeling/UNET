@@ -74,7 +74,7 @@ The network supports multi channel inputs and multi class segmentation.
 ![Visualize training results](https://github.com/mfroeling/UNET/blob/master/images/Visualize2.PNG)
 	* Visualize the training  
 ![animate unet training process](https://github.com/mfroeling/UNET/blob/master/images/amin0-v2.gif)  
-![animate unet training process muscle](https://github.com/mfroeling/UNET/blob/master/images/amin4-v2.gif)
+![animate unet training process muscle](https://github.com/mfroeling/UNET/blob/master/images/amin.gif)
 
 ## Example
 

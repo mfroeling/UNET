@@ -13,7 +13,7 @@
 (*start Package*)
 
 
-BeginPackage["UNET`UnetSupport`",  Join[{"Developer`"}, Complement[UNET`$Contexts, {"UNET`UnetSupport`"}]]]
+BeginPackage["UNET`UnetSupport`",  Join[{"Developer`"}, Complement[UNET`$ContextsUNET, {"UNET`UnetSupport`"}]]]
 
 
 (* ::Section:: *)
@@ -34,6 +34,7 @@ CreateImage2::usage = "CreateImage2[] creates a test images with label with one 
 CreateImage3::usage = "CreateImage3[] creates a test images with label with one channel and four classes."
 
 CreateImage4::usage = "CreateImage4[] creates a test images with label with three channels and four classes."
+
 
 (* ::Subsection:: *)
 (*Functions*)
@@ -66,23 +67,23 @@ Begin["`Private`"]
 SignalI[{T2_,T1_},{TE_,TR_}]:=N[(1-Exp[-TR/T1])Exp[-TE/T2]]
 
 (*T2 series for muscle and fat relaxation parameters*)
-par={{20,2000},{40,2000},{60,2000}};
-sig={SignalI[{30,1400},#],SignalI[{200,300},#]}&/@par;
+par = {{20,2000},{40,2000},{60,2000}};
+sig = {SignalI[{30,1400},#],SignalI[{200,300},#]}&/@par;
 
 (*normalize the signal and give the lowest signal an SNR of 5*)
-sig=sig/Max[sig];
-noise=Min[sig]/5;
+sig = sig/Max[sig];
+noise = Min[sig]/5;
 
 (*how big and where to place images*)
-pos={10,90};
-size={10,30};
+pos = {10,90};
+size = {10,30};
 
 
 (* ::Subsubsection::Closed:: *)
 (*AddNoise*)
 
 
-AddNoiseI=Compile[{{Mu,_Real,0},{Sigma,_Real,0}},Sqrt[RandomReal[NormalDistribution[Mu,Sigma]]^2+RandomReal[NormalDistribution[0,Sigma]]^2],RuntimeAttributes->{Listable},RuntimeOptions->"Speed"];
+AddNoiseI = Compile[{{Mu,_Real,0},{Sigma,_Real,0}},Sqrt[RandomReal[NormalDistribution[Mu,Sigma]]^2+RandomReal[NormalDistribution[0,Sigma]]^2],RuntimeAttributes->{Listable},RuntimeOptions->"Speed"];
 
 
 (* ::Subsubsection::Closed:: *)
