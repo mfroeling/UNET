@@ -495,7 +495,8 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 			All,
 			ValidationSet -> TrainFunction[valid, Length[valid], {False,False,False}, Nclass],
 			TargetDevice -> device, LossFunction->lossFunction,
-			WorkingPrecision -> "Mixed", PerformanceGoal -> {"TrainingMemory", "TrainingSpeed"},
+			WorkingPrecision -> If[device=!="CPU", "Mixed", Automatic], 
+			PerformanceGoal -> {"TrainingMemory", "TrainingSpeed"},
 			trainopt
 		];
 		
@@ -592,7 +593,7 @@ AddLossLayer[net_,dim_]:=NetGraph[<|
 
 SyntaxInformation[ClassEncoder] = {"ArgumentsPattern" -> {_, _}};
 
-ClassEncoder[data_,NClass_]:=ClassEncoderC[data,NClass]
+ClassEncoder[data_,NClass_]:= If[NClass === 1, data, ClassEncoderC[data,NClass]]
 
 ClassEncoderC = Compile[{{data, _Integer, 2}, {n, _Integer, 0}},
 	Transpose[1 - Unitize[ConstantArray[data, n] - Range[n]], {3, 1, 2}],
