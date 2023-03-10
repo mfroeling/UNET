@@ -329,7 +329,7 @@ UNET[NChan_, Nclass_, depI_, dimIn_, res_:"ResNet", drop_] := Block[{dep, pool},
 
 
 CBE[dep_, k_, r_: True] := Block[{d = Round[dep]},
-	{ConvolutionLayer[If[IntegerQ[d], d, First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["ELU"]}[[;;If[r, -1, -2]]]
+	{ConvolutionLayer[If[IntegerQ[d], d, First[d]], k, "PaddingSize" -> (k - 1)/2], BatchNormalizationLayer[], ElementwiseLayer["GELU"]}[[;;If[r, -1, -2]]]
 ]
 
 
@@ -382,7 +382,7 @@ conv[n_, dimIn_, res_, lab_] := Block[{},
 		"ResNet", NetGraph[<|
 			"con" -> Join[CBE[n/2, 3], CBE[n, 3, False]], 
 			"skip" -> CBE[n, 1, False], 
-			"tot" -> {TotalLayer[], ElementwiseLayer["ELU"]}
+			"tot" -> {TotalLayer[], ElementwiseLayer["GELU"]}
 		|>, {{"con", "skip"} -> "tot"}]
 		,		
 		"UResNet", Flatten[{CBE[n/2, 3], CBE[n, 3]}]
