@@ -24,18 +24,6 @@ BeginPackage["UNET`UnetCore`", Join[{"Developer`"}, Complement[UNET`$ContextsUNE
 (*Functions*)
 
 
-DiceSimilarity::usage = 
-"DiceSimilarity[ref, pred] gives the Dice Similarity between 1 and 0 of segmentations ref and pred for class equals 1.
-DiceSimilarity[x, y, class] gives the Dice Similarity of segmentations ref and pred for class.
-DiceSimilarity[x, y, {class, ..}] gives the Dice Similarity of segmentations ref and pred for the list of gives classes."
-
-MeanSurfaceDistance::usage = 
-"MeanSurfaceDistance[ref, pred] gives the mean surface distance of segmentations ref and pred for class equals 1 in voxels.
-MeanSurfaceDistance[x, y, class] gives the mean surface distance of segmentations ref and pred for class in voxels.
-MeanSurfaceDistance[x, y, {class, ..}] gives the mean surface distance of segmentations ref and pred for the list of gives classes in voxels.
-MeanSurfaceDistance[x, y, class , vox] gives the mean surface distance of segmentations ref and pred for class in milimeter.
-MeanSurfaceDistance[x, y, {class, ..}, vox] gives the mean surface distance of segmentations ref and pred for the list of gives classes in milimeters."
-
 MakeUNET::usage = 
 "MakeUNET[nchan, nclass, dep, dimIn] Generates a UNET with nchan as input and nclass as output. The number of parameter of the first convolution layer can be set with dep.\n
 The data dimensions can be 2D or 3D and each of the dimensions should be 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240 or 256."
@@ -49,20 +37,37 @@ SoftDiceLossLayer::usage =
 BrierLossLayer::usage = 
 "BrierLossLayer[dim] represents a net layer that computes the Brier loss by comparing input class probability vectors with the target class vector."
 
-TrainUNET::usage = 
-"TrainUNET[trainData, validationData] Trains a UNET for the given data.
-TrainUNET[trainData, validationData, {testData, testLabels}] Trains a UNET for the given data and also gives similarity results for the testData.
-The inputs trainData, validationData, testData and testLabels can be generated using SplitTrainData."
-
-SplitTrainData::usage = 
-"SplitTrainData[data, label] splits the data and label in trainData, validationData, testData and testLabels that can be used in TrainUNET.
-The data and label should be in the form {N, Nchan, x, y} or {N, Nchan, z, x, y}. The label sould be Integers with 1 for the background class and should go from 1 to Nclass."
 
 ClassEncoder::usage = 
 "ClassEncoder[label, nclass] encodes Integer label data of 1 to Ncalss into a Nclass vector of 1 and 0."
 
 ClassDecoder::usage = 
 "ClassDecoder[probability, nclass] decodes a probability vector of 1 and 0 into Integers of 1 to Nclass."
+
+
+DiceSimilarity::usage = 
+"DiceSimilarity[ref, pred] gives the Dice Similarity between 1 and 0 of segmentations ref and pred for class equals 1.
+DiceSimilarity[x, y, class] gives the Dice Similarity of segmentations ref and pred for class.
+DiceSimilarity[x, y, {class, ..}] gives the Dice Similarity of segmentations ref and pred for the list of gives classes."
+
+MeanSurfaceDistance::usage = 
+"MeanSurfaceDistance[ref, pred] gives the mean surface distance of segmentations ref and pred for class equals 1 in voxels.
+MeanSurfaceDistance[x, y, class] gives the mean surface distance of segmentations ref and pred for class in voxels.
+MeanSurfaceDistance[x, y, {class, ..}] gives the mean surface distance of segmentations ref and pred for the list of gives classes in voxels.
+MeanSurfaceDistance[x, y, class , vox] gives the mean surface distance of segmentations ref and pred for class in milimeter.
+MeanSurfaceDistance[x, y, {class, ..}, vox] gives the mean surface distance of segmentations ref and pred for the list of gives classes in milimeters."
+
+
+TrainUNET::usage = 
+"TrainUNET[trainData, validationData] Trains a UNET for the given data.
+TrainUNET[trainData, validationData, {testData, testLabels}] Trains a UNET for the given data and also gives similarity results for the testData.
+The inputs trainData, validationData, testData and testLabels can be generated using SplitTrainData."
+
+
+SplitTrainData::usage = 
+"SplitTrainData[data, label] splits the data and label in trainData, validationData, testData and testLabels that can be used in TrainUNET.
+The data and label should be in the form {N, Nchan, x, y} or {N, Nchan, z, x, y}. The label sould be Integers with 1 for the background class and should go from 1 to Nclass."
+
 
 RotateFlip::usage = 
 "RotateFlip[data] transforms one dataset into 8 by generating a mirrored version and rotation both 4x90 degree."
@@ -158,7 +163,7 @@ verb = False;
 (*UNET*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*MakeUNET*)
 
 
@@ -167,19 +172,21 @@ Options[MakeUNET] = {BlockType -> "ResNet", DropoutRate -> 0.2, NetworkDepth -> 
 SyntaxInformation[MakeUNET] = {"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}};
 
 MakeUNET[nChan_, nClass_, fIn_, dimIn_, OptionsPattern[]] := Block[{
-		dep, drop, type, dim, f, enc, dec, stride
+		dep, drop, type, dim, f, enc, dec, stride, nDim
 	},
 
 	enc ="enc_" <> ToString[#]&;
 	dec ="dec_" <> ToString[#]&;
 	{dep, drop, type, stride} = OptionValue[{NetworkDepth, DropoutRate, BlockType, DownsampleSchedule}];
 	
-	dim = Switch[Length@dimIn, 2, "2D", 3, "3D"];
+	nDim = Length@dimIn;
+	dim = Switch[nDim, 2, "2D", 3, "3D"];
 	f = Switch[type, 
 		"DenseNet" | "UDenseNet", Table[{fIn, 1 + i}, {i, {1, 2, 4, 6, 8}}],
 		_, fIn {1, 2, 4, 8, 16}
 	];
-	stride = Prepend[If[stride===Automatic,	ConstantArray[2, {dep-1, 3}], stride], {1, 1, 1}];
+
+	stride = Prepend[If[stride===Automatic,	ConstantArray[2, {dep-1, nDim}], stride], {1, 1, 1}[[;;nDim]]];
 
 	NetGraph[
 		Association@Join[
@@ -206,7 +213,7 @@ MakeUNET[nChan_, nClass_, fIn_, dimIn_, OptionsPattern[]] := Block[{
 ]
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*ConvBlock*)
 
 
@@ -220,7 +227,7 @@ Options[ConvBlock] = {
 ConvBlock[channels_, OptionsPattern[]] := Block[{chan, kern,  actType, pad, actLayer, convMode, dim, str},
 	{actType, convMode, dim, str} = OptionValue[{"ActivationType", "ConvMode", "Dimensions", "Stride"}];
 	chan = Round@First@Flatten@{channels};
-	
+
 	Switch[convMode,
 		"up", 
 		{ResizeLayer[Scaled/@str, Resampling -> "Nearest"], ConvolutionLayer[chan, 2, "PaddingSize" -> ConstantArray[{0,1},Length[str]], "Stride" -> 1]},
@@ -236,7 +243,7 @@ ConvBlock[channels_, OptionsPattern[]] := Block[{chan, kern,  actType, pad, actL
 ]
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*ConvNode*)
 
 
@@ -327,14 +334,14 @@ ConvNode[chan_, OptionsPattern[]] := Block[{
 ]
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*ActivationLayer*)
 
 
 ActivationLayer[actType_] := Switch[actType, "leakyRELU", ParametricRampLayer[], "None", Nothing, _, ElementwiseLayer[actType]]
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*ClassMap*)
 
 
@@ -407,7 +414,7 @@ BrierLossLayer[dim_] := NetGraph[<|
 FlatTotLayer[lev_]:=NetChain[{FlattenLayer[lev],AggregationLayer[Total,1]}];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*AddLossLayer*)
 
 
@@ -415,9 +422,9 @@ AddLossLayer[net_]:=Block[{dim},
 	dim = Length[Information[net,"OutputPorts"][[1]]]-1;
 	NetGraph[<|
 		"net"->net,
-		"SoftDice" -> SoftDiceLossLayer[dim],
+		"SoftDice" -> {SoftDiceLossLayer[dim], FunctionLayer[0.1 #&]},
 		"CrossEntropy" -> CrossEntropyLossLayer["Probabilities"],
-		"Brier" -> {BrierLossLayer[dim], FunctionLayer[10 #&]}
+		"Brier" -> {BrierLossLayer[dim], FunctionLayer[1000 #&]}
 		|>,{
 		NetPort["Input"]->"net"->NetPort["Output"],
 		{"net",NetPort["Target"]}->"SoftDice"->NetPort["SoftDice"],
@@ -425,6 +432,40 @@ AddLossLayer[net_]:=Block[{dim},
 		{"net",NetPort["Target"]}->"Brier"->NetPort["Brier"]
 	}]
 ]
+
+
+(* ::Subsection:: *)
+(*Encoders*)
+
+
+(* ::Subsubsection::Closed:: *)
+(*ClassEndocer*)
+
+
+SyntaxInformation[ClassEncoder] = {"ArgumentsPattern" -> {_, _.}};
+
+ClassEncoder[data_]:= If[nClass === 1, data, ClassEncoderC[data, Max@data]]
+
+ClassEncoder[data_, nClass_]:= If[nClass === 1, data, ClassEncoderC[data, nClass]]
+
+ClassEncoderC = Compile[{{data, _Integer, 2}, {n, _Integer, 0}},
+	Transpose[1 - Unitize[ConstantArray[data, n] - Range[n]], {3, 1, 2}]
+,RuntimeAttributes -> {Listable}]
+
+
+(* ::Subsubsection::Closed:: *)
+(*ClassDecoder*)
+
+
+SyntaxInformation[ClassDecoder] = {"ArgumentsPattern" -> {_, _.}};
+
+ClassDecoder[data_]:=ClassDecoderC[data, Last@Dimensions@data]
+
+ClassDecoder[data_, nClass_]:=ClassDecoderC[data, nClass]
+
+ClassDecoderC = Compile[{{data, _Real, 1}, {n, _Integer, 0}},  
+	Total[Range[n] (1 - Unitize[Chop[(data/Max[data]) - 1]])]
+, RuntimeAttributes -> {Listable}]
 
 
 (* ::Subsection:: *)
@@ -445,11 +486,11 @@ DiceSimilarity[ref_, pred_, c_?IntegerQ] := DiceSimilarityC[Flatten[ref], Flatte
 
 
 DiceSimilarityC = Compile[{{ref, _Integer, 1}, {pred, _Integer, 1}, {class, _Integer, 0}}, Block[{refv, predv, denom},
-    refv = Flatten[1 - Unitize[ref - class]];
-    predv = Flatten[1 - Unitize[pred - class]];
-    denom = (Total[refv] + Total[predv]);
-    If[denom === 0., 1., N[2 Total[refv predv] / denom]]
-    ], RuntimeOptions -> "Speed"];
+	refv = Flatten[1 - Unitize[ref - class]];
+	predv = Flatten[1 - Unitize[pred - class]];
+	denom = (Total[refv] + Total[predv]);
+	If[denom === 0., 1., N[2 Total[refv predv] / denom]]
+ ], RuntimeOptions -> "Speed"];
 
 
 
@@ -468,10 +509,14 @@ MeanSurfaceDistance[ref_, pred_, nClasses_?ListQ, vox_] := Table[MeanSurfaceDist
 MeanSurfaceDistance[ref_, pred_, c_?IntegerQ, vox_] := Block[{coorRef, coorPred, fun},
 	coorRef = Transpose[vox Transpose[GetEdge[1 - Unitize[ref - c]]["ExplicitPositions"]]];
 	coorPred = Transpose[vox Transpose[GetEdge[1 - Unitize[pred - c]]["ExplicitPositions"]]];
-	
-	fun = Nearest[coorRef];
-	Mean[EuclideanDistance[First[fun[#, 1]], #] & /@ coorPred]
+	If[coorRef==={}||coorPred==={},
+		"noSeg",
+		fun = Nearest[coorRef];
+		Mean@Sqrt@Total[(fun[coorPred,1][[All,1]]-coorPred)^2,{2}]
+	]
 ]
+
+
 
 
 (* ::Subsubsection::Closed:: *)
@@ -488,35 +533,11 @@ GetEdge[seg_] := Block[{n, per, pts},
 ]
 
 
-(* ::Subsection::Closed:: *)
-(*MakeNetPlots*)
-
-
-MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2, d1, d2},
-	d1 = {trained["ValidationLossList"], trained["RoundLossList"]};
-	d2 = {trained["ValidationMeasurementsLists"]["ErrorRate"], trained["RoundMeasurementsLists"]["ErrorRate"]};
-	
-	pl1 = ListLogPlot[d1, Joined -> True,
-		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
-		GridLines -> Automatic, FrameLabel -> {"Epochs", "Loss"},
-		LabelStyle -> Directive[Black, Bold, 12],
-		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
-		ImageSize -> size];
-	pl2 = ListLogPlot[100 d2, Joined -> True,
-		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
-		GridLines -> Automatic, FrameLabel -> {"Epochs", "Error Rate [%]"},
-		LabelStyle -> Directive[Black, Bold, 12],
-		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
-		ImageSize -> size];
-	{pl1, pl2}
-]
-
-
 (* ::Subsection:: *)
 (*Train Net*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Train UNET*)
 
 
@@ -603,7 +624,7 @@ TrainUNET[train_, valid_, {testData_, testLabel_}, opt:OptionsPattern[]]:=Block[
 
 
 (* ::Subsubsection::Closed:: *)
-(*Train UNET*)
+(*TrainFunction*)
 
 
 TrainFunction[train_, b_, aug_ ,n_] := AugmentData[RandomBatch[train[[All, 1]], train[[All, 2]], b], aug, n]
@@ -651,29 +672,28 @@ AugmentFunction3D[{rot_, scale_, flip_}] := Block[{fl, r, sc, rr, scs, flf},
 ]
 
 
-(* ::Subsubsection::Closed:: *)
-(*ClassEndocer*)
+(* ::Subsection::Closed:: *)
+(*MakeNetPlots*)
 
 
-SyntaxInformation[ClassEncoder] = {"ArgumentsPattern" -> {_, _}};
-
-ClassEncoder[data_,nClass_]:= If[nClass === 1, data, ClassEncoderC[data,nClass]]
-
-ClassEncoderC = Compile[{{data, _Integer, 2}, {n, _Integer, 0}},
-	Transpose[1 - Unitize[ConstantArray[data, n] - Range[n]], {3, 1, 2}],
-	RuntimeAttributes -> {Listable}, RuntimeOptions -> "Speed"
- ]
-
-
-(* ::Subsubsection::Closed:: *)
-(*ClassDecoder*)
-
-
-SyntaxInformation[ClassDecoder] = {"ArgumentsPattern" -> {_, _}};
-
-ClassDecoder[data_,nClass_]:=ClassDecoderC[data,nClass]
-
-ClassDecoderC = Compile[{{data, _Real, 1}, {n, _Integer, 0}},  Block[{r = Range[n]}, Total[r (1 - Unitize[Chop[(data/Max[data]) - 1]])]], RuntimeAttributes -> {Listable}, RuntimeOptions -> "Speed"]
+MakeNetPlots[trained_, size_: 400] := Block[{n, pl1, pl2, d1, d2},
+	d1 = {trained["ValidationLossList"], trained["RoundLossList"]};
+	d2 = {trained["ValidationMeasurementsLists"]["ErrorRate"], trained["RoundMeasurementsLists"]["ErrorRate"]};
+	
+	pl1 = ListLogPlot[d1, Joined -> True,
+		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
+		GridLines -> Automatic, FrameLabel -> {"Epochs", "Loss"},
+		LabelStyle -> Directive[Black, Bold, 12],
+		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
+		ImageSize -> size];
+	pl2 = ListLogPlot[100 d2, Joined -> True,
+		PlotLegends -> Placed[{"Validation", "Training"},Below], Frame -> True,
+		GridLines -> Automatic, FrameLabel -> {"Epochs", "Error Rate [%]"},
+		LabelStyle -> Directive[Black, Bold, 12],
+		FrameStyle -> Directive[Black, Thick], PlotStyle -> Thick,
+		ImageSize -> size];
+	{pl1, pl2}
+]
 
 
 (* ::Subsection:: *)
@@ -777,7 +797,7 @@ MakeClassImage[label_, ratio_] := MakeClassImage[label, MinMax[label], ratio]
 
 MakeClassImage[label_, {off_,max_}, ratio_] := ImageResize[
 	Colorize[Image[((label-off)/(max-off))], ColorFunction->"Rainbow", ColorFunctionScaling->False],
-	{Max[Dimensions[label]],ratio Max[Dimensions[label]]}
+	{Max[Dimensions[label]], ratio Max[Dimensions[label]]}
 ]
 
 
@@ -936,33 +956,6 @@ TransData[data_,dir_]:=Block[{ran,dep,fun},
 	fun=Switch[dir,"r",RotateLeft[ran],"l",RotateRight[ran]];
 	Transpose[data,fun]
 ]
-
-
-MeanSurfaceDistance[res_, label_] := 
- Block[{resS, labS, posR, posL, m, pR, pL, mat, msd, lpR, lpL},
-  (*Split the segmentations*)
-  resS = SplitSegmentations[res][[1]];
-  labS = SplitSegmentations[label][[1]];
-  (*Get the posisitons of the edge voxels*)
-  posR = aa = 
-    Map[Position[m = ArrayPad[#, 1]; m1 = m - Erosion[m, 1], 1] &, 
-     resS, {2}];
-  posL = bb = 
-    Map[Position[m = ArrayPad[#, 1]; m2 = m - Erosion[m, 1], 1] &, 
-     labS, {2}];
-  (*calculate the MSD for each point for ech ROI*)
-  msd = MapThread[(
-      pR = #; pL = #2;
-      lpR = Length[pR]; lpL = Length[pL];
-      If[lpR == 0 || lpL == 0,
-       Missing,
-       msd = ParallelMap[Norm[Nearest[pL, #, 1][[1]] - #] &, pR];
-       Mean[N[msd]]
-       ]
-      ) &, {posR, posL}, 2];
-  
-  Mean[DeleteCases[#, Missing]] & /@ Transpose[msd]
-  ]
 
 
 (* ::Section:: *)
