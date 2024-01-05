@@ -6,7 +6,7 @@
 
 ## Notice
 
-This package will no longer be developed. Its main functionality generating UNETs has been integrated in [QMRITools](www.qmritools.com).
+This package will no longer be developed. Its main functionality generating UNETs has been integrated in [QMRITools](https://www.qmritools.com) in the [SegmentationTools](https://github.com/mfroeling/QMRITools/blob/master/QMRITools/Kernel/SegmentationTools.wl) package.
 The last update included a more flexible down sampling schedule for and some other customizations for UNET generation.
 It has been a playground for development learning and testing.
 
