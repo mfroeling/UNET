@@ -6,7 +6,9 @@
 
 ## Notice
 
-This package will no longer be developed. Its main functionality generating UNETs has been integrated in [QMRITools](https://www.qmritools.com) in the [SegmentationTools](https://github.com/mfroeling/QMRITools/blob/master/QMRITools/Kernel/SegmentationTools.wl) package.
+This package will no longer be developed!
+
+Its main functionality generating UNETs has been integrated in [QMRITools](https://www.qmritools.com) in the [SegmentationTools](https://github.com/mfroeling/QMRITools/blob/master/QMRITools/Kernel/SegmentationTools.wl) package.
 The last update included a more flexible down sampling schedule for and some other customizations for UNET generation.
 It has been a playground for development learning and testing.
 
@@ -29,8 +31,6 @@ It contains the following toolboxes:
 
 Documentation of all functions and their options is fully integrated in the Mathematica documentation.
 The toolbox always works within the latest version of Mathematica and does not support any backward compatibility.
-
-All code and documentation is maintained and uploaded to github using [Workbench](https://www.wolfram.com/workbench/).
 
 ## Install toolbox
 
